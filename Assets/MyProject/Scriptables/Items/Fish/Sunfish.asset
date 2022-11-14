@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cefdedbf0d13614f9981d2a2a90c9c9, type: 3}
+  m_Name: Sunfish
+  m_EditorClassIdentifier: 
+  itemType: 5
+  itemName: Sunfish
+  itemDescription: Havent you heard? I am trying to tan
+  itemId: 
+  CanBeSold: 1
+  buyPrice: 0
+  sellPrice: 0
+  itemInventoryImage: {fileID: 0}
