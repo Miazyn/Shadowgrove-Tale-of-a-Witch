@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e130452ca181a4547bb48c6ae59da5ba, type: 3}
-  m_Name: PlayerInventory
+  m_Script: {fileID: 11500000, guid: 5cefdedbf0d13614f9981d2a2a90c9c9, type: 3}
+  m_Name: Cod
   m_EditorClassIdentifier: 
-  inventoryName: Player Inventory
-  inventorySize: 24
-  inventoryItems: []
+  itemType: 5
+  itemName: Cod
+  itemDescription: 
+  itemId: 
+  CanBeSold: 1
+  buyPrice: 0
+  sellPrice: 0
+  itemInventoryImage: {fileID: 0}

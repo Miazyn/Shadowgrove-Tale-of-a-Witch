@@ -15,7 +15,7 @@ public abstract class SO_Item : ScriptableObject
     public int buyPrice;
     public int sellPrice;
 
-    public Sprite itemInventoryImage;
+    public Sprite icon;
 
     public enum ItemType
     {
@@ -25,5 +25,10 @@ public abstract class SO_Item : ScriptableObject
         Structure,
         Tools,
         Fish
+    }
+
+    public virtual void Use()
+    {
+        Debug.Log("Is using item " + name);
     }
 }

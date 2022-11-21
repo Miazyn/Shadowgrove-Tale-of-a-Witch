@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] SO_Inventory playerInventory;
+
+    public static Player instance;
+    void Awake()
+    {
+        instance = this;
+    }
+
+    public SO_Inventory playerInventory;
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
 
 
     public void OnTriggerEnter(Collider other)
@@ -12,13 +21,25 @@ public class Player : MonoBehaviour
         var item = other.GetComponent<ItemHolder>();
         if (item)
         {
-            playerInventory.AddItem(item.item, 1);
-            Destroy(other.gameObject);
+            bool wasItemAdded = playerInventory.AddItem(item.item, 1);
+            if (wasItemAdded)
+            {
+                if (onItemChangedCallback != null)
+                {
+                    onItemChangedCallback.Invoke();
+                }
+                else
+                {
+                    Debug.Log("No methods subscribed");
+                }
+                Destroy(other.gameObject);
+            }
         }
     }
 
     private void OnApplicationQuit()
     {
+        //B4 clear, save inventory
         playerInventory.inventoryItems.Clear();
     }
 }
