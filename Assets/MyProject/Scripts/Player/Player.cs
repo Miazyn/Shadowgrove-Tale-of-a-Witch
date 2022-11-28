@@ -14,13 +14,40 @@ public class Player : MonoBehaviour
     public SO_Inventory playerInventory;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
+    
+    public delegate void OnHotbarScroll();
+    public OnItemChanged onHotbarScrollCallback;
 
+    public delegate void OnInventoryToggle();
+    public OnItemChanged onInventoryToggleCallback;
 
-    public void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        var item = other.GetComponent<ItemHolder>();
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            if (onHotbarScrollCallback != null)
+            {
+                onHotbarScrollCallback.Invoke();
+            }
+        }
+
+        if (Input.GetButtonDown("Inventory"))
+        {
+            if (onInventoryToggleCallback != null)
+            {
+                onInventoryToggleCallback.Invoke();
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Item has been triggered");
+
+        var item = collision.gameObject.GetComponent<ItemHolder>();
         if (item)
         {
+            Debug.Log("Can Add Item");
             bool wasItemAdded = playerInventory.AddItem(item.item, 1);
             if (wasItemAdded)
             {
@@ -32,7 +59,7 @@ public class Player : MonoBehaviour
                 {
                     Debug.Log("No methods subscribed");
                 }
-                Destroy(other.gameObject);
+                Destroy(collision.gameObject);
             }
         }
     }

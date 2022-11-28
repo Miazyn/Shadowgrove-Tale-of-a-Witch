@@ -37,7 +37,12 @@ public class PlayerController : MonoBehaviour
 
         if (verticalMovement != 0 || horizontalMovement != 0)
         {
+            this.GetComponent<Rigidbody>().isKinematic = false;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotationOfCharacter), characterRotationSmoothing);
+        }
+        else
+        {
+            this.GetComponent<Rigidbody>().isKinematic = true;
         }
 
     }

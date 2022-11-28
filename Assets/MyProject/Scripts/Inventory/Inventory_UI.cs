@@ -14,10 +14,12 @@ public class Inventory_UI : MonoBehaviour
     InventorySlotUI[] hotbarSlots;
     public GameObject hotbar;
     public Transform hotbarParent;
+
     private void Start()
     {
         player = Player.instance;
         player.onItemChangedCallback += UpdateUI;
+        player.onInventoryToggleCallback += InventoryToggle;
         inventory = player.playerInventory;
 
         inventoryUI.SetActive(false);
@@ -25,8 +27,8 @@ public class Inventory_UI : MonoBehaviour
 
         hotbar.SetActive(true);
         hotbarSlots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
+        
     }
-
     private void UpdateUI()
     {
         for (int i = 0; i < slots.Length; i++)
@@ -53,16 +55,14 @@ public class Inventory_UI : MonoBehaviour
             }
         }
     }
-
-    private void Update()
+    private void InventoryToggle()
     {
-        if (Input.GetButtonDown("Inventory"))
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            hotbar.SetActive(!inventoryUI.activeSelf);
-        }
-       
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
+        hotbar.SetActive(!inventoryUI.activeSelf);
     }
-
-
+    private void OnDisable()
+    {
+        player.onItemChangedCallback -= UpdateUI;
+        player.onInventoryToggleCallback -= InventoryToggle;
+    }
 }

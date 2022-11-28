@@ -35,4 +35,9 @@ public class InventorySlotUI : MonoBehaviour
             item.Use();
         }
     }
+
+    public SO_Item GetItem()
+    {
+        return item;
+    }
 }
