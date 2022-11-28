@@ -24,7 +24,8 @@ public abstract class SO_Item : ScriptableObject
         Useable,
         Structure,
         Tools,
-        Fish
+        Fish,
+        Seed
     }
 
     public virtual void Use()
