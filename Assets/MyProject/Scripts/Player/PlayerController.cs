@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     string horizontalAxis, verticalAxis;
     string sprintButton = "Sprint";
 
+    Rigidbody rb;
+
     bool IsSprinting = false;
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         VariableSetup();
-
     }
 
     private void VariableSetup()
@@ -26,10 +28,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Physics.Raycast(transform.position, Vector3.forward, 3))
+        {
+            Debug.LogWarning("Player hit sth infront");
+        }
+
         Sprinting();
 
         transform.position += new Vector3(Input.GetAxisRaw(horizontalAxis), 0, Input.GetAxisRaw(verticalAxis)) * speed * Time.deltaTime;
+        
+        Rotation();
 
+    }
+
+    private void Rotation()
+    {
         float horizontalMovement = Input.GetAxisRaw(horizontalAxis);
         float verticalMovement = Input.GetAxisRaw(verticalAxis);
 
@@ -37,14 +50,15 @@ public class PlayerController : MonoBehaviour
 
         if (verticalMovement != 0 || horizontalMovement != 0)
         {
-            this.GetComponent<Rigidbody>().isKinematic = false;
+
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotationOfCharacter), characterRotationSmoothing);
         }
-        else
-        {
-            this.GetComponent<Rigidbody>().isKinematic = true;
-        }
+    }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.forward * 3);
     }
 
     private void Sprinting()

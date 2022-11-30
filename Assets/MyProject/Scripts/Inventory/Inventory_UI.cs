@@ -20,7 +20,7 @@ public class Inventory_UI : MonoBehaviour
         player = Player.instance;
         player.onItemChangedCallback += UpdateUI;
         player.onInventoryToggleCallback += InventoryToggle;
-        inventory = player.playerInventory;
+        inventory = player.inventory;
 
         inventoryUI.SetActive(false);
         slots = itemsParent.GetComponentsInChildren<InventorySlotUI>();

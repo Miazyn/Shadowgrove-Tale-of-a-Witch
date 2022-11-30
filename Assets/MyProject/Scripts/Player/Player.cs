@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    string InventoryButton = "Inventory";
+    string InteractionButton = "Interact";
     public static Player instance;
+    [SerializeField] HotbarHighlight currentItem;
+    Interactor interactor;
+
     void Awake()
     {
         instance = this;
+        if(currentItem == null)
+        {
+            Debug.LogWarning("No Hotbar is defined.");
+        }
+        //Grab cuz its on player
+        interactor = GetComponent<Interactor>();
     }
 
-    public SO_Inventory playerInventory;
+    public SO_Inventory inventory;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
     
@@ -23,6 +33,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetButtonDown(InteractionButton))
+        {
+            if (interactor.GetOverlaps().Item1)
+            {
+                interactor.GetOverlaps().Item2.Interact(interactor);
+            }
+        }
+
         if (Input.mouseScrollDelta.y != 0)
         {
             if (onHotbarScrollCallback != null)
@@ -31,7 +49,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Inventory"))
+        if (Input.GetButtonDown(InventoryButton))
         {
             if (onInventoryToggleCallback != null)
             {
@@ -40,15 +58,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    //LOGIC INTO INTERACTIONS
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Item has been triggered");
-
         var item = collision.gameObject.GetComponent<ItemHolder>();
         if (item)
         {
             Debug.Log("Can Add Item");
-            bool wasItemAdded = playerInventory.AddItem(item.item, 1);
+            bool wasItemAdded = inventory.AddItem(item.item, 1);
             if (wasItemAdded)
             {
                 if (onItemChangedCallback != null)
@@ -64,9 +81,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    public SO_Item GetCurrentItem()
+    {
+        return currentItem.GetCurrentlyEquippedItem();
+    }
+
     private void OnApplicationQuit()
     {
         //B4 clear, save inventory
-        playerInventory.inventoryItems.Clear();
+        if (inventory.inventoryItems.Count > 0)
+        {
+            inventory.inventoryItems.Clear();
+        }
     }
 }
