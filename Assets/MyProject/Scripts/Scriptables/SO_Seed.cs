@@ -6,6 +6,7 @@ public class SO_Seed : SO_Item
 {
     public int daysToGrow;
     public Season[] season = new Season[1];
+    public Sprite[] PlantStages;
 
     private void Awake()
     {

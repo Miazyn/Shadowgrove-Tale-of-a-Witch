@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Sunflower Seed
   m_EditorClassIdentifier: 
   itemType: 6
-  itemName: 
+  itemName: Sunflower Seeds
   itemDescription: A beautiful flower will grow from this seed
   itemId: 
   CanBeSold: 1
   buyPrice: 0
   sellPrice: 0
   icon: {fileID: 0}
-  daysToGrow: 0
+  daysToGrow: 2
   season: 01000000
+  PlantStages: []
