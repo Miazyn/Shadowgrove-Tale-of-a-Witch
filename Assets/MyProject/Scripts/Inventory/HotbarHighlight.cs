@@ -20,9 +20,6 @@ public class HotbarHighlight : MonoBehaviour
         player.onHotbarScrollCallback += ChangeHotbarSlot;
     }
 
-    //Select Specific Slot
-    //public void SelectItemSlot(){} 
-
     private void ChangeHotbarSlot()
     {
         Vector2 scrollDelta = player.controls.Player.Scroll.ReadValue<Vector2>();
@@ -53,7 +50,7 @@ public class HotbarHighlight : MonoBehaviour
         }
     }
 
-    private void HighlightEnabled(bool value)
+    void HighlightEnabled(bool value)
     {
         for (int i = 0; i < slots[currentHighlight].GetComponent<Transform>().childCount; i++)
         {

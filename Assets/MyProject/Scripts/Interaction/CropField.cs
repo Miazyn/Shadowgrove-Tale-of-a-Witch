@@ -7,6 +7,15 @@ public class CropField : MonoBehaviour, IInteractable
     [SerializeField] private string prompt;
     public string interactionPrompt => prompt;
 
+    public enum FieldStates
+    {
+        flat,
+        tilled,
+        planted
+    }
+
+
+
     Player player;
     private void Start()
     {
@@ -18,6 +27,7 @@ public class CropField : MonoBehaviour, IInteractable
         Debug.Log("Interacted with CropField");
         if (player.GetCurrentItem() == null)
         {
+            Debug.Log("Player has currently no item equipped.");
             return false;
         }
 
@@ -27,7 +37,7 @@ public class CropField : MonoBehaviour, IInteractable
             return true;
         }
 
-        Debug.Log("No seed in inventory");
+        
         return false;
     }
 }

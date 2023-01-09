@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public static Player instance;
 
     [SerializeField] HotbarHighlight currentItem;
-    Interactor interactor;
+    public Interactor interactor { get; private set; }
 
 
     public InputControls controls { get; private set; }
@@ -76,12 +76,12 @@ public class Player : MonoBehaviour
         return currentItem.GetCurrentlyEquippedItem();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        var item = collision.gameObject.GetComponent<ItemHolder>();
+        var item = hit.gameObject.GetComponent<ItemHolder>();
         if (item)
         {
-            Debug.Log("Can Add Item");
+            Debug.Log($"Adding {item} to inventory");
             bool wasItemAdded = inventory.AddItem(item.item, 1);
             if (wasItemAdded)
             {
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
                 {
                     Debug.LogError("No methods subscribed");
                 }
-                Destroy(collision.gameObject);
+                Destroy(hit.gameObject);
             }
         }
     }

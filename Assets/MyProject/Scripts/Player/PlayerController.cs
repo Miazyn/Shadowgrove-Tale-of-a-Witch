@@ -5,18 +5,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    InputControls controls;
 
     [SerializeField] float speed = 1;
     [SerializeField] float sprintSpeed = 2;
     [SerializeField] float characterRotationSmoothing = 0.03f;
+    float playerHeight;
 
+    [SerializeField] CharacterController charControl;
     Rigidbody rb;
 
     bool IsSprinting = false;
 
     Vector2 moveDirection;
+    bool IsGrounded;
 
-    InputControls controls;
+    public float gravity = -9.8f;
+
+    Vector3 velocity;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+    bool isGrounded;
 
     private void Start()
     {
@@ -24,20 +34,33 @@ public class PlayerController : MonoBehaviour
         controls.Player.Sprint.performed += sprinting => Sprinting();
         controls.Player.StopSprint.performed += sprintStop => StopSprinting();
 
-
+        playerHeight = transform.position.y;
         rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        if (Physics.Raycast(transform.position, Vector3.forward, 3))
-        {
-            Debug.LogWarning("Player hit sth infront");
-        }
+        //RaycastHit hit;
+        //if (Physics.Raycast(new Ray(transform.position, Vector3.forward), out hit, 3))
+        //{
+        //    //Debug.Log($"Too close to {hit.transform.gameObject.name}");
+        //}
 
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2;
+        }
         moveDirection = controls.Player.Move.ReadValue<Vector2>();
-        transform.position += new Vector3(moveDirection.x, 0, moveDirection.y) * speed * Time.deltaTime;
+        //transform.position += new Vector3(moveDirection.x, 0, moveDirection.y) * speed * Time.deltaTime;
+        charControl.Move(new Vector3(moveDirection.x, 0 , moveDirection.y) * speed * Time.deltaTime);
         Rotation();
+
+        //Physics of free fall
+        velocity.y += gravity * Time.deltaTime;
+        charControl.Move(velocity * speed);
+        
     }
 
     void Rotation()
@@ -72,6 +95,8 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.forward * 3);
+
+        Gizmos.DrawSphere(groundCheck.position, groundDistance);
     }
 
     
