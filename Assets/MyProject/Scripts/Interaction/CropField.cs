@@ -16,14 +16,17 @@ public class CropField : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Interacted with CropField");
-        if (player.GetCurrentItem() != null)
+        if (player.GetCurrentItem() == null)
         {
-            if (player.GetCurrentItem().itemType == SO_Item.ItemType.Seed)
-            {
-                Debug.Log("You have a seed to use owo");
-                return true;
-            }
+            return false;
         }
+
+        if (player.GetCurrentItem().itemType == SO_Item.ItemType.Seed)
+        {
+            Debug.Log("You have a seed to use owo");
+            return true;
+        }
+
         Debug.Log("No seed in inventory");
         return false;
     }

@@ -25,9 +25,10 @@ public class HotbarHighlight : MonoBehaviour
 
     private void ChangeHotbarSlot()
     {
+        Vector2 scrollDelta = player.controls.Player.Scroll.ReadValue<Vector2>();
         HighlightEnabled(false);
 
-        if (Input.mouseScrollDelta.y > 0)
+        if (scrollDelta.y > 0)
         {
             if (currentHighlight != 0)
             {
@@ -40,7 +41,7 @@ public class HotbarHighlight : MonoBehaviour
             
             HighlightEnabled(true);
         }
-        else if(Input.mouseScrollDelta.y < 0)
+        else if(scrollDelta.y < 0)
         {
             currentHighlight++;
             if (currentHighlight > slots.Length - 1)

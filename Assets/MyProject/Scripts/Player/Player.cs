@@ -4,16 +4,45 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    string InventoryButton = "Inventory";
-    string InteractionButton = "Interact";
     public static Player instance;
+
     [SerializeField] HotbarHighlight currentItem;
     Interactor interactor;
 
+
+    public InputControls controls { get; private set; }
+
     void Awake()
     {
-        instance = this;
-        if(currentItem == null)
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+        controls = new InputControls();
+        controls.Player.Interact.performed += interaction => Interacting();
+        controls.Player.Inventory.performed += inventory => InventoryInteraction();
+        controls.Player.Scroll.performed += scroll => Scroll();
+    }
+
+
+    public SO_Inventory inventory;
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
+    
+    public delegate void OnHotbarScroll(Vector2 scrollDelta);
+    public OnItemChanged onHotbarScrollCallback;
+
+    public delegate void OnInventoryToggle();
+    public OnItemChanged onInventoryToggleCallback;
+
+    void Start()
+    {
+        if (currentItem == null)
         {
             Debug.LogWarning("No Hotbar is defined.");
         }
@@ -21,45 +50,33 @@ public class Player : MonoBehaviour
         interactor = GetComponent<Interactor>();
     }
 
-    public SO_Inventory inventory;
-    public delegate void OnItemChanged();
-    public OnItemChanged onItemChangedCallback;
-    
-    public delegate void OnHotbarScroll();
-    public OnItemChanged onHotbarScrollCallback;
-
-    public delegate void OnInventoryToggle();
-    public OnItemChanged onInventoryToggleCallback;
-
-    private void Update()
+    void Scroll()
     {
-        if (Input.GetButtonDown(InteractionButton))
-        {
-            if (interactor.GetOverlaps().Item1)
-            {
-                interactor.GetOverlaps().Item2.Interact(interactor);
-            }
-        }
+        onHotbarScrollCallback?.Invoke();
+    }
 
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            if (onHotbarScrollCallback != null)
-            {
-                onHotbarScrollCallback.Invoke();
-            }
-        }
+    void InventoryInteraction()
+    {
+        onInventoryToggleCallback?.Invoke();
+    }
 
-        if (Input.GetButtonDown(InventoryButton))
+    void Interacting()
+    {
+        Debug.Log("Interaction has been clicked");
+        if (interactor.GetOverlaps().Item1)
         {
-            if (onInventoryToggleCallback != null)
-            {
-                onInventoryToggleCallback.Invoke();
-            }
+            interactor.GetOverlaps().Item2.Interact(interactor);
         }
     }
 
     //LOGIC INTO INTERACTIONS
-    private void OnCollisionEnter(Collision collision)
+
+    public SO_Item GetCurrentItem()
+    {
+        return currentItem.GetCurrentlyEquippedItem();
+    }
+
+    void OnCollisionEnter(Collision collision)
     {
         var item = collision.gameObject.GetComponent<ItemHolder>();
         if (item)
@@ -74,19 +91,24 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("No methods subscribed");
+                    Debug.LogError("No methods subscribed");
                 }
                 Destroy(collision.gameObject);
             }
         }
     }
 
-    public SO_Item GetCurrentItem()
+    void OnEnable()
     {
-        return currentItem.GetCurrentlyEquippedItem();
+        controls.Enable();
     }
 
-    private void OnApplicationQuit()
+    void OnDisable()
+    {
+        controls.Disable();
+    }
+
+    void OnApplicationQuit()
     {
         //B4 clear, save inventory
         if (inventory.inventoryItems.Count > 0)
