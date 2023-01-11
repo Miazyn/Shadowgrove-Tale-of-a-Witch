@@ -7,7 +7,7 @@ public class SO_Structures : SO_Item
 {
     private void Awake()
     {
-        itemType = ItemType.Structure;
+        TypeOfItem = ItemType.Structure;
         CanBeSold = false;
     }
 }

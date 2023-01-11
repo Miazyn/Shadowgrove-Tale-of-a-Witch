@@ -6,13 +6,13 @@ using UnityEngine;
 public class SO_Tools : SO_Item
 {
     //For tools with an increasing range
-    public bool hasEffectArea;
-    public Vector2 effectArea;
+    public bool HasEffectArea;
+    public Vector2 EffectArea;
     //For Tools which increasingly can hit harder stuff
-    public int maxHardness;
+    public int MaxHardness;
     private void Awake()
     {
-        itemType = ItemType.Tools;
+        TypeOfItem = ItemType.Tools;
         CanBeSold = false;
     }
 }

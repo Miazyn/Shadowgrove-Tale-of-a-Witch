@@ -4,13 +4,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Seed", menuName = "SO/Item/Seed")]
 public class SO_Seed : SO_Item
 {
-    public int daysToGrow;
-    public Season[] season = new Season[1];
+    public int DaysToGrow;
+    public Season[] GrowthSeason = new Season[1];
     public Sprite[] PlantStages;
+
+    public SO_Item Harvestable;
 
     private void Awake()
     {
-        itemType = ItemType.Seed;
+        TypeOfItem = ItemType.Seed;
         CanBeSold = true;
     }
 

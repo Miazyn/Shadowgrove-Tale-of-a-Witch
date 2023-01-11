@@ -10,7 +10,7 @@ public class InventorySlotUI : MonoBehaviour
     public void AddItem(SO_Item newItem, int amount)
     {
         item = newItem;
-        icon.sprite = item.icon;
+        icon.sprite = item.Icon;
         icon.enabled = true;
 
         itemAmount.SetText(amount.ToString());

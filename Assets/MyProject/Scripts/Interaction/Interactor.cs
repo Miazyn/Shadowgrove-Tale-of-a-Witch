@@ -27,6 +27,23 @@ public class Interactor : MonoBehaviour
         
     }
 
+    public IInteractable GetInteractable()
+    {
+        numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, colliders, interactableMask);
+        if(numFound == 0)
+        {
+            return null;
+        }
+
+        var interactable = colliders[0].GetComponent<IInteractable>();
+        if (interactable != null)
+        {
+            return interactable;
+        }
+
+        return null;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

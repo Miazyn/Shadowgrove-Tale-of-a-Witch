@@ -31,14 +31,14 @@ public class CropField : MonoBehaviour, IInteractable
 
 
 
-        if (player.GetCurrentItem().itemType == SO_Item.ItemType.Seed)
+        if (player.GetCurrentItem().TypeOfItem == SO_Item.ItemType.Seed)
         {
-            Debug.Log($"You just planted some {player.GetCurrentItem().itemName}." +
+            Debug.Log($"You just planted some {player.GetCurrentItem().ItemName}." +
                 $"Good luck on the growth");
             HasAPlant = true;
             
             currentPlant = (SO_Seed)player.GetCurrentItem();
-            daysToGrow = currentPlant.daysToGrow;
+            daysToGrow = currentPlant.DaysToGrow;
             int counter = 0;
             plantStages = 3;
 
@@ -59,6 +59,6 @@ public class CropField : MonoBehaviour, IInteractable
             counter++;
             Debug.Log($"{daysToGrow} Days have passed and the plant has grown.");
         }
-        Debug.Log($"{currentPlant.itemName} has fully grown. Now we can harvest.");
+        Debug.Log($"{currentPlant.ItemName} has fully grown. Now we can harvest.");
     }
 }

@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SO_Item : ScriptableObject
+[CreateAssetMenu(fileName = "New Item", menuName = "SO/Item/Item")]
+public class SO_Item : ScriptableObject
 {
 
-    public ItemType itemType;
-    public string itemName;
+    public ItemType TypeOfItem;
+    public string ItemName;
     [TextArea(15,20)]
-    public string itemDescription;
-    public string itemId;
+    public string ItemDescription;
+    public string ItemId;
 
     public bool CanBeSold;
-    public int buyPrice;
-    public int sellPrice;
+    public int BuyPrice;
+    public int SellPrice;
 
-    public Sprite icon;
+    public Sprite Icon;
 
     public enum ItemType
     {
         Material,
         Consumable,
-        Useable,
         Structure,
         Tools,
         Fish,
@@ -30,6 +30,6 @@ public abstract class SO_Item : ScriptableObject
 
     public virtual void Use()
     {
-        Debug.Log("Is using item " + name);
+        Debug.Log("Is using item " + ItemName);
     }
 }

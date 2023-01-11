@@ -40,12 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //RaycastHit hit;
-        //if (Physics.Raycast(new Ray(transform.position, Vector3.forward), out hit, 3))
-        //{
-        //    //Debug.Log($"Too close to {hit.transform.gameObject.name}");
-        //}
-
+        
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         
         if (isGrounded && velocity.y < 0)
@@ -53,11 +48,11 @@ public class PlayerController : MonoBehaviour
             velocity.y = -2;
         }
         moveDirection = controls.Player.Move.ReadValue<Vector2>();
-        //transform.position += new Vector3(moveDirection.x, 0, moveDirection.y) * speed * Time.deltaTime;
+        
         charControl.Move(new Vector3(moveDirection.x, 0 , moveDirection.y) * speed * Time.deltaTime);
         Rotation();
 
-        //Physics of free fall
+        
         velocity.y += gravity * Time.deltaTime;
         charControl.Move(velocity * speed);
         
@@ -94,7 +89,7 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.forward * 3);
+        //Gizmos.DrawLine(transform.position, transform.position + Vector3.forward * 3);
 
         Gizmos.DrawSphere(groundCheck.position, groundDistance);
     }
