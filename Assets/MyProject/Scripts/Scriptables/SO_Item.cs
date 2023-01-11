@@ -20,6 +20,7 @@ public class SO_Item : ScriptableObject
 
     public enum ItemType
     {
+        Item,
         Material,
         Consumable,
         Structure,

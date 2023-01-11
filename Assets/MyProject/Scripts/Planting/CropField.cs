@@ -7,12 +7,22 @@ public class CropField : MonoBehaviour, IInteractable
     [SerializeField] private string prompt;
     public string interactionPrompt => prompt;
 
-    public bool HasAPlant;
-    [SerializeField] SO_Seed currentPlant;
+    Plant plant;
+
+    [SerializeField] SO_Seed currentSeed;
     int daysToGrow;
     int plantStages;
 
     Player player;
+
+    public enum PlantStages
+    {
+        empty,
+        planted,
+        harvestable
+    }
+    PlantStages currentStage;
+
     private void Start()
     {
         player = Player.instance;
@@ -20,9 +30,19 @@ public class CropField : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
-        if (HasAPlant)
+        if (currentStage == PlantStages.planted)
         {
             return false;
+        }
+        if(currentStage == PlantStages.harvestable)
+        {
+            Debug.Log($"Harvested crop: {plant.HarvestPlant.ItemName} x{plant.AmountPerHarvest}");
+            player.inventory.AddItem(plant.HarvestPlant, plant.AmountPerHarvest);
+            plant = null;
+
+            currentStage = PlantStages.empty;
+
+            return true;
         }
         if (player.GetCurrentItem() == null)
         {
@@ -30,19 +50,20 @@ public class CropField : MonoBehaviour, IInteractable
         }
 
 
-
         if (player.GetCurrentItem().TypeOfItem == SO_Item.ItemType.Seed)
         {
-            Debug.Log($"You just planted some {player.GetCurrentItem().ItemName}." +
-                $"Good luck on the growth");
-            HasAPlant = true;
+            currentSeed = (SO_Seed)player.GetCurrentItem();
+
+            currentSeed.Use();
+
+
+            currentStage = CropField.PlantStages.planted;
             
-            currentPlant = (SO_Seed)player.GetCurrentItem();
-            daysToGrow = currentPlant.DaysToGrow;
+            daysToGrow = currentSeed.DaysToGrow;
             int counter = 0;
             plantStages = 3;
 
-            StartCoroutine(PlantStages());
+            StartCoroutine(GrowPlantStages());
             return true;
         }
 
@@ -50,7 +71,7 @@ public class CropField : MonoBehaviour, IInteractable
         return false;
     }
 
-    IEnumerator PlantStages()
+    IEnumerator GrowPlantStages()
     {
         int counter = 0;
         while(counter < plantStages)
@@ -59,6 +80,9 @@ public class CropField : MonoBehaviour, IInteractable
             counter++;
             Debug.Log($"{daysToGrow} Days have passed and the plant has grown.");
         }
-        Debug.Log($"{currentPlant.ItemName} has fully grown. Now we can harvest.");
+        currentStage = PlantStages.harvestable;
+
+        Debug.Log($"{currentSeed.ItemName} has fully grown. Now we can harvest.");
+        plant = new Plant(currentSeed.Harvestable, currentSeed.HarvestAmount);
     }
 }

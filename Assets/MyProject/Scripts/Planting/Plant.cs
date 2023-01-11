@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int AmountPerHarvest;
+    public SO_Item HarvestPlant;
+    public Plant(SO_Item _plant, int _amount)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        HarvestPlant = _plant;
+        AmountPerHarvest = _amount;
     }
 }

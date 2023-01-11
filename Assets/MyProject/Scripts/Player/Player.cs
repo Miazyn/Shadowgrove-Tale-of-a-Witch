@@ -85,14 +85,9 @@ public class Player : MonoBehaviour
             bool wasItemAdded = inventory.AddItem(item.item, 1);
             if (wasItemAdded)
             {
-                if (onItemChangedCallback != null)
-                {
-                    onItemChangedCallback.Invoke();
-                }
-                else
-                {
-                    Debug.LogError("No methods subscribed");
-                }
+                
+                onItemChangedCallback?.Invoke();
+                
                 Destroy(hit.gameObject);
             }
         }

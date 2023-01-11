@@ -10,6 +10,8 @@ public class SO_Seed : SO_Item
 
     public SO_Item Harvestable;
 
+    public int HarvestAmount;
+
     private void Awake()
     {
         TypeOfItem = ItemType.Seed;
@@ -27,5 +29,7 @@ public class SO_Seed : SO_Item
     public override void Use()
     {
         base.Use();
+        Debug.Log($"Planted {ItemName}.");
+        Player.instance.inventory.RemoveItem(this);
     }
 }

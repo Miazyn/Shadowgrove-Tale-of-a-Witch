@@ -15,4 +15,10 @@ public class SO_Tools : SO_Item
         TypeOfItem = ItemType.Tools;
         CanBeSold = false;
     }
+
+    public override void Use()
+    {
+        base.Use();
+        Debug.Log($"Used a {ItemName} as a tool");
+    }
 }

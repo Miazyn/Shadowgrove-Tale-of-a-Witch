@@ -17,6 +17,7 @@ public class SO_Inventory : ScriptableObject
             if (inventoryItems[i].item == _item)
             {
                 inventoryItems[i].AddAmount(_amount);
+                Player.instance.onItemChangedCallback?.Invoke();
                 return true;
             }
         }
@@ -27,7 +28,26 @@ public class SO_Inventory : ScriptableObject
         }
         Debug.Log("Enough room.");
         inventoryItems.Add(new InventorySlot(_item, _amount));
+        Player.instance.onItemChangedCallback?.Invoke();
         return true;
+
+    }
+
+    public void RemoveItem(SO_Item _item)
+    {
+        List<InventorySlot> _tempList = new List<InventorySlot>();
+
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].item != _item)
+            {
+                _tempList.Add(inventoryItems[i]);
+            }
+        }
+
+        inventoryItems = new List<InventorySlot>();
+        inventoryItems = _tempList;
+        Player.instance.onItemChangedCallback?.Invoke();
 
     }
 }
