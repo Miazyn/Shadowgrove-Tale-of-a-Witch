@@ -31,6 +31,12 @@ public class SO_Item : ScriptableObject
 
     public virtual void Use()
     {
-        Debug.Log("Is using item " + ItemName);
+        Player.instance.inventory.RemoveItem(this);
+    }
+
+    public virtual bool CanBeUsed(GameObject _objectToInteract)
+    {
+        Debug.Log("Can be used. From Base Class.");
+        return true;
     }
 }

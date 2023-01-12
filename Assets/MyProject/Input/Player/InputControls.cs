@@ -65,6 +65,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""e29f2f08-941a-4216-bbe3-02c98d253352"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -83,17 +91,6 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""ecc06440-c927-4276-99bd-7f6042e5bf18"",
                     ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""52725c6a-8910-4e46-8ed5-40b96cb5b5ed"",
-                    ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -130,6 +127,17 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54d8d2b0-3033-4379-aeab-660a0290b5e0"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -309,6 +317,17 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2032e91-8379-477f-8c5b-b89f4ab5629d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -351,6 +370,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_Player_StopSprint = m_Player.FindAction("StopSprint", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Scroll = m_Player.FindAction("Scroll", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -406,6 +426,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_StopSprint;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Scroll;
+    private readonly InputAction m_Player_Use;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -416,6 +437,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @StopSprint => m_Wrapper.m_Player_StopSprint;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Scroll => m_Wrapper.m_Player_Scroll;
+        public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -443,6 +465,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Scroll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScroll;
                 @Scroll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScroll;
                 @Scroll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScroll;
+                @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -465,6 +490,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Scroll.started += instance.OnScroll;
                 @Scroll.performed += instance.OnScroll;
                 @Scroll.canceled += instance.OnScroll;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
             }
         }
     }
@@ -495,5 +523,6 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnStopSprint(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnScroll(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
 }

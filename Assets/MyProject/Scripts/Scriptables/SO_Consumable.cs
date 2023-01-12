@@ -12,4 +12,13 @@ public class SO_Consumable : SO_Item
         TypeOfItem = ItemType.Consumable;
         CanBeSold = true;
     }
+    public override void Use()
+    {
+        base.Use();
+    }
+
+    public override bool CanBeUsed(GameObject _objectToInteract)
+    {
+        return base.CanBeUsed(_objectToInteract);
+    }
 }

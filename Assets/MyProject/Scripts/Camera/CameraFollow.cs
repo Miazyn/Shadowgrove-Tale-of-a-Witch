@@ -35,4 +35,15 @@ public class CameraFollow : MonoBehaviour
 
     }
 
+
+    [ContextMenu("Preview Camera Angle")]
+    public void Preview()
+    {
+        yPos = characterToFollow.transform.position.y + camHeight;
+        zPos = characterToFollow.transform.position.z - camZoom;
+
+        xPos = characterToFollow.transform.position.x;
+
+        transform.position = new Vector3(xPos, yPos, zPos);
+    }
 }

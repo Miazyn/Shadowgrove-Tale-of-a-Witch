@@ -30,6 +30,11 @@ public class SO_Seed : SO_Item
     {
         base.Use();
         Debug.Log($"Planted {ItemName}.");
-        Player.instance.inventory.RemoveItem(this);
+    }
+
+    public override bool CanBeUsed(GameObject _objectToInteract)
+    {
+        Debug.Log("Has to be used with an interactable.");
+        return false;
     }
 }

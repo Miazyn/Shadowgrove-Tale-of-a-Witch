@@ -24,7 +24,21 @@ public class Interactor : MonoBehaviour
             }
         }
         return (false, null);
-        
+    }
+
+    public (bool, GameObject) GetGameObjects()
+    {
+        numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, colliders, interactableMask);
+
+        if (numFound > 0)
+        {
+            var gameObjects = colliders[0].gameObject;
+            if (gameObjects != null)
+            {
+                return (true, gameObjects);
+            }
+        }
+        return (false, null);
     }
 
     public IInteractable GetInteractable()

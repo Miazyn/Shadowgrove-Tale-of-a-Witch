@@ -52,6 +52,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "e29f2f08-941a-4216-bbe3-02c98d253352",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -70,17 +78,6 @@
                     "name": "",
                     "id": "ecc06440-c927-4276-99bd-7f6042e5bf18",
                     "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "52725c6a-8910-4e46-8ed5-40b96cb5b5ed",
-                    "path": "<DualShockGamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -117,6 +114,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54d8d2b0-3033-4379-aeab-660a0290b5e0",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -294,6 +302,17 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b2032e91-8379-477f-8c5b-b89f4ab5629d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

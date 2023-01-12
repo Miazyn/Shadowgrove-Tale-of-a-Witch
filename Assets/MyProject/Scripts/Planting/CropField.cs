@@ -56,7 +56,6 @@ public class CropField : MonoBehaviour, IInteractable
 
             currentSeed.Use();
 
-
             currentStage = CropField.PlantStages.planted;
             
             daysToGrow = currentSeed.DaysToGrow;

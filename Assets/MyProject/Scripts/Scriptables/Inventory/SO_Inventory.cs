@@ -43,6 +43,13 @@ public class SO_Inventory : ScriptableObject
             {
                 _tempList.Add(inventoryItems[i]);
             }
+            else
+            {
+                if(inventoryItems[i].amount - 1 > 0)
+                {
+                    _tempList.Add(new InventorySlot(inventoryItems[i].item, inventoryItems[i].amount - 1));
+                }
+            }
         }
 
         inventoryItems = new List<InventorySlot>();

@@ -21,4 +21,9 @@ public class SO_Tools : SO_Item
         base.Use();
         Debug.Log($"Used a {ItemName} as a tool");
     }
+
+    public override bool CanBeUsed(GameObject _objectToInteract)
+    {
+        return base.CanBeUsed(_objectToInteract);
+    }
 }

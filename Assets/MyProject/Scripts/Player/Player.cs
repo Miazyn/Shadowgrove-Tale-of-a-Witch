@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    GameManager manager;
     [SerializeField] HotbarHighlight currentItem;
     public Interactor interactor { get; private set; }
 
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
         controls.Player.Interact.performed += interaction => Interacting();
         controls.Player.Inventory.performed += inventory => InventoryInteraction();
         controls.Player.Scroll.performed += scroll => Scroll();
+        controls.Player.Use.performed += use => UseItem();
     }
 
 
@@ -46,7 +48,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogWarning("No Hotbar is defined.");
         }
-        //Grab cuz its on player
+        manager = GameManager.Instance;
+
         interactor = GetComponent<Interactor>();
     }
 
@@ -58,6 +61,25 @@ public class Player : MonoBehaviour
     void InventoryInteraction()
     {
         onInventoryToggleCallback?.Invoke();
+    }
+
+    bool UseItem()
+    {
+        bool _itemUsed = false;
+        SO_Item _curItem = GetCurrentItem();
+        if (manager.GetCurrentState() != GameManager.GameState.Normal)
+        {
+            return false;
+        }
+        if (_curItem == null)
+        {
+            return false;
+        }
+        
+        _itemUsed = _curItem.CanBeUsed(interactor.GetGameObjects().Item2);
+
+        return true;
+
     }
 
     void Interacting()

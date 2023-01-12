@@ -1,0 +1,6 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl Stage-3-Sunflower
+Kd 1 1 1
+map_Kd Textures/Stage-3-Sunflower.png
+
