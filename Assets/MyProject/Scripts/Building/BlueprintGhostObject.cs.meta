@@ -9,7 +9,7 @@ MonoImporter:
   - validMat: {fileID: 2100000, guid: 4803f8d9dc23b194dab69e97801638be, type: 2}
   - invalidMat: {fileID: 2100000, guid: 5aa9f75cfc861ac418489998b0981ce1, type: 2}
   executionOrder: 0
-  icon: {instanceID: 0}
+  icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

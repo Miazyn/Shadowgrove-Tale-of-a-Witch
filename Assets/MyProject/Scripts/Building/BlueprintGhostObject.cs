@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class BlueprintGhostObject : MonoBehaviour
@@ -17,10 +18,14 @@ public class BlueprintGhostObject : MonoBehaviour
 
     GameManager manager;
 
+    BoxCollider _col;
+
     void Start()
     {
         manager = GameManager.Instance;
         manager.ChangeGameState(GameManager.GameState.BuildMode);
+
+        _col = GetComponent<BoxCollider>();
 
         GetMousePos();
         StartCoroutine(StartDelay());
@@ -36,7 +41,7 @@ public class BlueprintGhostObject : MonoBehaviour
     {
         GetMousePos();
 
-        if (CanPlaceItem())
+        if (CanPlaceItem(transform.position))
         {
             renderer.material = validMat;
         }
@@ -47,15 +52,8 @@ public class BlueprintGhostObject : MonoBehaviour
 
         if (Mouse.current.leftButton.isPressed)
         {
-            if (delayedStart)
-            {
-                Instantiate(prefab, transform.position, transform.rotation);
-
-                Player.instance.inventory.RemoveItem(structureSO);
-
-                manager.ChangeGameState(GameManager.GameState.Normal);
-                Destroy(gameObject);
-            }
+            Debug.Log($"Has placed item: {PlacingItem()}");
+            PlacingItem();
         }
         if (Mouse.current.rightButton.isPressed)
         {
@@ -74,8 +72,64 @@ public class BlueprintGhostObject : MonoBehaviour
         }
     }
 
-    bool CanPlaceItem()
+    bool CanPlaceItem(Vector3 _centerPos)
     {
+        var CheckValidPlacementBox = Physics.OverlapBox(_col.bounds.center, _col.size);
+
+        if(CheckValidPlacementBox == null)
+        {
+            return true;
+        }
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return false;
+        }
+
+        bool foundInvalidItem = false;
+        foreach (var item in CheckValidPlacementBox)
+        {
+            if (item.gameObject.layer != 8 && item.gameObject.name != "Terrain" || item.gameObject.name != "Terrain")
+            {
+                foundInvalidItem = true;
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    bool PlacingItem()
+    {
+        if (!CanPlaceItem(transform.position))
+        {
+            return false;
+        }
+
+        if (!delayedStart)
+        {
+            return false;
+        }
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return false;
+        }
+
+
+        Instantiate(prefab, transform.position, transform.rotation);
+
+        Player.instance.inventory.RemoveItem(structureSO);
+
+        manager.ChangeGameState(GameManager.GameState.Normal);
+        Destroy(gameObject);
+
+        return true;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(GetComponent<BoxCollider>().bounds.center, GetComponent<BoxCollider>().size);
     }
 }

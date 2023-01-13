@@ -20,4 +20,4 @@ MonoBehaviour:
   BuyPrice: 0
   SellPrice: 0
   Icon: {fileID: 0}
-  StructurePrefab: {fileID: 7675072599220647436, guid: 927312ee54b02f14ba6322d040879a90, type: 3}
+  StructurePrefab: {fileID: 2449528281638307088, guid: 8732df02cc8541340b0e7878225a2442, type: 3}
