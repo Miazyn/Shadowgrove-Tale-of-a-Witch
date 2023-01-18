@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7480af370485dd4b871065c72ab26d2, type: 3}
+  m_Name: Male
+  m_EditorClassIdentifier: 
+  voiceClips:
+  - {fileID: 8300000, guid: 23c7cd730cfb4ed48b47afbf27dfbd5e, type: 3}
+  - {fileID: 8300000, guid: db4228b02875992458e6348acb4050f9, type: 3}
+  - {fileID: 8300000, guid: b168c5aa8dbd6ec429fca97ceb2d0755, type: 3}
+  - {fileID: 8300000, guid: a78c5886e00d5fd43b23dfd7bcbe6ad5, type: 3}
