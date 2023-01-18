@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HotbarHighlight : MonoBehaviour
 {
     Player player;
 
     public Transform hotbarParent;
+    [SerializeField] TextMeshProUGUI itemNameText;
     InventorySlotUI[] slots;
     int currentHighlight = 0;
     
@@ -17,7 +19,26 @@ public class HotbarHighlight : MonoBehaviour
         player = Player.instance;
         slots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
 
+        ChangeItemName();
+
         player.onHotbarScrollCallback += ChangeHotbarSlot;
+        player.onHotbarScrollCallback += ChangeItemName;
+
+        player.onItemChangedCallback += ChangeHotbarSlot;
+        player.onItemChangedCallback += ChangeItemName;
+    }
+
+    void ChangeItemName()
+    {
+        if(GetCurrentlyEquippedItem() != null)
+        {
+            itemNameText.gameObject.SetActive(true);
+            itemNameText.SetText(GetCurrentlyEquippedItem().ItemName);
+        }
+        else
+        {
+            itemNameText.gameObject.SetActive(false);
+        }
     }
 
     private void ChangeHotbarSlot()
@@ -48,6 +69,8 @@ public class HotbarHighlight : MonoBehaviour
 
             HighlightEnabled(true);
         }
+        //Highlight stayed where it was
+        HighlightEnabled(true);
     }
 
     void HighlightEnabled(bool value)
@@ -73,5 +96,9 @@ public class HotbarHighlight : MonoBehaviour
     private void OnDisable()
     {
         player.onHotbarScrollCallback -= ChangeHotbarSlot;
+        player.onHotbarScrollCallback -= ChangeItemName;
+
+        player.onItemChangedCallback -= ChangeHotbarSlot;
+        player.onItemChangedCallback -= ChangeItemName;
     }
 }

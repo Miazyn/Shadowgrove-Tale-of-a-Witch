@@ -25,8 +25,11 @@ public class InteractButton : MonoBehaviour
     {
         if(interactor.GetInteractable() != null)
         {
-            UpdateButtonText();
-            Show();
+            if (interactor.GetInteractable().CanInteract())
+            {
+                UpdateButtonText();
+                Show();
+            }
         }
         else
         {

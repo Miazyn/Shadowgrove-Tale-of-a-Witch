@@ -20,7 +20,7 @@ MonoBehaviour:
   BuyPrice: 0
   SellPrice: 0
   Icon: {fileID: 0}
-  DaysToGrow: 0
+  DaysToGrow: 2
   GrowthSeason: 00000000
   PlantStages: []
   Harvestable: {fileID: 11400000, guid: 32e3a266a5303d640a945faf85a15615, type: 2}

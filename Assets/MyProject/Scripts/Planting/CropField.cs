@@ -13,6 +13,10 @@ public class CropField : MonoBehaviour, IInteractable
     int daysToGrow;
     int plantStages;
 
+    [SerializeField] GameObject stage1;
+    [SerializeField] GameObject stage2;
+    [SerializeField] GameObject stage3;
+
     Player player;
 
     public enum PlantStages
@@ -36,11 +40,7 @@ public class CropField : MonoBehaviour, IInteractable
         }
         if(currentStage == PlantStages.harvestable)
         {
-            Debug.Log($"Harvested crop: {plant.HarvestPlant.ItemName} x{plant.AmountPerHarvest}");
-            player.inventory.AddItem(plant.HarvestPlant, plant.AmountPerHarvest);
-            plant = null;
-
-            currentStage = PlantStages.empty;
+            Harvest();
 
             return true;
         }
@@ -50,7 +50,7 @@ public class CropField : MonoBehaviour, IInteractable
         }
 
 
-        if (player.GetCurrentItem().TypeOfItem == SO_Item.ItemType.Seed)
+        if (CanInteract())
         {
             currentSeed = (SO_Seed)player.GetCurrentItem();
 
@@ -65,9 +65,19 @@ public class CropField : MonoBehaviour, IInteractable
             StartCoroutine(GrowPlantStages());
             return true;
         }
-
         
         return false;
+    }
+
+    private void Harvest()
+    {
+        Debug.Log($"Harvested crop: {plant.HarvestPlant.ItemName} x{plant.AmountPerHarvest}");
+        player.inventory.AddItem(plant.HarvestPlant, plant.AmountPerHarvest);
+        plant = null;
+
+        stage3.SetActive(false);
+
+        currentStage = PlantStages.empty;
     }
 
     IEnumerator GrowPlantStages()
@@ -78,10 +88,38 @@ public class CropField : MonoBehaviour, IInteractable
             yield return new WaitForSeconds(daysToGrow);
             counter++;
             Debug.Log($"{daysToGrow} Days have passed and the plant has grown.");
+            if(counter == 1)
+            {
+                stage1.SetActive(true);
+            }
+            if(counter == 2)
+            {
+                stage1.SetActive(false);
+                stage2.SetActive(true);
+            }
+            if(counter == plantStages)
+            {
+                stage2.SetActive(false);
+                stage3.SetActive(true);
+            }
+            
         }
         currentStage = PlantStages.harvestable;
 
         Debug.Log($"{currentSeed.ItemName} has fully grown. Now we can harvest.");
         plant = new Plant(currentSeed.Harvestable, currentSeed.HarvestAmount);
+    }
+
+    public bool CanInteract()
+    {
+        if (player.GetCurrentItem().TypeOfItem == SO_Item.ItemType.Seed)
+        {
+            return true;
+        }
+        if(currentStage == PlantStages.harvestable)
+        {
+            return true;
+        }
+        return false;
     }
 }
