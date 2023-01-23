@@ -5,4 +5,5 @@ using UnityEngine;
 public class ItemHolder : MonoBehaviour
 {
     public SO_Item item;
+
 }
