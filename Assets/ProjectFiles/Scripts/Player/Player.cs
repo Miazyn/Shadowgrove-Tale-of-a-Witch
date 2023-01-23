@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
 
 
     public SO_Inventory inventory;
+
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
     
@@ -53,6 +55,19 @@ public class Player : MonoBehaviour
         manager = GameManager.Instance;
 
         interactor = GetComponent<Interactor>();
+
+        CreateInventory();
+    }
+
+    void CreateInventory()
+    {
+        int inventorySize = inventory.inventorySize;
+
+        for(int i = 0; i < inventorySize; i++)
+        {
+            inventory.inventoryItems.Add(new InventorySlot(null, 0, i));
+            Debug.Log($"Created inventory slot {inventory.inventoryItems[i]}.");
+        }
     }
 
     void Scroll()
@@ -105,8 +120,8 @@ public class Player : MonoBehaviour
         var item = hit.gameObject.GetComponent<ItemHolder>();
         if (item)
         {
-            Debug.Log($"Adding {item} to inventory");
-            bool wasItemAdded = inventory.AddItem(item.item, 1);
+            //Debug.Log($"Adding {item.ItemName} to inventory");
+            bool wasItemAdded = inventory.AddItem(item.item, 1, 0);
             if (wasItemAdded)
             {
                 

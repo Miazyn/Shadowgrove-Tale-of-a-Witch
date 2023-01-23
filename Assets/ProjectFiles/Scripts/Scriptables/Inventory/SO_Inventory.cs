@@ -9,53 +9,101 @@ public class SO_Inventory : ScriptableObject
     public int inventorySize;
 
     public List<InventorySlot> inventoryItems = new List<InventorySlot>();
-    public bool AddItem(SO_Item _item, int _amount)
+    public bool AddItem(SO_Item _item, int _amount, int _slotPos)
     {
+        if(_slotPos >= inventoryItems.Count)
+        {
+            Debug.Log("Slot out of range");
 
-        for (int i = 0; i < inventoryItems.Count; i++)
-        {
-            if (inventoryItems[i].item == _item)
-            {
-                inventoryItems[i].AddAmount(_amount);
-                Player.instance.onItemChangedCallback?.Invoke();
-                return true;
-            }
-        }
-        if (inventoryItems.Count >= inventorySize)
-        {
-            Debug.Log("Not enough room.");
             return false;
         }
-        Debug.Log("Enough room.");
-        inventoryItems.Add(new InventorySlot(_item, _amount));
+
+        InventorySlot _itemSlot = inventoryItems[_slotPos];
+
+        //COMPARE ITEM TO BE ADDED WITH ITEM IN INVENTORY
+        if (_itemSlot.item != _item && _itemSlot.item != null)
+        {
+            Debug.Log($"Items are not equal. {_itemSlot.item} and {_item}");
+
+            return false;
+        }
+
+        if(_itemSlot.item == null)
+        {
+            _itemSlot.item = _item;
+            _itemSlot.AddAmount(_amount);
+            Player.instance.onItemChangedCallback?.Invoke();
+
+            return true;
+        }
+
+
+        _itemSlot.AddAmount(_amount);
         Player.instance.onItemChangedCallback?.Invoke();
+
         return true;
 
     }
+    public void RemoveItem(SO_Item _item, int _slotPos)
+    {
+        InventorySlot _itemSlot = inventoryItems[_slotPos];
 
+        if(_itemSlot.amount - 1 == 0)
+        {
+            _itemSlot.item = null;
+            _itemSlot.amount--;
+        }
+
+        if(_itemSlot.amount - 1 > 0)
+        {
+            _itemSlot.amount--;
+        }
+
+        Player.instance.onItemChangedCallback?.Invoke();
+    }
     public void RemoveItem(SO_Item _item)
     {
-        List<InventorySlot> _tempList = new List<InventorySlot>();
-
-        for (int i = 0; i < inventoryItems.Count; i++)
+        for(int i = 0; i < inventoryItems.Count; i++)
         {
-            if (inventoryItems[i].item != _item)
+            if(inventoryItems[i].item == _item)
             {
-                _tempList.Add(inventoryItems[i]);
-            }
-            else
-            {
-                if(inventoryItems[i].amount - 1 > 0)
+                if (inventoryItems[i].amount - 1 == 0)
                 {
-                    _tempList.Add(new InventorySlot(inventoryItems[i].item, inventoryItems[i].amount - 1));
+                    inventoryItems[i].amount--;
+                    inventoryItems[i].item = null;
+                }
+                else
+                {
+                    inventoryItems[i].amount--;
                 }
             }
         }
 
-        inventoryItems = new List<InventorySlot>();
-        inventoryItems = _tempList;
         Player.instance.onItemChangedCallback?.Invoke();
+    }
 
+    public bool AddItem(SO_Item _item, int _amount)
+    {
+        for(int i = 0; i < inventoryItems.Count; i++)
+        {
+            if(inventoryItems[i].item == _item)
+            {
+                AddItem(_item, _amount, i);
+                return true;
+            }
+        }
+
+        for(int i = 0; i < inventoryItems.Count; i++)
+        {
+            if(inventoryItems[i].item == null)
+            {
+                AddItem(_item, _amount, i);
+                return true;
+            }
+        }
+
+        Debug.Log("Inventory is full");
+        return false;
     }
 }
 
@@ -64,10 +112,12 @@ public class InventorySlot
 {
     public SO_Item item;
     public int amount;
-    public InventorySlot (SO_Item _item, int _amount)
+    public int slotNum;
+    public InventorySlot (SO_Item _item, int _amount, int _slotNum)
     {
         item = _item;
         amount = _amount;
+        slotNum = _slotNum;
     }
 
     public void AddAmount(int value)

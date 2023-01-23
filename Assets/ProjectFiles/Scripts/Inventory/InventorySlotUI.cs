@@ -2,17 +2,21 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IInitializePotentialDragHandler
 {
-    SO_Item item;
+    public SO_Item item;
     public Image icon;
     public TextMeshProUGUI itemAmount;
     int amount;
 
-    [SerializeField] RectTransform itemImageRect;
-    [SerializeField] GameObject DragableItemPrefab;
+    public int SlotPosition;
 
+    [SerializeField] RectTransform itemImageRect;
+    [SerializeField] GameObject dragableItemPrefab;
+
+    GameObject instantiatedObject;
     public void AddItem(SO_Item _newItem, int _amount)
     {
         item = _newItem;
@@ -37,6 +41,21 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
         itemAmount.enabled = false;
     }
 
+    public void EnableSlot()
+    {
+        if (item != null)
+        {
+            icon.enabled = true;
+            itemAmount.enabled = true;
+        }
+    }
+
+    public void DisableSlot()
+    {
+        icon.enabled = false;
+        itemAmount.enabled = false;
+    }
+
     public void UseItem()
     {
         if(item != null)
@@ -52,20 +71,34 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
 
     public void OnDrop(PointerEventData eventData)
     {
-        if( eventData.pointerDrag != null && item == null)
+        Debug.Log("Item has been dropped on an inventory Slot");
+
+        if ( eventData.pointerDrag != null && item == null)
         {
-            Debug.Log("Item has been dropped on an inventory Slot");
+            Debug.Log("Item valid");
             DragDrop _itemDrop = eventData.pointerDrag.GetComponent<DragDrop>();
-            AddItem(_itemDrop.HeldItem, _itemDrop.HeldItemAmount);
+
+            if (_itemDrop != null)
+            {
+                _itemDrop.HasBeenDroppedOnSlot = true;
+
+                _itemDrop.IsMySlot(this);
+            }
+
+            eventData.pointerDrag = null;
         }
+
     }
 
     public void OnInitializePotentialDrag(PointerEventData eventData)
     {
         if (item != null)
         {
-            Debug.Log($"Potential Item to be dragged {item.ItemName}");
-            GameObject instantiatedObject = Instantiate(DragableItemPrefab, transform);
+            //Debug.Log($"Potential Item to be dragged {item.ItemName}");
+            instantiatedObject = Instantiate(dragableItemPrefab, Vector3.zero, Quaternion.identity, itemImageRect.transform);
+
+
+            instantiatedObject.GetComponent<DragDrop>().ItemSlot = this;
 
             instantiatedObject.GetComponent<DragDrop>().HeldItem = item;
             instantiatedObject.GetComponent<DragDrop>().HeldItemAmount = amount;
@@ -73,15 +106,19 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
             instantiatedObject.GetComponent<DragDrop>().canvas = GameObject.FindObjectOfType<Canvas>();
 
             //////////////////////////////////////////////////////////////////////////////////////////////
+            
+            instantiatedObject.GetComponent<RectTransform>().anchoredPosition =  itemImageRect.anchoredPosition;
 
-            Vector3 mousePos = new Vector3(Input.mousePosition.x - 2, Input.mousePosition.y - 2, Input.mousePosition.z);
-            instantiatedObject.transform.position = mousePos;
+
+            instantiatedObject.GetComponent<RectTransform>().anchoredPosition += eventData.delta;
 
             eventData.pointerDrag = instantiatedObject;
+
+            DisableSlot();
         }
         else
         {
-            Debug.Log("No item to be dragged");
+
         }
     }
 

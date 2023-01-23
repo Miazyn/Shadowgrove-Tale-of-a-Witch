@@ -89,9 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80daf915795b5f14daad954ed3778cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  transparencyOnDrag: 0.5
+  delayedCheck: 0.3
   HeldItem: {fileID: 0}
+  HeldItemAmount: 0
+  canvas: {fileID: 0}
+  HasBeenDroppedOnSlot: 0
 --- !u!225 &6334129545829556076
 CanvasGroup:
   m_ObjectHideFlags: 0

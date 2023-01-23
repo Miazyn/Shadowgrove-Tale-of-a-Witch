@@ -547,4 +547,5 @@ MonoBehaviour:
   icon: {fileID: 6075584846365504207}
   itemAmount: {fileID: 6075584846345709021}
   itemImageRect: {fileID: 6075584845242167987}
-  DragableItemPrefab: {fileID: 6334129545829556087, guid: 6d676be3bf942ae488719897c3a57e68, type: 3}
+  dragableItemPrefab: {fileID: 6334129545829556087, guid: 6d676be3bf942ae488719897c3a57e68, type: 3}
+  itemParent: {fileID: 0}

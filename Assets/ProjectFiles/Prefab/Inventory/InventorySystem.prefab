@@ -204,6 +204,7 @@ MonoBehaviour:
   inventoryUI: {fileID: 7908292225279184048}
   hotbar: {fileID: 7908292226730629171}
   hotbarParent: {fileID: 7908292226730629170}
+  itemNameAnzeige: {fileID: 5349855085281836614}
 --- !u!1001 &290657351428964467
 PrefabInstance:
   m_ObjectHideFlags: 0
