@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class HotbarHighlight : MonoBehaviour
-{
+public class HotbarHighlight : MonoBehaviour 
+{ 
     Player player;
 
     public Transform hotbarParent;
@@ -17,20 +17,20 @@ public class HotbarHighlight : MonoBehaviour
     void Start()
     {
         player = Player.instance;
-        slots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
-
-        ChangeItemName();
 
         player.onHotbarScrollCallback += ChangeHotbarSlot;
         player.onHotbarScrollCallback += ChangeItemName;
 
         player.onItemChangedCallback += ChangeHotbarSlot;
         player.onItemChangedCallback += ChangeItemName;
+
     }
 
     void ChangeItemName()
     {
-        if(GetCurrentlyEquippedItem() != null)
+        slots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
+
+        if (GetCurrentlyEquippedItem() != null)
         {
             itemNameText.gameObject.SetActive(true);
             itemNameText.SetText(GetCurrentlyEquippedItem().ItemName);
@@ -43,6 +43,8 @@ public class HotbarHighlight : MonoBehaviour
 
     private void ChangeHotbarSlot()
     {
+        slots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
+
         Vector2 scrollDelta = player.controls.Player.Scroll.ReadValue<Vector2>();
         HighlightEnabled(false);
 
@@ -101,4 +103,5 @@ public class HotbarHighlight : MonoBehaviour
         player.onItemChangedCallback -= ChangeHotbarSlot;
         player.onItemChangedCallback -= ChangeItemName;
     }
+
 }

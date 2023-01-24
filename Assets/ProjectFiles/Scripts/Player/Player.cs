@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
         controls.Player.Inventory.performed += inventory => InventoryInteraction();
         controls.Player.Scroll.performed += scroll => Scroll();
         controls.Player.Use.performed += use => UseItem();
+
+        controls.Enable();
     }
 
 
@@ -45,6 +47,9 @@ public class Player : MonoBehaviour
 
     public delegate void OnInventoryToggle();
     public OnItemChanged onInventoryToggleCallback;
+
+    public delegate void OnInventoryCreated();
+    public OnInventoryCreated onInventoryCreatedCallback;
 
     void Start()
     {
@@ -66,8 +71,9 @@ public class Player : MonoBehaviour
         for(int i = 0; i < inventorySize; i++)
         {
             inventory.inventoryItems.Add(new InventorySlot(null, 0, i));
-            Debug.Log($"Created inventory slot {inventory.inventoryItems[i]}.");
         }
+
+        onInventoryCreatedCallback?.Invoke();
     }
 
     void Scroll()

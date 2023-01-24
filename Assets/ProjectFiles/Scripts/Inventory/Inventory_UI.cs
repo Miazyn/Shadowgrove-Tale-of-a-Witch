@@ -39,6 +39,11 @@ public class Inventory_UI : MonoBehaviour
 
     private void UpdateUI()
     {
+        slots = itemsParent.GetComponentsInChildren<InventorySlotUI>();
+
+        hotbarSlots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
+
+
         for (int i = 0; i < slots.Length; i++)
         {
             

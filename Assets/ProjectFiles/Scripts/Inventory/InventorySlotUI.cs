@@ -6,27 +6,38 @@ using UnityEngine.InputSystem;
 
 public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IInitializePotentialDragHandler
 {
-    public SO_Item item;
-    public Image icon;
-    public TextMeshProUGUI itemAmount;
+    //Externally setup
+    public SO_Item item; //Item can be null
+    public int SlotPosition; //Pos == InventoryPos
+
     int amount;
 
-    public int SlotPosition;
-
+    [SerializeField] Image icon;
+    [SerializeField] TextMeshProUGUI itemAmount;
     [SerializeField] RectTransform itemImageRect;
     [SerializeField] GameObject dragableItemPrefab;
 
+
     GameObject instantiatedObject;
+
     public void AddItem(SO_Item _newItem, int _amount)
     {
-        item = _newItem;
-        icon.sprite = item.Icon;
-        icon.enabled = true;
+        if (_newItem != null)
+        {
+            item = _newItem;
+            icon.sprite = item.Icon;
+            icon.enabled = true;
 
-        amount = _amount;
+            amount = _amount;
 
-        itemAmount.SetText(_amount.ToString());
-        itemAmount.enabled = true;
+            itemAmount.SetText(_amount.ToString());
+            itemAmount.enabled = true;
+        }
+        else
+        {
+            ClearSlot();
+            DisableSlot();
+        }
     }
 
     public void ClearSlot()
