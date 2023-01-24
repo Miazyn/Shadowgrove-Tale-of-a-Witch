@@ -33,7 +33,14 @@ public class HotbarHighlight : MonoBehaviour
         if (GetCurrentlyEquippedItem() != null)
         {
             itemNameText.gameObject.SetActive(true);
-            itemNameText.SetText(GetCurrentlyEquippedItem().ItemName);
+            if (GetCurrentlyEquippedItem().ItemName != "")
+            {
+                itemNameText.SetText(GetCurrentlyEquippedItem().ItemName);
+            }
+            else
+            {
+                itemNameText.SetText(GetCurrentlyEquippedItem().name);
+            }
         }
         else
         {

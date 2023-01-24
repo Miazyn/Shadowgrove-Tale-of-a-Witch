@@ -126,8 +126,8 @@ public class Player : MonoBehaviour
         var item = hit.gameObject.GetComponent<ItemHolder>();
         if (item)
         {
-            //Debug.Log($"Adding {item.ItemName} to inventory");
-            bool wasItemAdded = inventory.AddItem(item.item, 1, 0);
+
+            bool wasItemAdded = inventory.AddItem(item.item, 1);
             if (wasItemAdded)
             {
                 

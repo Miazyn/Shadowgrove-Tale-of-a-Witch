@@ -34,44 +34,48 @@ public class Inventory_UI : MonoBehaviour
 
     void IndividualUIUpdate(int _slotPos)
     {
-
+        
     }
 
-    private void UpdateUI()
+    void UpdatingSlots()
     {
         slots = itemsParent.GetComponentsInChildren<InventorySlotUI>();
-
         hotbarSlots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
 
+        ///INVENTORY SLOTS
 
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < inventory.inventorySize; i ++)
         {
-            
-            if(i < inventory.inventoryItems.Count && inventory.inventoryItems[i].item != null)
+            for(int j = 0; j < slots.Length; j++)
             {
-                Debug.Log("Added images to Slot");
-                slots[i].AddItem(inventory.inventoryItems[i].item, inventory.inventoryItems[i].amount);
+                if(inventory.inventoryItems[i].slotNum == slots[j].SlotPosition)
+                {
+                    InventorySlot _slotInfo = inventory.inventoryItems[i];
+                    slots[j].AddItem(_slotInfo.item, _slotInfo.amount);
+                    break;
+                }
             }
-            else
-            {
-                Debug.Log("Cleared Slot");
-                slots[i].ClearSlot();
-            }
-
-            Debug.Log($"Item inside is {inventory.inventoryItems[i].item}");
         }
 
-        for(int i = 0; i < hotbarSlots.Length; i++)
+        ///HOTBAR SLOTS
+
+        for (int i = 0; i < inventory.inventorySize; i++)
         {
-            if(i < inventory.inventoryItems.Count && inventory.inventoryItems[i].item != null)
+            for (int j = 0; j < hotbarSlots.Length; j++)
             {
-                hotbarSlots[i].AddItem(inventory.inventoryItems[i].item, inventory.inventoryItems[i].amount);
-            }
-            else
-            {
-                hotbarSlots[i].ClearSlot();
+                if (inventory.inventoryItems[i].slotNum == hotbarSlots[j].SlotPosition)
+                {
+                    InventorySlot _slotInfo = inventory.inventoryItems[i];
+                    hotbarSlots[j].AddItem(_slotInfo.item, _slotInfo.amount);
+                    break;
+                }
             }
         }
+    }
+
+    void UpdateUI()
+    {
+        UpdatingSlots();
     }
 
     void UpdateSlots(InventorySlotUI[] _slots)

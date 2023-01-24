@@ -61,6 +61,42 @@ public class SO_Inventory : ScriptableObject
 
         Player.instance.onItemChangedCallback?.Invoke();
     }
+
+    public bool AddItem(SO_Item _item, int _amount)
+    {
+        if(_item == null)
+        {
+            return false;
+        }
+        if(_amount <= 0)
+        {
+            return false;
+        }
+
+        //Item Exists alrdy, Add Amount
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].item == _item)
+            {
+                inventoryItems[i].AddAmount(_amount);
+                return true;
+            }
+        }
+
+        //Item does not exits, find next empty spot.
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].item == null)
+            {
+                inventoryItems[i].item = _item;
+                inventoryItems[i].AddAmount(_amount);
+                return true;
+            }
+        }
+
+        Debug.Log("Inventory is full");
+        return false;
+    }
     public void RemoveItem(SO_Item _item)
     {
         for(int i = 0; i < inventoryItems.Count; i++)
@@ -80,30 +116,6 @@ public class SO_Inventory : ScriptableObject
         }
 
         Player.instance.onItemChangedCallback?.Invoke();
-    }
-
-    public bool AddItem(SO_Item _item, int _amount)
-    {
-        for(int i = 0; i < inventoryItems.Count; i++)
-        {
-            if(inventoryItems[i].item == _item)
-            {
-                AddItem(_item, _amount, i);
-                return true;
-            }
-        }
-
-        for(int i = 0; i < inventoryItems.Count; i++)
-        {
-            if(inventoryItems[i].item == null)
-            {
-                AddItem(_item, _amount, i);
-                return true;
-            }
-        }
-
-        Debug.Log("Inventory is full");
-        return false;
     }
 }
 

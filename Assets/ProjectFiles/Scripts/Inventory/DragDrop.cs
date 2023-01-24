@@ -46,14 +46,28 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         if(_slot != ItemSlot)
         {
-            //Destroy reference in previous slot
-            ItemSlot.ClearSlot();
-            ItemSlot.DisableSlot();
+            int prevIndex = ItemSlot.SlotPosition;
+            int curSlot = _slot.SlotPosition;
 
-            //create reference in new slot
-            _slot.DisableSlot();
-            _slot.AddItem(HeldItem, HeldItemAmount);
-            _slot.EnableSlot();
+            for(int i = 0; i < player.inventory.inventorySize; i++)
+            {
+
+                //Check through inventory. Nullify old ref, fill new ref
+                if(player.inventory.inventoryItems[i].slotNum == prevIndex)
+                {
+                    //NULLIFY
+                    player.inventory.inventoryItems[i].item = null;
+                    player.inventory.inventoryItems[i].amount = 0;
+                }
+
+                if(player.inventory.inventoryItems[i].slotNum == curSlot)
+                {
+                    //FILL INFO IN
+                    player.inventory.inventoryItems[i].item = HeldItem;
+                    player.inventory.inventoryItems[i].amount = HeldItemAmount;
+                }
+
+            }
 
             player.onItemChangedCallback?.Invoke();
 
