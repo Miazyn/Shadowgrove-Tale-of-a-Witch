@@ -24,6 +24,7 @@ public class GenerateInventoryUI : MonoBehaviour
 
     void GenerateUI()
     {
+        Debug.Log("Generating inventory");
         for (int i = 0; i < playerInventory.inventorySize; i++)
         {
             GameObject _objI = Instantiate(inventorySlotPrefab, inventoryParent);

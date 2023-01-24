@@ -95,7 +95,9 @@ public class HotbarHighlight : MonoBehaviour
 
     public SO_Item GetCurrentlyEquippedItem()
     {
-        if(slots[currentHighlight].GetComponent<InventorySlotUI>().GetItem() != null)
+        slots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
+
+        if (slots[currentHighlight].GetComponent<InventorySlotUI>().GetItem() != null)
         {
             return slots[currentHighlight].GetComponent<InventorySlotUI>().GetItem();
         }

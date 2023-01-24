@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ILateStart
 {
     public static Player instance;
 
@@ -61,6 +61,13 @@ public class Player : MonoBehaviour
 
         interactor = GetComponent<Interactor>();
 
+        StartCoroutine(LateStart());
+    }
+
+
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
         CreateInventory();
     }
 
@@ -107,7 +114,6 @@ public class Player : MonoBehaviour
 
     void Interacting()
     {
-        Debug.Log("Interaction has been clicked");
         if (interactor.GetOverlaps().Item1)
         {
             interactor.GetOverlaps().Item2.Interact(interactor);
@@ -156,4 +162,5 @@ public class Player : MonoBehaviour
             inventory.inventoryItems.Clear();
         }
     }
+
 }

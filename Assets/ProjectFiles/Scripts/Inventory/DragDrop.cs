@@ -38,6 +38,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         yield return new WaitForSeconds(delayedCheck);
         if (!IsDragged)
         {
+            ItemSlot.EnableSlot();
             Destroy(gameObject);
         }
     }
