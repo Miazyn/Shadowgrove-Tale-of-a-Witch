@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, ILateStart
+public class Player : MonoBehaviour, ILateStart, IDamageable
 {
     public static Player instance;
 
@@ -15,6 +15,9 @@ public class Player : MonoBehaviour, ILateStart
 
 
     public InputControls controls { get; private set; }
+
+    public int Health { get { return Health; } set { Health += value; } }
+    public int MaxHealth { get { return MaxHealth; } set { MaxHealth = value; } }
 
     void Awake()
     {
@@ -126,6 +129,26 @@ public class Player : MonoBehaviour, ILateStart
     {
         return currentItem.GetCurrentlyEquippedItem();
     }
+
+
+    public void TakeDamage(int dmg)
+    {
+        Health -= dmg;
+        if(Health <= 0)
+        {
+            Debug.Log($"{gameObject.name} has died.");
+        }
+    }
+
+    public void Heal(int healHP)
+    {
+        Health += healHP;
+        if(Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
+    }
+
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {

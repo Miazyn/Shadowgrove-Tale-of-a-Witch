@@ -111,7 +111,6 @@ public class DialogueManager : MonoBehaviour
 
             StopTypeEffect(_currentDialog);
         }
-        Debug.Log($"Current counter at: {counter}");
     }
     void TextReceived(SO_Dialog dialogue)
     {
@@ -164,22 +163,26 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
         for (int i = 0; i < line.ToCharArray().Length; i++)
         {
-            
+
             dialogueText.text += line.ToCharArray()[i];
-            
-            if (IsNpcLine)
-            {
-                if (line.ToCharArray()[i] != '.' || line.ToCharArray()[i] != ' ' || line.ToCharArray()[i] != '\n')
-                {
-                    audioSource.clip = allTypeClips[UnityEngine.Random.Range(0, allTypeClips.Length - 1)];
-                    audioSource.Play();
-                }
-            }
+
+            //PlayVoiceClip(line.ToCharArray()[i]);
 
             yield return new WaitForSeconds(typingSpeedInSeconds);
 
         }
         typerRunning = false;
+    }
+    void PlayVoiceClip(char _letter)
+    {
+        if (IsNpcLine)
+        {
+            if (_letter != '.' || _letter != ' ' || _letter != '\n')
+            {
+                audioSource.clip = allTypeClips[UnityEngine.Random.Range(0, allTypeClips.Length - 1)];
+                audioSource.Play();
+            }
+        }
     }
     void StopTypeEffect(SO_Dialog dialogue)
     {
