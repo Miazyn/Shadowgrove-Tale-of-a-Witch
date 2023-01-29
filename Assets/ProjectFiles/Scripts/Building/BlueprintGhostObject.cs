@@ -12,16 +12,26 @@ public class BlueprintGhostObject : MonoBehaviour
     public GameObject prefab;
     bool delayedStart = false;
 
-    [SerializeField] Renderer renderer;
+    [SerializeField] Renderer ghostRenderer;
     [SerializeField] Material validMat;
     [SerializeField] Material invalidMat;
+
+    [SerializeField] float maxBuildDistance = 200f;
 
     GameManager manager;
 
     BoxCollider _col;
 
+    Grid grid;
+
+    private void Awake()
+    {
+        grid = FindObjectOfType<Grid>();
+    }
+
     void Start()
     {
+
         manager = GameManager.Instance;
         manager.ChangeGameState(GameManager.GameState.BuildMode);
 
@@ -39,15 +49,16 @@ public class BlueprintGhostObject : MonoBehaviour
     
     private void Update()
     {
-        GetMousePos();
+        //GetMousePos();
+        MoveItemOnGrid();
 
         if (CanPlaceItem(transform.position))
         {
-            renderer.material = validMat;
+            ghostRenderer.material = validMat;
         }
         else
         {
-            renderer.material = invalidMat;
+            ghostRenderer.material = invalidMat;
         }
 
         if (Mouse.current.leftButton.isPressed)
@@ -55,6 +66,7 @@ public class BlueprintGhostObject : MonoBehaviour
             Debug.Log($"Has placed item: {PlacingItem()}");
             PlacingItem();
         }
+
         if (Mouse.current.rightButton.isPressed)
         {
             manager.ChangeGameState(GameManager.GameState.Normal);
@@ -64,11 +76,24 @@ public class BlueprintGhostObject : MonoBehaviour
 
     void GetMousePos()
     {
+
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out hit, 5000f, (1<<8) ))
+        if (Physics.Raycast(ray, out hit, maxBuildDistance, (1<<8) ))
         {
             transform.position = hit.point;
             transform.position = transform.position + (Vector3.up * prefab.transform.position.y);
+        }
+    }
+
+    void MoveItemOnGrid()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out hit, maxBuildDistance, (1 << 8)))
+        {
+
+            var finalPos = grid.GetNearestPointOnGrid(hit.point);
+            transform.position = finalPos;
+            transform.position = new Vector3(transform.position.x, prefab.transform.position.y, transform.position.z);
         }
     }
 
@@ -79,6 +104,7 @@ public class BlueprintGhostObject : MonoBehaviour
 
         if(CheckValidPlacementBox == null)
         {
+            Debug.Log($"Collided with {CheckValidPlacementBox}");
             return true;
         }
 
@@ -87,17 +113,14 @@ public class BlueprintGhostObject : MonoBehaviour
             return false;
         }
 
-        bool foundInvalidItem = false;
         foreach (var item in CheckValidPlacementBox)
         {
             if (item.gameObject.layer != 8 && !item.gameObject.TryGetComponent<Terrain>(out _terrain))
             {
-                foundInvalidItem = true;
                 return false;
             }
             if (!item.gameObject.TryGetComponent<Terrain>(out _terrain))
             {
-                foundInvalidItem = true;
                 return false;
             }
         }
@@ -118,7 +141,7 @@ public class BlueprintGhostObject : MonoBehaviour
         }
 
         if (EventSystem.current.IsPointerOverGameObject())
-        {
+        { 
             return false;
         }
 
@@ -137,5 +160,7 @@ public class BlueprintGhostObject : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(GetComponent<BoxCollider>().bounds.center, GetComponent<BoxCollider>().size);
+
+    
     }
 }

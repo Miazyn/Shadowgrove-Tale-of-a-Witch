@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureSO: {fileID: 11400000, guid: a858a8880b128cb4a862002a777d9fb8, type: 2}
   prefab: {fileID: 2449528281638307088, guid: 76b00501899f74645af847fd23fe7c84, type: 3}
-  renderer: {fileID: 143976941063900912}
+  ghostRenderer: {fileID: 143976941063900912}
   validMat: {fileID: 2100000, guid: 4803f8d9dc23b194dab69e97801638be, type: 2}
   invalidMat: {fileID: 2100000, guid: 5aa9f75cfc861ac418489998b0981ce1, type: 2}
+  maxBuildDistance: 200

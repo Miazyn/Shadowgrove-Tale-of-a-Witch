@@ -84,11 +84,19 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
     {
         Debug.Log("Item has been dropped on an inventory Slot");
 
-        if ( eventData.pointerDrag != null && item == null)
+        if(eventData.pointerDrag == null)
+        {
+            Debug.Log("Pointer was null");
+            return;
+        }
+
+        DragDrop _itemDrop = eventData.pointerDrag.GetComponent<DragDrop>();
+
+        //No item in slot and item being dragged into slot
+        if (item == null)
         {
             Debug.Log("Item valid");
-            DragDrop _itemDrop = eventData.pointerDrag.GetComponent<DragDrop>();
-
+            
             if (_itemDrop != null)
             {
                 _itemDrop.HasBeenDroppedOnSlot = true;
@@ -97,6 +105,13 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
             }
 
             eventData.pointerDrag = null;
+        }
+
+        //Swap LOGIC
+        if(item != null)
+        {
+            Debug.Log("Slot alrdy contains an item. Preparing Item swap!");
+            _itemDrop.SwapItems(this);
         }
 
     }
@@ -129,7 +144,7 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
         }
         else
         {
-
+            eventData.pointerDrag = null;
         }
     }
 

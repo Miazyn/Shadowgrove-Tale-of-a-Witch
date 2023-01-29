@@ -43,6 +43,49 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
     }
 
+    public void SwapItems(InventorySlotUI _slot)
+    {
+        int firstSlot = ItemSlot.SlotPosition;
+        int secondSlot = _slot.SlotPosition;
+
+        int slotNumOne = 0;
+        SO_Item firstItem = null;
+        int firstItemAmount = 0;
+
+        int slotNumTwo = 0;
+        SO_Item secondItem = null;
+        int secondItemAmount = 0;
+
+        for (int i = 0; i < player.inventory.inventorySize; i++)
+        {
+            if(player.inventory.inventoryItems[i].slotNum == firstSlot)
+            {
+                slotNumOne = i;
+                firstItem = player.inventory.inventoryItems[i].item;
+                firstItemAmount = player.inventory.inventoryItems[i].amount;
+            }
+
+            if (player.inventory.inventoryItems[i].slotNum == secondSlot)
+            {
+                slotNumTwo = i;
+                secondItem = player.inventory.inventoryItems[i].item;
+                secondItemAmount = player.inventory.inventoryItems[i].amount;
+            }
+        }
+
+        //ASSIGN SLOT 1 into 2
+        player.inventory.inventoryItems[slotNumTwo].item = firstItem;
+        player.inventory.inventoryItems[slotNumTwo].amount = firstItemAmount;
+        //ASSIGN SLOT 2 into 1
+        player.inventory.inventoryItems[slotNumOne].item = secondItem;
+        player.inventory.inventoryItems[slotNumOne].amount = secondItemAmount;
+
+
+
+        player.onItemChangedCallback?.Invoke();
+        Destroy(gameObject);
+    }
+
     public bool IsMySlot(InventorySlotUI _slot)
     {
         if(_slot != ItemSlot)
