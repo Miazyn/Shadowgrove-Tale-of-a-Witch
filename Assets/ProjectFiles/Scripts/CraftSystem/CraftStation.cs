@@ -31,7 +31,7 @@ public class CraftStation : MonoBehaviour, IInteractable
         //For now one recipe
         if (CanCraftItem(0))
         {
-            Debug.Log("Going to craft now: " + possibleBlueprintArray[0].BlueprintName);
+            Debug.Log("Going to craft now:" + possibleBlueprintArray[0].BlueprintName);
             return true;
         }
 
