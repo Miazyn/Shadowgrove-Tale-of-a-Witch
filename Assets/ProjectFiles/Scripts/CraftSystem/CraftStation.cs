@@ -39,6 +39,13 @@ public class CraftStation : MonoBehaviour, IInteractable
         return false;
     }
 
+    void SetUpCraftingMenu()
+    {
+        //Loop through all the craftable item 
+        //Instantiate ui elements with said info
+        //Attach number to them
+    }
+
     bool CanCraftItem(int index)
     {
         SO_Blueprint currentBlueprint = possibleBlueprintArray[index];
