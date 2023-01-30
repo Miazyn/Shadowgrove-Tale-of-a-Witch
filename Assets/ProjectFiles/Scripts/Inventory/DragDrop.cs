@@ -90,6 +90,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         if(_slot != ItemSlot)
         {
+            Debug.Log("Not the same slot, remove reference");
             int prevIndex = ItemSlot.SlotPosition;
             int curSlot = _slot.SlotPosition;
 

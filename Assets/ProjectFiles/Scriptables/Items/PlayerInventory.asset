@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   inventoryName: Player Inventory
-  inventorySize: 24
+  inventorySize: 36
   inventoryItems: []

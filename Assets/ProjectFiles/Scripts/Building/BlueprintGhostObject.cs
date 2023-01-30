@@ -63,7 +63,6 @@ public class BlueprintGhostObject : MonoBehaviour
 
         if (Mouse.current.leftButton.isPressed)
         {
-            Debug.Log($"Has placed item: {PlacingItem()}");
             PlacingItem();
         }
 

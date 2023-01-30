@@ -95,7 +95,7 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
         //No item in slot and item being dragged into slot
         if (item == null)
         {
-            Debug.Log("Item valid");
+            Debug.Log($"No Item in slot {this.name}");
             
             if (_itemDrop != null)
             {
@@ -105,13 +105,17 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
             }
 
             eventData.pointerDrag = null;
+
+            return;
         }
 
         //Swap LOGIC
         if(item != null)
         {
-            Debug.Log("Slot alrdy contains an item. Preparing Item swap!");
+            Debug.Log($"Slot alrdy contains an item. Preparing Item swap! Slot is {this.name}");
             _itemDrop.SwapItems(this);
+
+            return;
         }
 
     }
@@ -144,7 +148,7 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
         }
         else
         {
-            eventData.pointerDrag = null;
+            
         }
     }
 

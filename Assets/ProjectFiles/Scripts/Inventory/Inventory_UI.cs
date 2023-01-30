@@ -15,7 +15,8 @@ public class Inventory_UI : MonoBehaviour
     public GameObject hotbar;
     public Transform hotbarParent;
 
-    [SerializeField] GameObject itemNameAnzeige; 
+    [SerializeField] GameObject itemNameAnzeige;
+    [SerializeField] GameObject hotbarBackground;
 
     void Start()
     {
@@ -97,6 +98,7 @@ public class Inventory_UI : MonoBehaviour
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
         hotbar.SetActive(!inventoryUI.activeSelf);
+        hotbarBackground.SetActive(!inventoryUI.activeSelf);
         itemNameAnzeige.SetActive(!inventoryUI.activeSelf);
     }
     private void OnDisable()
