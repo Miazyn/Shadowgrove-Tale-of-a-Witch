@@ -66,10 +66,12 @@ public class SO_Inventory : ScriptableObject
     {
         if(_item == null)
         {
+            Debug.Log("invalid item");
             return false;
         }
         if(_amount <= 0)
         {
+            Debug.Log("invalid amount");
             return false;
         }
 
@@ -79,6 +81,8 @@ public class SO_Inventory : ScriptableObject
             if (inventoryItems[i].item == _item)
             {
                 inventoryItems[i].AddAmount(_amount);
+                Debug.Log("Added amount to inventory");
+                Player.instance.onItemChangedCallback?.Invoke();
                 return true;
             }
         }
@@ -90,6 +94,8 @@ public class SO_Inventory : ScriptableObject
             {
                 inventoryItems[i].item = _item;
                 inventoryItems[i].AddAmount(_amount);
+                Debug.Log("Added new item to inventory");
+                Player.instance.onItemChangedCallback?.Invoke();
                 return true;
             }
         }

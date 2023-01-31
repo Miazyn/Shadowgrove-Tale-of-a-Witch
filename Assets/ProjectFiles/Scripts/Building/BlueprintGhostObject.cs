@@ -16,7 +16,8 @@ public class BlueprintGhostObject : MonoBehaviour
     [SerializeField] Material validMat;
     [SerializeField] Material invalidMat;
 
-    [SerializeField] float maxBuildDistance = 200f;
+    const float maxBuildDistance = 10f;
+    const float maxBuildDistanceZAxis = 5f;
 
     GameManager manager;
 
@@ -24,6 +25,7 @@ public class BlueprintGhostObject : MonoBehaviour
 
     Grid grid;
 
+    
     private void Awake()
     {
         grid = FindObjectOfType<Grid>();
@@ -37,7 +39,7 @@ public class BlueprintGhostObject : MonoBehaviour
 
         _col = GetComponent<BoxCollider>();
 
-        GetMousePos();
+        MoveItemOnGrid();
         StartCoroutine(StartDelay());
     }
 
@@ -49,7 +51,6 @@ public class BlueprintGhostObject : MonoBehaviour
     
     private void Update()
     {
-        //GetMousePos();
         MoveItemOnGrid();
 
         if (CanPlaceItem(transform.position))
@@ -73,24 +74,44 @@ public class BlueprintGhostObject : MonoBehaviour
         }
     }
 
-    void GetMousePos()
-    {
-
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out hit, maxBuildDistance, (1<<8) ))
-        {
-            transform.position = hit.point;
-            transform.position = transform.position + (Vector3.up * prefab.transform.position.y);
-        }
-    }
-
     void MoveItemOnGrid()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out hit, maxBuildDistance, (1 << 8)))
-        {
 
-            var finalPos = grid.GetNearestPointOnGrid(hit.point);
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out hit, 10000, (1 << 8)))
+        {
+            //var view = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+            //var IsOutside = view.x < 0 || view.x > 1 || view.y < 0 || view.y > 1;
+
+            //Debug.Log($"Camera is outside viewport? {IsOutside}");
+
+
+            Vector3 playerPos = Player.instance.transform.position;
+            Vector3 finalPos = grid.GetNearestPointOnGrid(hit.point);
+
+            float xAbs = Mathf.Abs(playerPos.x - finalPos.x);
+            float yAbs = Mathf.Abs(playerPos.y - finalPos.y);
+            float zAbs = Mathf.Abs(playerPos.z - finalPos.z);
+
+            if(xAbs > maxBuildDistance)
+            {
+                return;
+            }
+            if (yAbs > maxBuildDistance)
+            {
+                return;
+            }
+            if (zAbs > maxBuildDistance)
+            {
+                return;
+            }
+
+
             transform.position = finalPos;
             transform.position = new Vector3(transform.position.x, prefab.transform.position.y, transform.position.z);
         }
@@ -101,15 +122,11 @@ public class BlueprintGhostObject : MonoBehaviour
         var CheckValidPlacementBox = Physics.OverlapBox(_col.bounds.center, _col.size);
         Terrain _terrain;
 
+
         if(CheckValidPlacementBox == null)
         {
             Debug.Log($"Collided with {CheckValidPlacementBox}");
             return true;
-        }
-
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return false;
         }
 
         foreach (var item in CheckValidPlacementBox)

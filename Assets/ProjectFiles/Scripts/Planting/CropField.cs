@@ -78,6 +78,7 @@ public class CropField : MonoBehaviour, IInteractable
         stage3.SetActive(false);
 
         currentStage = PlantStages.empty;
+
     }
 
     IEnumerator GrowPlantStages()
