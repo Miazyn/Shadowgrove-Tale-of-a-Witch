@@ -19,5 +19,5 @@ MonoBehaviour:
   CanBeSold: 0
   BuyPrice: 0
   SellPrice: 0
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 91f3cc9da32299a4683c69302f46a828, type: 3}
   StructurePrefab: {fileID: 2449528281638307088, guid: 8732df02cc8541340b0e7878225a2442, type: 3}

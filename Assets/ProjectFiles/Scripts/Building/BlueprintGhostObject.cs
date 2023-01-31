@@ -16,8 +16,8 @@ public class BlueprintGhostObject : MonoBehaviour
     [SerializeField] Material validMat;
     [SerializeField] Material invalidMat;
 
-    const float maxBuildDistance = 10f;
-    const float maxBuildDistanceZAxis = 5f;
+    const float MAXBUILDDISTANCE = 10f;
+    const float MAXBUILDDISTANCEYAXIS = 5f;
 
     GameManager manager;
 
@@ -98,15 +98,15 @@ public class BlueprintGhostObject : MonoBehaviour
             float yAbs = Mathf.Abs(playerPos.y - finalPos.y);
             float zAbs = Mathf.Abs(playerPos.z - finalPos.z);
 
-            if(xAbs > maxBuildDistance)
+            if(xAbs > MAXBUILDDISTANCE)
             {
                 return;
             }
-            if (yAbs > maxBuildDistance)
+            if (yAbs > MAXBUILDDISTANCE)
             {
                 return;
             }
-            if (zAbs > maxBuildDistance)
+            if (zAbs > MAXBUILDDISTANCE)
             {
                 return;
             }

@@ -17,6 +17,8 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
     [SerializeField] RectTransform itemImageRect;
     [SerializeField] GameObject dragableItemPrefab;
 
+    [SerializeField] Sprite defaultSprite;
+
 
     GameObject instantiatedObject;
 
@@ -25,13 +27,18 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
         if (_newItem != null)
         {
             item = _newItem;
-            icon.sprite = item.Icon;
+            if (item.Icon)
+            {
+                icon.sprite = item.Icon;
+            }
             icon.enabled = true;
 
             amount = _amount;
 
             itemAmount.SetText(_amount.ToString());
             itemAmount.enabled = true;
+
+            
         }
         else
         {
@@ -45,7 +52,7 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
         item = null;
         amount = 0;
 
-        icon.sprite = null;
+        icon.sprite = defaultSprite;
         icon.enabled = false;
 
         itemAmount.SetText("0");
