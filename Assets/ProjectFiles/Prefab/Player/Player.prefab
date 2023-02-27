@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c032c77e2bd78224ca2fd98ce7de2972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerName: Isabella
   currentItem: {fileID: 0}
   inventory: {fileID: 11400000, guid: 0816329210b699048b6d2e79ad1c36d1, type: 2}
 --- !u!114 &4450180731014685433
@@ -239,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   sprintSpeed: 4
-  characterRotationSmoothing: 0.045
+  characterRotationSmoothing: 0.45
   charControl: {fileID: 4450180731014685413}
   gravity: -9.8
   groundCheck: {fileID: 4450180730750063165}

@@ -24,6 +24,7 @@ public class HotbarHighlight : MonoBehaviour
         player.onItemChangedCallback += ChangeHotbarSlot;
         player.onItemChangedCallback += ChangeItemName;
 
+        player.onHotbarQuickSelect += QuickSelectSlot;
     }
 
     void ChangeItemName()
@@ -48,7 +49,7 @@ public class HotbarHighlight : MonoBehaviour
         }
     }
 
-    private void ChangeHotbarSlot()
+    void ChangeHotbarSlot()
     {
         slots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
 
@@ -82,6 +83,17 @@ public class HotbarHighlight : MonoBehaviour
         HighlightEnabled(true);
     }
 
+    void QuickSelectSlot(float value)
+    {
+        HighlightEnabled(false);
+
+        Debug.Log($"Current value of highlight: {value}");
+
+        currentHighlight = (int)value - 1;
+
+        HighlightEnabled(true);
+    }
+
     void HighlightEnabled(bool value)
     {
         for (int i = 0; i < slots[currentHighlight].GetComponent<Transform>().childCount; i++)
@@ -111,6 +123,8 @@ public class HotbarHighlight : MonoBehaviour
 
         player.onItemChangedCallback -= ChangeHotbarSlot;
         player.onItemChangedCallback -= ChangeItemName;
+
+        player.onHotbarQuickSelect -= QuickSelectSlot;
     }
 
 }

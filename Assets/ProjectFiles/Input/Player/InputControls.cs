@@ -73,6 +73,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""HotbarQuick"",
+                    ""type"": ""Button"",
+                    ""id"": ""cee4460f-7989-413f-a85b-ed71daab7c18"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -328,6 +336,105 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8db2052-46f7-4506-ab0b-46f61d5ab7f0"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""947368f9-027b-425f-8387-34ff8524bbbe"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12999de2-ae95-4864-ba98-37a539999c47"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38e05cd0-13dd-4a55-a9db-bdcad3f4f65a"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a21f2ab-083f-4471-b2ed-f07adea82853"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f991e93-8f1c-4f98-b094-fd0605d87ce5"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5766641b-caa6-4b33-b4f1-dda42e8fa7ae"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=7)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f604f3c2-cc65-4887-88c5-0fc5763336ac"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=8)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""123e35d7-9874-4949-8e62-e0f5577cb325"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=9)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""HotbarQuick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -371,6 +478,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Scroll = m_Player.FindAction("Scroll", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_HotbarQuick = m_Player.FindAction("HotbarQuick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,6 +535,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Scroll;
     private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_HotbarQuick;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -438,6 +547,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Scroll => m_Wrapper.m_Player_Scroll;
         public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @HotbarQuick => m_Wrapper.m_Player_HotbarQuick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -468,6 +578,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @HotbarQuick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotbarQuick;
+                @HotbarQuick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotbarQuick;
+                @HotbarQuick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotbarQuick;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -493,6 +606,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Use.started += instance.OnUse;
                 @Use.performed += instance.OnUse;
                 @Use.canceled += instance.OnUse;
+                @HotbarQuick.started += instance.OnHotbarQuick;
+                @HotbarQuick.performed += instance.OnHotbarQuick;
+                @HotbarQuick.canceled += instance.OnHotbarQuick;
             }
         }
     }
@@ -524,5 +640,6 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnScroll(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnHotbarQuick(InputAction.CallbackContext context);
     }
 }

@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "HotbarQuick",
+                    "type": "Button",
+                    "id": "cee4460f-7989-413f-a85b-ed71daab7c18",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -313,6 +321,105 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8db2052-46f7-4506-ab0b-46f61d5ab7f0",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "947368f9-027b-425f-8387-34ff8524bbbe",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12999de2-ae95-4864-ba98-37a539999c47",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "38e05cd0-13dd-4a55-a9db-bdcad3f4f65a",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a21f2ab-083f-4471-b2ed-f07adea82853",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "Scale(factor=5)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f991e93-8f1c-4f98-b094-fd0605d87ce5",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "Scale(factor=6)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5766641b-caa6-4b33-b4f1-dda42e8fa7ae",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "Scale(factor=7)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f604f3c2-cc65-4887-88c5-0fc5763336ac",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "Scale(factor=8)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "123e35d7-9874-4949-8e62-e0f5577cb325",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "Scale(factor=9)",
+                    "groups": "Keyboard and Mouse",
+                    "action": "HotbarQuick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

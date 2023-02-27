@@ -36,6 +36,8 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         controls.Player.Scroll.performed += scroll => Scroll();
         controls.Player.Use.performed += use => UseItem();
 
+        controls.Player.HotbarQuick.performed += HotbarHighlight => HotbarSelection(controls.Player.HotbarQuick.ReadValue<float>());
+
         controls.Enable();
     }
 
@@ -47,6 +49,9 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     
     public delegate void OnHotbarScroll(Vector2 scrollDelta);
     public OnItemChanged onHotbarScrollCallback;
+
+    public delegate void OnHotbarQuickSelect(float slotPos);
+    public OnHotbarQuickSelect onHotbarQuickSelect;
 
     public delegate void OnInventoryToggle();
     public OnItemChanged onInventoryToggleCallback;
@@ -84,6 +89,11 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         }
 
         onInventoryCreatedCallback?.Invoke();
+    }
+
+    void HotbarSelection(float value)
+    {
+        onHotbarQuickSelect?.Invoke(value);
     }
 
     void Scroll()
