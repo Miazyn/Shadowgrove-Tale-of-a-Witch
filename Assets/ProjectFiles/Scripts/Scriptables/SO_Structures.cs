@@ -15,7 +15,6 @@ public class SO_Structures : SO_Item
 
     public override void Use()
     {
-        Debug.Log("Trying to use Ghost Object");
         Instantiate(StructurePrefab);
     }
 

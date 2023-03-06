@@ -31,6 +31,10 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
             {
                 icon.sprite = item.Icon;
             }
+            else
+            {
+                icon.sprite = null;
+            }
             icon.enabled = true;
 
             amount = _amount;
@@ -89,7 +93,6 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Item has been dropped on an inventory Slot");
 
         if(eventData.pointerDrag == null)
         {
@@ -119,7 +122,6 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
         //Swap LOGIC
         if(item != null)
         {
-            Debug.Log($"Slot alrdy contains an item. Preparing Item swap! Slot is {this.name}");
             _itemDrop.SwapItems(this);
 
             return;
