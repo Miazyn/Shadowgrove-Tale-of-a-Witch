@@ -22,6 +22,10 @@ MonoBehaviour:
   Icon: {fileID: 0}
   DaysToGrow: 2
   GrowthSeason: 00000000
-  PlantStages: []
   Harvestable: {fileID: 11400000, guid: 32e3a266a5303d640a945faf85a15615, type: 2}
   HarvestAmount: 1
+  Stages: 3
+  MeshForStages:
+  - {fileID: -2432090755550338912, guid: cd6ae8f53e1ba7f478d93ac697a8665a, type: 3}
+  - {fileID: -2432090755550338912, guid: bb07b5d40e268374cb03adb486948b04, type: 3}
+  - {fileID: -2432090755550338912, guid: 15540597053fe9442ba5e84de79aa83e, type: 3}

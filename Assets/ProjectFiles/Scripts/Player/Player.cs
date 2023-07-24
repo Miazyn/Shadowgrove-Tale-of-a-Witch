@@ -34,7 +34,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         controls.Player.Interact.performed += interaction => Interacting();
         controls.Player.Inventory.performed += inventory => InventoryInteraction();
         controls.Player.Scroll.performed += scroll => Scroll();
-        controls.Player.Use.performed += use => UseItem();
+        //controls.Player.Use.performed += use => UseItem();
 
         controls.Player.HotbarQuick.performed += HotbarHighlight => HotbarSelection(controls.Player.HotbarQuick.ReadValue<float>());
 
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         
         _itemUsed = _curItem.CanBeUsed(interactor.GetGameObjects().Item2);
 
-        return true;
+        return _itemUsed;
 
     }
 
@@ -137,6 +137,10 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     public SO_Item GetCurrentItem()
     {
+        if(currentItem.GetCurrentlyEquippedItem() == null)
+        {
+            return null;
+        }
         return currentItem.GetCurrentlyEquippedItem();
     }
 

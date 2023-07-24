@@ -32,6 +32,8 @@ public class CropField : MonoBehaviour, IInteractable
         player = Player.instance;
     }
 
+
+
     public bool Interact(Interactor interactor)
     {
         if (currentStage == PlantStages.planted)

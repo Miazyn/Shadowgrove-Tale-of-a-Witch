@@ -6,11 +6,18 @@ public class SO_Seed : SO_Item
 {
     public int DaysToGrow;
     public Season[] GrowthSeason = new Season[1];
-    public Sprite[] PlantStages;
 
     public SO_Item Harvestable;
 
     public int HarvestAmount;
+
+    [Range(1, 10)]
+    public int Stages;
+    public Mesh[] MeshForStages;
+
+    //public bool GetSeedsBack;
+    //public int SeedMax;
+    //public int SeedMin;
 
     private void Awake()
     {
