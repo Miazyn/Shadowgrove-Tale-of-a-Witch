@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CraftingGridGenerator : MonoBehaviour
 {
-
-    [SerializeField] Transform hotbarParent;
     [SerializeField] Transform craftgridParent;
 
     [SerializeField] GameObject craftgridPrefab;
@@ -17,11 +15,17 @@ public class CraftingGridGenerator : MonoBehaviour
         player = Player.instance;
         playerInventory = player.inventory;
 
-        player.onInventoryCreatedCallback += Method;
+        player.onInventoryCreatedCallback += CreateCraftGridUI;
     }
 
-    public void Method()
+    public void CreateCraftGridUI()
     {
-        
+        SO_Blueprint blueprint = Resources.Load<SO_Blueprint>("Blueprints/TestBlueprint");
+
+        for (int i = 0; i < playerInventory.inventorySize; i++)
+        {
+            GameObject _objI = Instantiate(craftgridPrefab, craftgridParent);
+            _objI.GetComponent<InformationCraftGridUI>().SetItemBlueprint(blueprint);
+        }
     }
 }
