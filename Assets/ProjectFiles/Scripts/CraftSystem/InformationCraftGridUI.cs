@@ -24,4 +24,10 @@ public class InformationCraftGridUI : MonoBehaviour
         }
         BpName.text = ItemBlueprint.BlueprintName;
     }
+
+    public void OnClickEvent()
+    {
+        Debug.Log($"Crafting: {ItemBlueprint} and adding to inventory!");
+
+    }
 }

@@ -82,6 +82,7 @@ public class CraftStation : MonoBehaviour, IInteractable
     ///- How many Button? -> Increase number/decrease
     ///- Grey out on: Max craftable/can't craft
     ///- Go through inventory to see if you have enough of said material
+    ///-  Add possibility for more than one ingredient needed
 
 
 

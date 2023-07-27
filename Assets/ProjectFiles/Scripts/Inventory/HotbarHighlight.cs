@@ -87,7 +87,7 @@ public class HotbarHighlight : MonoBehaviour
     {
         HighlightEnabled(false);
 
-        Debug.Log($"Current value of highlight: {value}");
+        //Debug.Log($"Current value of highlight: {value}");
 
         currentHighlight = (int)value - 1;
 
