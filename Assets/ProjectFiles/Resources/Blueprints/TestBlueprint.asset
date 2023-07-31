@@ -15,4 +15,5 @@ MonoBehaviour:
   BlueprintName: Tester_NA
   BlueprintDesc: Just a test, for the golden apple time.
   Result: {fileID: 11400000, guid: 9eb9be2dde0b2874db89b469900ca7b2, type: 2}
-  Materials: []
+  Materials:
+  - {fileID: 11400000, guid: 9eb9be2dde0b2874db89b469900ca7b2, type: 2}

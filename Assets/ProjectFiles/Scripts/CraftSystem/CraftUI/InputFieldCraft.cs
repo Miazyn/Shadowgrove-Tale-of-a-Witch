@@ -13,6 +13,12 @@ public class InputFieldCraft : MonoBehaviour
         input.text = "0";
     }
 
+    //Update all Values of each CraftingItem
+    public void UpdatingValues()
+    {
+
+    }
+
     public void IncreaseValue()
     {
         if(int.TryParse(input.text, out int result))

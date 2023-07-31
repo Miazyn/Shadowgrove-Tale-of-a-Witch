@@ -28,36 +28,31 @@ public class CraftStation : MonoBehaviour, IInteractable
             //No Player as interactor
         }
 
-        //For now one recipe
-        if (CanCraftItem(0))
+        return true;
+    }
+
+    public void Craft(SO_Blueprint _blueprint)
+    {
+        if (!CanCraftItem(_blueprint))
         {
-            Debug.Log("Going to craft now:" + possibleBlueprintArray[0].BlueprintName);
-            return true;
+            Debug.Log("Cannot craft yet");
+            return;
         }
 
-        Debug.Log("Cannot craft yet");
-        return false;
+        Debug.Log("Going to craft now:" + _blueprint.BlueprintName);
     }
 
-    void SetUpCraftingMenu()
+    bool CanCraftItem(SO_Blueprint _blueprint)
     {
-        //Loop through all the craftable item 
-        //Instantiate ui elements with said info
-        //Attach number to them
-    }
-
-    bool CanCraftItem(int index)
-    {
-        SO_Blueprint currentBlueprint = possibleBlueprintArray[index];
         bool foundItem = false;
 
-        for (int i = 0; i < currentBlueprint.Materials.Length; i++)
+        for (int i = 0; i < _blueprint.Materials.Length; i++)
         {
             foundItem = false;
 
             for (int j = 0; j < playerInventory.inventoryItems.Count; j++)
             {
-                if (playerInventory.inventoryItems[j].item == currentBlueprint.Materials[i])
+                if (playerInventory.inventoryItems[j].item == _blueprint.Materials[i])
                 {
                     Debug.Log("Found item in inventory!");
                     foundItem = true;
@@ -66,7 +61,7 @@ public class CraftStation : MonoBehaviour, IInteractable
 
             if (!foundItem)
             {
-                Debug.Log($"Missing the item: {currentBlueprint.Materials[i]}");
+                Debug.Log($"Missing the item: {_blueprint.Materials[i]}");
                 return false;
             }
         }

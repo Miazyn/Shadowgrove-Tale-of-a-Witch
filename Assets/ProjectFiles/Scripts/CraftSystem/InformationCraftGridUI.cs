@@ -10,6 +10,8 @@ public class InformationCraftGridUI : MonoBehaviour
     public Image BpImage;
     public TextMeshProUGUI BpName;
 
+    public int Index { get; private set; }
+
     public void SetItemBlueprint(SO_Blueprint _blueprint)
     {
         ItemBlueprint = _blueprint;
@@ -25,9 +27,15 @@ public class InformationCraftGridUI : MonoBehaviour
         BpName.text = ItemBlueprint.BlueprintName;
     }
 
+    public void SetIndex(int _index)
+    {
+        Index = _index;
+    }
+
     public void OnClickEvent()
     {
-        Debug.Log($"Crafting: {ItemBlueprint} and adding to inventory!");
+        CraftStation _craftStation = GameObject.FindObjectOfType<CraftStation>();
 
+        _craftStation.Craft(ItemBlueprint);
     }
 }
