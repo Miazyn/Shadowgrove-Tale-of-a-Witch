@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController), typeof(Interactor), typeof(CharacterController))]
 public class Player : MonoBehaviour, ILateStart, IDamageable
 {
     public static Player instance;
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     public string PlayerName = "Isabella";
 
     GameManager manager;
+
     [SerializeField] HotbarHighlight currentItem;
     public Interactor interactor { get; private set; }
 

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CraftStation : MonoBehaviour, IInteractable
 {
-    [SerializeField] SO_Blueprint[] possibleBlueprintArray;
     Player player;
     SO_Inventory playerInventory;
+    static string CraftMenu = "CraftMenu";
     public string interactionPrompt => throw new System.NotImplementedException();
+
+    public delegate void OnMenuToggle();
+    public OnMenuToggle onMenuTogggleCallback;
 
     private void Start()
     {
@@ -27,7 +30,7 @@ public class CraftStation : MonoBehaviour, IInteractable
             return false;
             //No Player as interactor
         }
-
+        onMenuTogggleCallback?.Invoke();
         return true;
     }
 

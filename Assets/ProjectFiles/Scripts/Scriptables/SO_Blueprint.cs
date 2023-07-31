@@ -12,5 +12,8 @@ public class SO_Blueprint : ScriptableObject
     public SO_Item Result;
 
     public SO_Item[] Materials;
+
+    [Range(1,999)]
     public int[] Amount;
+
 }
