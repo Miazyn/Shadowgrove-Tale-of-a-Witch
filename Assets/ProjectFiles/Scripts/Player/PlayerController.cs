@@ -29,8 +29,15 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
+    bool canMove;
+
+    private void Awake()
+    {
+        canMove = true;
+    }
     private void Start()
     {
+
         controls = gameObject.GetComponent<Player>().controls;
         controls.Player.Sprint.performed += sprinting => Sprinting();
         controls.Player.StopSprint.performed += sprintStop => StopSprinting();
@@ -39,23 +46,38 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnDialogueStart.AddListener(DisableMovement);
+        EventManager.OnDialogueEnd.AddListener(EnableMovement);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnDialogueStart.RemoveListener(DisableMovement);
+        EventManager.OnDialogueEnd.RemoveListener(EnableMovement);
+    }
+
     void Update()
     {
-        
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        
-        if (isGrounded && velocity.y < 0)
+        if (canMove)
         {
-            velocity.y = -2;
-        }
-        moveDirection = controls.Player.Move.ReadValue<Vector2>();
-        
-        charControl.Move(new Vector3(moveDirection.x, 0 , moveDirection.y) * speed * Time.deltaTime);
-        Rotation();
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2;
+            }
+            moveDirection = controls.Player.Move.ReadValue<Vector2>();
+
+            charControl.Move(new Vector3(moveDirection.x, 0, moveDirection.y) * speed * Time.deltaTime);
+            Rotation();
+
+
+            velocity.y += gravity * Time.deltaTime;
+            charControl.Move(velocity * speed);
+        }
         
-        velocity.y += gravity * Time.deltaTime;
-        charControl.Move(velocity * speed);
         
     }
 
@@ -86,7 +108,16 @@ public class PlayerController : MonoBehaviour
         IsSprinting = !IsSprinting;
 
     }
+
+    void EnableMovement()
+    {
+        canMove = true;
+    }
  
+    void DisableMovement()
+    {
+        canMove = false;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -94,8 +125,6 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.DrawSphere(groundCheck.position, groundDistance);
     }
-
-    
 
 
 }

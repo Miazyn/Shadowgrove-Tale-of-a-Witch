@@ -77,6 +77,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void SetUpDialog(SO_Dialog _currentDialog, SO_NPC _dialogNpc)
     {
+
         if (_dialogNpc.voice != null)
         {
             allTypeClips = _dialogNpc.voice.voiceClips;
@@ -95,6 +96,8 @@ public class DialogueManager : MonoBehaviour
 
         if (finishedLastDialog)
         {
+            EventManager.OnDialogueEnd.Invoke();
+
             finishedLastDialog = false;
             counter = 0;
         }
@@ -106,6 +109,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (typerRunning)
         {
+
             DisplayCharacterSprite(_currentDialog);
             DisplayCharacterName(_currentDialog);
 
@@ -114,6 +118,8 @@ public class DialogueManager : MonoBehaviour
     }
     void TextReceived(SO_Dialog dialogue)
     {
+        EventManager.OnDialogueStart.Invoke();
+
         npcSprite.GetComponent<Image>().sprite = DisplayCharacterSprite(dialogue);
         nameText.SetText(DisplayCharacterName(dialogue));
 
@@ -148,6 +154,7 @@ public class DialogueManager : MonoBehaviour
     }
     void EndDialog()
     {
+        EventManager.OnDialogueEnd.Invoke();
 
         //SET INACTIVE
         textBoxObject.SetActive(false);

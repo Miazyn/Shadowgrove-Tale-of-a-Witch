@@ -30,7 +30,10 @@ public class CraftStation : MonoBehaviour, IInteractable
             return false;
             //No Player as interactor
         }
-        onMenuTogggleCallback?.Invoke();
+
+        GameManager.Instance.onAnyMenuToggleCallback?.Invoke(UIController.Menu.Crafting);
+
+        //onMenuTogggleCallback?.Invoke();
         return true;
     }
 

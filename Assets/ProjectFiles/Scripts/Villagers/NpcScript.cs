@@ -22,6 +22,7 @@ public class NpcScript : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
+        Debug.Log("Interacted with npc");
         dialogManager.SetUpDialog(_MyDialog, _NPC);
         return true;
     }

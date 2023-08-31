@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
 
     public GameState CurrentState { get; private set; }
 
+    
+    public delegate void OnAnyMenuToggled(UIController.Menu _menu);
+    public OnAnyMenuToggled onAnyMenuToggleCallback;
+
     public enum GameState
     {
         Normal,
