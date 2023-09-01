@@ -14,10 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyForName: 00000000
   nameOfSpeaker:
-  - Simon
-  keyForCharacterDisplay: 00000000
+  - ???
+  keyForCharacterDisplay: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
   spriteForCharacterDisplay:
-  - {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+  - {fileID: 21300000, guid: 847d138b86d1dc144991260038b653f6, type: 3}
+  - {fileID: 21300000, guid: e3fcde8222aa4e7409944b3155675173, type: 3}
+  - {fileID: 21300000, guid: bb857d2d7300354449db012422e7c6c9, type: 3}
+  - {fileID: 21300000, guid: e7e5cef9c5ae19947ae70f4724b8b345, type: 3}
+  - {fileID: 21300000, guid: f03745a878ff2f047a88f06f29df47d5, type: 3}
+  - {fileID: 21300000, guid: afbd17e6205b25f47a4d859504b98aa0, type: 3}
+  - {fileID: 21300000, guid: 853995a0e5a1f3f47bb656663bd33e26, type: 3}
+  - {fileID: 21300000, guid: 7cebe0bbfabdace4c8afff7bd1dc8082, type: 3}
+  - {fileID: 21300000, guid: e86283ac3eb54f6499c6cc5bb1376790, type: 3}
+  - {fileID: 21300000, guid: 7b03b15638cd4f940b88ae5c9b7d6b0f, type: 3}
+  - {fileID: 21300000, guid: 0eb4c260e48c247458a11787d01811b0, type: 3}
+  - {fileID: 21300000, guid: 05b45c6274126814d8f7e8bc456e9250, type: 3}
+  - {fileID: 21300000, guid: ed67f0563a073c349bc74d27519002ad, type: 3}
+  - {fileID: 21300000, guid: cb47d096f9fc9734eb38955503644123, type: 3}
+  - {fileID: 21300000, guid: 43e5098ba78ac6d418d76bb2c3d0f46a, type: 3}
   lines:
-  - Works!
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
+  - Hi
   dialogueChoices: []
