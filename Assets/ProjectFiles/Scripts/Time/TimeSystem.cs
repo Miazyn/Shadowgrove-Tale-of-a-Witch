@@ -22,7 +22,16 @@ public class TimeSystem : MonoBehaviour
     private int hour = 6;
     private int minute = 0;
 
-    [SerializeField] private float timeBtwMinutes = 7f;
+    [Range(0.001f, 10.0f)]
+    [SerializeField] private float timeBtwMinutes = 7.0f;
+    [Range(1, 31)]
+    [SerializeField] private int dayInSeason = 28;
+    [Range(0, 23)]
+    [SerializeField] private int startHour = 6;
+    [Range(0, 23)]
+    [SerializeField] private int passOutTime = 2;
+
+
 
     public enum Day
     {
@@ -45,6 +54,8 @@ public class TimeSystem : MonoBehaviour
 
     public void Start()
     {
+        hour = startHour;
+
         curDay = Day.Mon;
         curSeason = Season.Spring;
 
@@ -64,22 +75,20 @@ public class TimeSystem : MonoBehaviour
                 {
                     hour = 0;
                 }
-                else if (hour != 2)
+                else if (hour != passOutTime)
                 {
                     hour++;
                 }
             }
             else
             {
-                if (hour != 2)
+                if (hour != passOutTime)
                 {
                     minute += 10;
                 }
             }
 
             //string time = "Time" + hour.ToString("D2") + ":" + minute.ToString("D2") + " Day:" + dayCounter;
-            string time = "Time" + hour.ToString("D2") + " Day:" + dayCounter;
-            Debug.Log(time);
         }
 
         Debug.Log("We have passeed out. Restart Coroutine, next day.");
@@ -116,12 +125,23 @@ public class TimeSystem : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Next day:" + curDay);
+        if(dayCounter + 1 < dayInSeason + 1)
+        {
+            dayCounter++;
+        }
+        else
+        {
+            dayCounter = 1;
 
-        dayCounter = dayCounter++ > 27 ? 1 : dayCounter++;
+            NextSeason();
+        }
 
-        hour = 6;
+        Debug.Log("Next day:" + curDay + " " + dayCounter + " " + curSeason + " Year: " + Year);
+
+        hour = startHour;
         minute = 0;
+
+        StartCoroutine(HourIncrease());
     }
 
     public void NextSeason()
@@ -139,6 +159,8 @@ public class TimeSystem : MonoBehaviour
                 break;
             case Season.Winter:
                 curSeason = Season.Spring;
+                NextYear();
+
                 break;
             default:
                 Debug.LogError("Went outside of the expected possible seasons!!!");

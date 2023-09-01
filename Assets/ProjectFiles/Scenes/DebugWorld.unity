@@ -4587,6 +4587,9 @@ MonoBehaviour:
   curSeason: 0
   Year: 1
   timeBtwMinutes: 7
+  dayInSeason: 28
+  startHour: 6
+  passOutTime: 2
 --- !u!1 &1450852985
 GameObject:
   m_ObjectHideFlags: 0
