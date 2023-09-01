@@ -101,6 +101,8 @@ public class UIController : MonoBehaviour
         Hotbar.SetActive(true);
 
         EventManager.OnInteractionEnd?.Invoke();
+
+        currentMenu = null;
     }
 
 
