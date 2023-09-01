@@ -6,6 +6,6 @@ using UnityEngine.EventSystems;
 
 public class EventManager : MonoBehaviour
 {
-    public static UnityEvent OnDialogueStart = new UnityEvent();
-    public static UnityEvent OnDialogueEnd = new UnityEvent();
+    public static UnityEvent OnInteractionStart = new UnityEvent();
+    public static UnityEvent OnInteractionEnd = new UnityEvent();
 }

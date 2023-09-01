@@ -96,7 +96,7 @@ public class DialogueManager : MonoBehaviour
 
         if (finishedLastDialog)
         {
-            EventManager.OnDialogueEnd.Invoke();
+            EventManager.OnInteractionEnd.Invoke();
 
             finishedLastDialog = false;
             counter = 0;
@@ -118,7 +118,7 @@ public class DialogueManager : MonoBehaviour
     }
     void TextReceived(SO_Dialog dialogue)
     {
-        EventManager.OnDialogueStart.Invoke();
+        EventManager.OnInteractionStart.Invoke();
 
         npcSprite.GetComponent<Image>().sprite = DisplayCharacterSprite(dialogue);
         nameText.SetText(DisplayCharacterName(dialogue));
@@ -154,7 +154,7 @@ public class DialogueManager : MonoBehaviour
     }
     void EndDialog()
     {
-        EventManager.OnDialogueEnd.Invoke();
+        EventManager.OnInteractionEnd.Invoke();
 
         //SET INACTIVE
         textBoxObject.SetActive(false);

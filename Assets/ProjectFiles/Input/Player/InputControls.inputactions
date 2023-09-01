@@ -14,6 +14,14 @@
                     "interactions": "Press"
                 },
                 {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "c441928e-8826-4627-93ff-a44b0ba3f006",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
                     "name": "Inventory",
                     "type": "Button",
                     "id": "7a1a16db-7166-42f7-892b-4cb962a54ee0",
@@ -420,6 +428,28 @@
                     "processors": "Scale(factor=9)",
                     "groups": "Keyboard and Mouse",
                     "action": "HotbarQuick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc1eab9e-ba83-429d-b428-6857c8437f07",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e5ccce1-b368-40da-9786-b48642c44101",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -27,6 +27,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press""
                 },
                 {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c441928e-8826-4627-93ff-a44b0ba3f006"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""7a1a16db-7166-42f7-892b-4cb962a54ee0"",
@@ -435,6 +443,28 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""HotbarQuick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc1eab9e-ba83-429d-b428-6857c8437f07"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e5ccce1-b368-40da-9786-b48642c44101"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -472,6 +502,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_StopSprint = m_Player.FindAction("StopSprint", throwIfNotFound: true);
@@ -529,6 +560,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Cancel;
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_StopSprint;
@@ -541,6 +573,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         private @InputControls m_Wrapper;
         public PlayerActions(@InputControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @StopSprint => m_Wrapper.m_Player_StopSprint;
@@ -560,6 +593,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Cancel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
                 @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
@@ -588,6 +624,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
@@ -634,6 +673,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnInteract(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnStopSprint(InputAction.CallbackContext context);

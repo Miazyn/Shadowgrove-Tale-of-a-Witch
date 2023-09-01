@@ -36,6 +36,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         controls.Player.Interact.performed += interaction => Interacting();
         controls.Player.Inventory.performed += inventory => InventoryInteraction();
         controls.Player.Scroll.performed += scroll => Scroll();
+        controls.Player.Cancel.performed += cancel => CancelAction();
         //controls.Player.Use.performed += use => UseItem();
 
         controls.Player.HotbarQuick.performed += HotbarHighlight => HotbarSelection(controls.Player.HotbarQuick.ReadValue<float>());
@@ -54,9 +55,6 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     public delegate void OnHotbarQuickSelect(float slotPos);
     public OnHotbarQuickSelect onHotbarQuickSelect;
-
-    public delegate void OnInventoryToggle();
-    public OnItemChanged onInventoryToggleCallback;
 
     public delegate void OnInventoryCreated();
     public OnInventoryCreated onInventoryCreatedCallback;
@@ -93,6 +91,11 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         onInventoryCreatedCallback?.Invoke();
     }
 
+    private void CancelAction()
+    {
+        manager.onMenuClosedCallback?.Invoke();
+    }
+
     void HotbarSelection(float value)
     {
         onHotbarQuickSelect?.Invoke(value);
@@ -105,7 +108,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     void InventoryInteraction()
     {
-        onInventoryToggleCallback?.Invoke();
+        manager.onAnyMenuToggleCallback(UIController.Menu.Inventory);
     }
 
     bool UseItem()

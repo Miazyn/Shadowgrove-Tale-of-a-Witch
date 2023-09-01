@@ -7,11 +7,16 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance;
 
-    public GameObject CraftMenu;
+    [SerializeField] public GameObject CraftMenu;
+    [SerializeField] public GameObject InventoryMenu;
+    [SerializeField] public GameObject Hotbar;
+
+    private GameObject currentMenu;
 
     public enum Menu
     {
-        Crafting
+        Crafting,
+        Inventory
     }
 
     GameManager gamemanager;
@@ -34,24 +39,69 @@ public class UIController : MonoBehaviour
         gamemanager = GameManager.Instance;
 
         gamemanager.onAnyMenuToggleCallback += AnyMenuToggled;
+        gamemanager.onMenuClosedCallback += CloseCurrentWindow;
+
+        Hotbar.SetActive(true);
     }
+
+    private void OnDisable()
+    {
+        gamemanager.onAnyMenuToggleCallback -= AnyMenuToggled;
+        gamemanager.onMenuClosedCallback -= CloseCurrentWindow;
+    }
+
 
     private void AnyMenuToggled(Menu _menu)
     {
-        if(Menu.Crafting == _menu)
+        if(currentMenu != null)
         {
-            Toggle(CraftMenu);
-            Debug.Log("Toggle Craft Menu");
+            if (currentMenu.activeSelf == true)
+            {
+                Debug.Log("Current Menu still active, cannot open new menu!");
+                return;
+            }
+        }
+
+        switch (_menu)
+        {
+            case Menu.Crafting:
+                EnableMenu(CraftMenu);
+                break;
+            case Menu.Inventory:
+                EnableMenu(InventoryMenu);
+
+                break;
+            default:
+                break;
         }
     }
 
-    private void Toggle(GameObject _toggler)
+    private void EnableMenu(GameObject _go)
     {
-        if(_toggler == null)
+        if(_go == null)
         {
             return;
         }
 
-        _toggler.SetActive(_toggler.activeSelf ? false : true);
+        _go.SetActive(true);
+        currentMenu = _go;
+
+        Hotbar.SetActive(false);
+
+        EventManager.OnInteractionStart?.Invoke();
     }
+    private void CloseCurrentWindow()
+    {
+        if (currentMenu == null)
+        {
+            return;
+        }
+        currentMenu.SetActive(false);
+
+        Hotbar.SetActive(true);
+
+        EventManager.OnInteractionEnd?.Invoke();
+    }
+
+
 }

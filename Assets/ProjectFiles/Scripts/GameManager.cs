@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public delegate void OnAnyMenuToggled(UIController.Menu _menu);
     public OnAnyMenuToggled onAnyMenuToggleCallback;
 
+    public delegate void OnMenuClosed();
+    public OnMenuClosed onMenuClosedCallback;
     public enum GameState
     {
         Normal,

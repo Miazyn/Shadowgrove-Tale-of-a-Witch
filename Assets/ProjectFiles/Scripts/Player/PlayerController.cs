@@ -48,14 +48,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnDialogueStart.AddListener(DisableMovement);
-        EventManager.OnDialogueEnd.AddListener(EnableMovement);
+        EventManager.OnInteractionStart.AddListener(DisableMovement);
+        EventManager.OnInteractionEnd.AddListener(EnableMovement);
     }
 
     private void OnDisable()
     {
-        EventManager.OnDialogueStart.RemoveListener(DisableMovement);
-        EventManager.OnDialogueEnd.RemoveListener(EnableMovement);
+        EventManager.OnInteractionStart.RemoveListener(DisableMovement);
+        EventManager.OnInteractionEnd.RemoveListener(EnableMovement);
     }
 
     void Update()

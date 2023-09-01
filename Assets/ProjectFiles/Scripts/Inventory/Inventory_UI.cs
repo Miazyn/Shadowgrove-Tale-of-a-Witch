@@ -22,15 +22,18 @@ public class Inventory_UI : MonoBehaviour
     {
         player = Player.instance;
         player.onItemChangedCallback += UpdateUI;
-        player.onInventoryToggleCallback += InventoryToggle;
         inventory = player.inventory;
 
-        inventoryUI.SetActive(false);
+        //inventoryUI.SetActive(false);
         slots = itemsParent.GetComponentsInChildren<InventorySlotUI>();
 
-        hotbar.SetActive(true);
         hotbarSlots = hotbarParent.GetComponentsInChildren<InventorySlotUI>();
         
+    }
+    
+    private void OnDisable()
+    {
+        player.onItemChangedCallback -= UpdateUI;
     }
 
     void IndividualUIUpdate(int _slotPos)
@@ -94,16 +97,12 @@ public class Inventory_UI : MonoBehaviour
         }
     }
 
-    private void InventoryToggle()
+    public void InventoryToggle()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
         hotbar.SetActive(!inventoryUI.activeSelf);
         hotbarBackground.SetActive(!inventoryUI.activeSelf);
         itemNameAnzeige.SetActive(!inventoryUI.activeSelf);
     }
-    private void OnDisable()
-    {
-        player.onItemChangedCallback -= UpdateUI;
-        player.onInventoryToggleCallback -= InventoryToggle;
-    }
+   
 }
