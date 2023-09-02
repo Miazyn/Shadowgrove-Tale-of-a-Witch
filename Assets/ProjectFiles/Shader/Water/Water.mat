@@ -7,15 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Name: Water
+  m_Shader: {fileID: -6465566751694194690, guid: 376b470ce1eda3c4b9fa65609527e425, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -77,6 +76,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_3294e0dba57b48ff82ab3e44d46113c3: 15
+    - Vector1_4a7d4b78856444f6a5a2c5bf39e5911a: 80
+    - Vector1_8576fe76bd84462bb09abde4b0be6285: 1
+    - Vector1_944259c851654dd5b201bb432601b1d8: 0.5
+    - Vector1_9ec8bfde0e7d414db2ecfad4e602f238: 1
+    - Vector1_a51f55e667fc472c8f04c4f70fd163d6: 1
+    - Vector1_a56ea3e92f374b738ae62357380a80d2: 1
+    - Vector1_a8a8231abde84ffda53981989de786f6: 0.01
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -88,13 +95,12 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
     - _Metallic: 0
-    - _Mode: 0
     - _OcclusionStrength: 1
-    - _Parallax: 0.02
+    - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -102,16 +108,18 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 1, b: 0.029119253, a: 1}
-    - _Color: {r: 0, g: 1, b: 0.029119253, a: 1}
+    - Color_92ca514a5c8f4732a9f7558ec92d9b4f: {r: 0.5509434, g: 0.9682603, b: 1, a: 0.34901962}
+    - Color_abee92318a1248cbacd8202ec145979a: {r: 1, g: 1, b: 1, a: 0.8235294}
+    - Color_c68a7bd4fed64437b49dcad8410ae88b: {r: 0.2583196, g: 0.24896757, b: 0.6698113, a: 0.3254902}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2942965274000573783
+--- !u!114 &4673739044674099448
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
