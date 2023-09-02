@@ -12,6 +12,8 @@ public class BlueprintGhostObject : MonoBehaviour
     public GameObject prefab;
     bool delayedStart = false;
 
+    bool rotating = false;
+
     [SerializeField] Renderer ghostRenderer;
     [SerializeField] Material validMat;
     [SerializeField] Material invalidMat;
@@ -65,6 +67,14 @@ public class BlueprintGhostObject : MonoBehaviour
         if (Mouse.current.leftButton.isPressed)
         {
             PlacingItem();
+        }
+
+        if (Keyboard.current.rKey.isPressed)
+        {
+            if (!rotating)
+            {
+                StartCoroutine(RotateObject());
+            }
         }
 
         if (Mouse.current.rightButton.isPressed)
@@ -122,6 +132,10 @@ public class BlueprintGhostObject : MonoBehaviour
         var CheckValidPlacementBox = Physics.OverlapBox(_col.bounds.center, _col.size);
         Terrain _terrain;
 
+        if (rotating)
+        {
+            return false;
+        }
 
         if(CheckValidPlacementBox == null)
         {
@@ -170,6 +184,73 @@ public class BlueprintGhostObject : MonoBehaviour
         Destroy(gameObject);
 
         return true;
+    }
+
+    IEnumerator RotateObject()
+    {
+        rotating = true;
+
+        float rotationAmount = 90;
+        float liftAmount = 0.5f;
+        float scaleAmount = 1.15f;
+
+        float rotationTime = 0.25f;
+
+        //OBJ ROTATION
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(0, startRotation.eulerAngles.y + rotationAmount, 0);
+
+        //OBJ SCALE
+        Vector3 startScale = transform.localScale;
+        Vector3 targetScale = startScale * scaleAmount;
+
+        //OBJ LIFT
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = startPosition + new Vector3(0, liftAmount, 0);
+
+       /////////////////////////////////////////////////////////////////////////////////
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rotationTime)
+        {
+            float t = elapsedTime / rotationTime;
+
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+            transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+        transform.rotation = endRotation;
+        transform.position = endPosition;
+
+        
+        //SCALE & POSITION
+        Vector3 lowerStartPosition = transform.position;
+        Vector3 lowerEndPosition = startPosition;
+
+        Vector3 returnScale = startScale;
+
+        elapsedTime = 0f;
+        float liftTime = 0.15f;
+
+        while (elapsedTime < liftTime)
+        {
+            float t = elapsedTime / liftTime;
+
+            transform.position = Vector3.Lerp(lowerStartPosition, lowerEndPosition, t);
+            transform.localScale = Vector3.Lerp(targetScale, returnScale, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = lowerEndPosition;
+
+        rotating = false;
     }
 
     void OnDrawGizmos()

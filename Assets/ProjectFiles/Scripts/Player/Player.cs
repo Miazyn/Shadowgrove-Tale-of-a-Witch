@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         controls.Player.Inventory.performed += inventory => InventoryInteraction();
         controls.Player.Scroll.performed += scroll => Scroll();
         controls.Player.Cancel.performed += cancel => CancelAction();
-        //controls.Player.Use.performed += use => UseItem();
+        controls.Player.Use.performed += use => UseItem();
 
         controls.Player.HotbarQuick.performed += HotbarHighlight => HotbarSelection(controls.Player.HotbarQuick.ReadValue<float>());
 

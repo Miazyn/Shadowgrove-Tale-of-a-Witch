@@ -5,7 +5,7 @@ using TMPro;
 
 public class Grid : MonoBehaviour
 {
-    [SerializeField] private float size = 1f;
+    [SerializeField] private float size = 0.5f;
 
     public Vector3 GetNearestPointOnGrid(Vector3 position)
     {
