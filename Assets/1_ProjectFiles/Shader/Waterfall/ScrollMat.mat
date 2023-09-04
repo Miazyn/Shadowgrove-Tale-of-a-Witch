@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterfallMat
-  m_Shader: {fileID: -6465566751694194690, guid: 19a2fddd1bf313b49927f3fba2b7ddc8, type: 3}
+  m_Name: ScrollMat
+  m_Shader: {fileID: -6465566751694194690, guid: 2f9df9bb79c63a542bc6998fa0366c99, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_7241e46effda4b8cb459af8f6d6b621e:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e15b3727e5d848319420a1f349c85fe9:
+        m_Texture: {fileID: 2800000, guid: ea097aba9f2e5c9408bd4b9be6fdffe2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -32,13 +40,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_238023452d644212bc98faecd91ee300: 2
-    - Vector1_5dccf586538e4aae8d4c875a2c4c4eb4: 12
-    - Vector1_76315b0f2f9a411192338e8559cbfd7a: -0.75
-    - Vector1_b5e523e2706d4389a00835082645a8a4: 10
-    - Vector1_c69c0ac41b8c45a7b32167bb189356de: 4
+    - Vector1_fe5486c270964cd1ab79cdf92b977ce1: 0
     m_Colors:
-    - Color_e8030b9b6692450e9fb4d6249594fa1d: {r: 0, g: 1.5196749, b: 2.4622886, a: 1}
-    - Vector2_061ba910d3654188b2820a17a66c28a8: {r: 0, g: 0.2, b: 0, a: 0}
-    - Vector2_62c8ccd723074ceabe9c2647b13ba5a1: {r: 0, g: 1, b: 0, a: 0}
+    - Color_72fc005a0046493da22301da18d6b546: {r: 1, g: 1, b: 1, a: 1}
+    - Vector2_aed5b9973fae4bf7a84bb74e7dc66ca9: {r: 0, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
