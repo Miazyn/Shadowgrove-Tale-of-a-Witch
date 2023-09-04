@@ -146,8 +146,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33225555}
-  m_LocalRotation: {x: -0, y: 0.6249994, z: -0, w: 0.78062516}
-  m_LocalPosition: {x: 13.26, y: 6.9, z: 44.8}
+  m_LocalRotation: {x: -0, y: -0.63090855, z: -0, w: 0.77585715}
+  m_LocalPosition: {x: 6.04, y: 1.47, z: 47.54}
   m_LocalScale: {x: 1, y: 0.87302, z: 1}
   m_Children:
   - {fileID: 920247885}
@@ -155,7 +155,7 @@ Transform:
   - {fileID: 1416945256}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 77.364, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -78.234, z: 0}
 --- !u!1 &195830939
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,8 +621,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416945255}
   m_LocalRotation: {x: -0.2821832, y: -0.6483615, z: -0.6483615, w: 0.2821832}
-  m_LocalPosition: {x: 29.94, y: -5.97, z: 66.88}
-  m_LocalScale: {x: 424.79608, y: 424.79608, z: 424.79608}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 267.71924, y: 267.71924, z: 267.71924}
   m_Children: []
   m_Father: {fileID: 33225556}
   m_RootOrder: 2
@@ -5550,7 +5550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2087131126
 Transform:
   m_ObjectHideFlags: 0
@@ -5558,13 +5558,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087131125}
-  m_LocalRotation: {x: -0.72502494, y: -0.6886908, z: -0.0022377076, w: 0.0062359283}
-  m_LocalPosition: {x: 29.53, y: -4.96, z: 66.84}
+  m_LocalRotation: {x: -0.7245446, y: -0.68851453, z: -0.026474241, w: -0.016790153}
+  m_LocalPosition: {x: 1.28, y: 1.04, z: -1.84}
   m_LocalScale: {x: 27.428286, y: 27.428286, z: 27.428286}
   m_Children: []
   m_Father: {fileID: 33225556}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -0.695, y: -179.694, z: 92.943}
+  m_LocalEulerAnglesHint: {x: -0.695, y: -183.525, z: 92.943}
 --- !u!199 &2087131127
 ParticleSystemRenderer:
   serializedVersion: 6
