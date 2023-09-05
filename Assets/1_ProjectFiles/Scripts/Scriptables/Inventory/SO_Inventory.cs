@@ -7,6 +7,7 @@ public class SO_Inventory : ScriptableObject
 {
     public string inventoryName;
     public int inventorySize;
+    public int itemCap;
 
     public List<InventorySlot> inventoryItems = new List<InventorySlot>();
     public bool AddItem(SO_Item _item, int _amount, int _slotPos)
@@ -80,10 +81,13 @@ public class SO_Inventory : ScriptableObject
         {
             if (inventoryItems[i].item == _item)
             {
-                inventoryItems[i].AddAmount(_amount);
-                Debug.Log("Added amount to inventory");
-                Player.instance.onItemChangedCallback?.Invoke();
-                return true;
+                if (inventoryItems[i].amount < itemCap)
+                {
+                    inventoryItems[i].AddAmount(_amount);
+                    Debug.Log("Added amount to inventory");
+                    Player.instance.onItemChangedCallback?.Invoke();
+                    return true;
+                }
             }
         }
 
@@ -93,10 +97,23 @@ public class SO_Inventory : ScriptableObject
             if (inventoryItems[i].item == null)
             {
                 inventoryItems[i].item = _item;
-                inventoryItems[i].AddAmount(_amount);
-                Debug.Log("Added new item to inventory");
-                Player.instance.onItemChangedCallback?.Invoke();
-                return true;
+
+                if(itemCap < _amount)
+                {
+                    inventoryItems[i].AddAmount(itemCap);
+                    //Player.instance.onItemChangedCallback?.Invoke();
+
+                    AddItem(_item, _amount - itemCap);
+                    break;
+                }
+                else
+                {
+                    inventoryItems[i].AddAmount(_amount);
+                    Debug.Log("Added new item to inventory");
+                    Player.instance.onItemChangedCallback?.Invoke();
+                    return true;
+                }
+                
             }
         }
 
