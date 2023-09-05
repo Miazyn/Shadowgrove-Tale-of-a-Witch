@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TypeOfItem: 4
   ItemName: Copper Axe
-  ItemDescription: An upgraded Axe to copper tier. Better than the previous one.
+  ItemDescription: An upgraded axe to copper tier. Better than the previous one.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -23,3 +23,4 @@ MonoBehaviour:
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
   MaxHardness: 10
+  Strength: 10

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: WateringcanIron
   m_EditorClassIdentifier: 
   TypeOfItem: 4
-  ItemName: Iron Axe
-  ItemDescription: An upgraded Axe to iron tier. Better than the previous one.
+  ItemName: Iron Wateringcan
+  ItemDescription: An upgraded wateringcan to iron tier. Better than the previous
+    one.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -22,4 +23,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: d252b5c967f15444aaae9b3b980099eb, type: 3}
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
-  MaxHardness: 15
+  MaxHardness: 20
+  Strength: 15

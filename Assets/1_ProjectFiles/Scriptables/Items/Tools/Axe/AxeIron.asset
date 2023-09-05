@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TypeOfItem: 4
   ItemName: Iron Axe
-  ItemDescription: An upgraded Axe to iron tier. Better than the previous one.
+  ItemDescription: An upgraded axe to iron tier. Better than the previous one.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -22,4 +22,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: b497c8d157753e249bce9e83c01da98a, type: 3}
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
-  MaxHardness: 15
+  MaxHardness: 20
+  Strength: 15

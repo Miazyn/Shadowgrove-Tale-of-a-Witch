@@ -10,6 +10,8 @@ public class SO_Tools : SO_Item
     public Vector2 EffectArea;
     //For Tools which increasingly can hit harder stuff
     public int MaxHardness;
+
+    public int Strength;
     private void Awake()
     {
         TypeOfItem = ItemType.Tools;

@@ -2,19 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceNode : MonoBehaviour, IInteractable
+public class ResourceNode : MonoBehaviour, IInteractable, IDamageable
 {
     Player player;
     SO_Inventory playerInventory;
 
     [SerializeField] SO_Tools[] ValidTools;
-    [Range(0, 50)]
+    private SO_Tools playerTool;
+
+    
+    [Range(0, 50)][Tooltip("Whether I can mine with my tool via hardness.")]
     [SerializeField] private int resourceHardness = 0;
+
+    private int currentHardness;
 
     [SerializeField] private SO_Item droppedItem;
     [SerializeField] private int droppedAmount = 0;
     public string interactionPrompt => throw new System.NotImplementedException();
 
+    [SerializeField] private GameObject interactPrompt;
+    [Range(0, 50)][Tooltip("How much health the resource node has before breaking")]
+    [SerializeField] private int maxHealth;
+
+    public GameObject InteractPrompt
+    {
+        get { return interactPrompt; }
+        set { interactPrompt = value; }
+    }
+
+    public int Health { get; set; }
+    public int MaxHealth
+    {
+        get { return maxHealth; }
+        set { maxHealth = value; }
+    }
 
     public enum ResourceType
     {
@@ -22,6 +43,8 @@ public class ResourceNode : MonoBehaviour, IInteractable
         Stone,
 
     }
+
+    bool hasResources = true;
 
     public ResourceType resource;
 
@@ -31,6 +54,9 @@ public class ResourceNode : MonoBehaviour, IInteractable
         {
             Debug.LogError($"No Dropped Item defined for {this.gameObject.name}.");
         }
+
+        //currentHardness = resourceHardness;
+        Health = maxHealth;
 
         player = Player.instance;
         playerInventory = player.inventory;
@@ -43,6 +69,11 @@ public class ResourceNode : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
+        if (!hasResources)
+        {
+            return false;
+        } 
+
         if (!interactor.TryGetComponent<Player>(out player))
         {
             return false;
@@ -59,12 +90,13 @@ public class ResourceNode : MonoBehaviour, IInteractable
         {
             if(player.GetCurrentItem() == tool)
             {
-                SO_Tools playerTool = (SO_Tools)player.GetCurrentItem();
-                if (playerTool.MaxHardness < resourceHardness)
+                playerTool = (SO_Tools)player.GetCurrentItem();
+
+                if(playerTool.MaxHardness < resourceHardness)
                 {
-                    Debug.Log("Not strong enough!");
                     return false;
                 }
+
                 continue;
             }
         }
@@ -79,12 +111,63 @@ public class ResourceNode : MonoBehaviour, IInteractable
     {
         if(droppedItem == null)
         {
-            Debug.Log("DIdnt add dropped Item!!!");
+            Debug.LogError("Didnt add dropped Item to resource node!!!");
             return;
         }
 
-        playerInventory.AddItem(droppedItem, droppedAmount);
+        TakeDamage(playerTool.Strength);
+        Debug.Log("CHOP");
+        
+        if (Health == 0) 
+        {
+            playerInventory.AddItem(droppedItem, droppedAmount);
+            Debug.Log("Chop chop, gone and added items");
+            Collapse();
+        }
+        //System with any tool can chop, but slower.
+        //if (currentHardness >= 0)
+        //{
+        //    playerInventory.AddItem(droppedItem, droppedAmount);
+        //}
+        //else
+        //{
+        //    currentHardness -= playerTool.MaxHardness;
+        //}
+    }
+    public void TakeDamage(int dmg)
+    {
+        Health = Health - dmg < 0 ? 0 : Health - dmg;
+    }
 
-        Debug.Log("Chop chop, tree gone and added items");
+    public void ShowInteractPrompt()
+    {
+        if (!hasResources)
+        {
+            return;
+        }
+        if (InteractPrompt != null)
+        {
+            InteractPrompt.SetActive(true);
+        }
+    }
+
+    public void HideInteractPrompt()
+    {
+        if (InteractPrompt != null)
+        {
+            InteractPrompt.SetActive(false);
+        }
+    }
+
+    public void Collapse()
+    {
+        hasResources = false;
+        HideInteractPrompt();
+    }
+
+    public void Heal(int healHP)
+    {
+        Health = maxHealth;
+        hasResources = true;
     }
 }

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: GardenhoeIron
   m_EditorClassIdentifier: 
   TypeOfItem: 4
-  ItemName: Iron Axe
-  ItemDescription: An upgraded Axe to iron tier. Better than the previous one.
+  ItemName: Iron Garden hoe
+  ItemDescription: An upgraded garden hoe to iron tier. Better than the previous
+    one.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -22,4 +23,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 81106f4d124ef7d46b1ccea8b364db86, type: 3}
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
-  MaxHardness: 15
+  MaxHardness: 20
+  Strength: 15

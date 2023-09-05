@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: GardenhoeCopper
   m_EditorClassIdentifier: 
   TypeOfItem: 4
-  ItemName: Copper Axe
-  ItemDescription: An upgraded Axe to copper tier. Better than the previous one.
+  ItemName: Copper Garden hoe
+  ItemDescription: An upgraded garden hoe to copper tier. Better than the previous
+    one.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -23,3 +24,4 @@ MonoBehaviour:
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
   MaxHardness: 10
+  Strength: 10

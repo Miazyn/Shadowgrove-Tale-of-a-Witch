@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: WateringcanSteel
   m_EditorClassIdentifier: 
   TypeOfItem: 4
-  ItemName: SteelAxe
-  ItemDescription: An upgraded Axe to steel tier. Better than the previous one.
+  ItemName: Steel Wateringcan
+  ItemDescription: An upgraded wateringcan to steel tier. Better than the previous
+    one.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -23,3 +24,4 @@ MonoBehaviour:
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
   MaxHardness: 30
+  Strength: 30

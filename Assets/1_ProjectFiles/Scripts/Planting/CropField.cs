@@ -19,6 +19,13 @@ public class CropField : MonoBehaviour, IInteractable
 
     Player player;
 
+    [SerializeField] private GameObject interactPrompt;
+    public GameObject InteractPrompt
+    {
+        get { return interactPrompt; }
+        set { interactPrompt = value; }
+    }
+
     public enum PlantStages
     {
         empty,
@@ -128,5 +135,21 @@ public class CropField : MonoBehaviour, IInteractable
             return true;
         }
         return false;
+    }
+
+    public void ShowInteractPrompt()
+    {
+        if (InteractPrompt != null)
+        {
+            InteractPrompt.SetActive(true);
+        }
+    }
+
+    public void HideInteractPrompt()
+    {
+        if (InteractPrompt != null)
+        {
+            InteractPrompt.SetActive(false);
+        }
     }
 }

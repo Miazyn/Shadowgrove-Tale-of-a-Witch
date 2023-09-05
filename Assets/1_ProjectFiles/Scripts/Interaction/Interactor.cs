@@ -11,7 +11,7 @@ public class Interactor : MonoBehaviour
     private readonly Collider[] colliders = new Collider[3];
     [SerializeField] private int numFound;
 
-    public (bool, IInteractable) GetOverlaps()
+    public (bool, IInteractable, GameObject) GetOverlaps()
     {
         numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, colliders, interactableMask);
 
@@ -20,10 +20,10 @@ public class Interactor : MonoBehaviour
             var interactable = colliders[0].GetComponent<IInteractable>();
             if (interactable != null)
             {
-                return (true, interactable);
+                return (true, interactable, colliders[0].gameObject);
             }
         }
-        return (false, null);
+        return (false, null, null);
     }
 
     public (bool, GameObject) GetGameObjects()

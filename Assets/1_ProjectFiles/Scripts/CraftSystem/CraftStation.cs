@@ -9,6 +9,13 @@ public class CraftStation : MonoBehaviour, IInteractable
     static string CraftMenu = "CraftMenu";
     public string interactionPrompt => throw new System.NotImplementedException();
 
+    [SerializeField] private GameObject interactPrompt;
+    public GameObject InteractPrompt
+    {
+        get { return interactPrompt; }
+        set { interactPrompt = value; }
+    }
+
     public delegate void OnMenuToggle();
     public OnMenuToggle onMenuTogggleCallback;
 
@@ -74,6 +81,22 @@ public class CraftStation : MonoBehaviour, IInteractable
 
         Debug.Log("All items for blueprint available.");
         return true;
+    }
+
+    public void ShowInteractPrompt()
+    {
+        if (InteractPrompt != null)
+        {
+            InteractPrompt.SetActive(true);
+        }
+    }
+
+    public void HideInteractPrompt()
+    {
+        if (InteractPrompt != null)
+        {
+            InteractPrompt.SetActive(false);
+        }
     }
 
     ///Needed

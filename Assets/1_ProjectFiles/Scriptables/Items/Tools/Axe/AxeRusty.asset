@@ -23,4 +23,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: b497c8d157753e249bce9e83c01da98a, type: 3}
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
-  MaxHardness: 1
+  MaxHardness: 0
+  Strength: 1

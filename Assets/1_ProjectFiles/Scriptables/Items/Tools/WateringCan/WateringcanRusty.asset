@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WateringcanRusty
   m_EditorClassIdentifier: 
   TypeOfItem: 4
-  ItemName: Rusty Axe
-  ItemDescription: An old axe which seems to slowly fall apart. May be a good idea
-    to look into an upgrade...
+  ItemName: Rusty Wateringcan
+  ItemDescription: An old wateringcan which seems to slowly fall apart. May be a
+    good idea to look into an upgrade...
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -23,4 +23,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: d252b5c967f15444aaae9b3b980099eb, type: 3}
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
-  MaxHardness: 1
+  MaxHardness: 0
+  Strength: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HammerIron
   m_EditorClassIdentifier: 
   TypeOfItem: 4
-  ItemName: Iron Axe
-  ItemDescription: An upgraded Axe to iron tier. Better than the previous one.
+  ItemName: Iron Hammer
+  ItemDescription: An upgraded hammer to iron tier. Better than the previous one.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -22,4 +22,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 084b763889afb5c429f7d6fa083c62a6, type: 3}
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
-  MaxHardness: 15
+  MaxHardness: 20
+  Strength: 15

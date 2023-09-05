@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HammerNormal
   m_EditorClassIdentifier: 
   TypeOfItem: 4
-  ItemName: Axe
-  ItemDescription: A standard regular axe.
+  ItemName: Hammer
+  ItemDescription: A standard regular hammer.
   ItemId: 
   CanBeSold: 0
   BuyPrice: 0
@@ -23,3 +23,4 @@ MonoBehaviour:
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
   MaxHardness: 5
+  Strength: 5

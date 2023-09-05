@@ -16,10 +16,13 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     public Interactor interactor { get; private set; }
 
 
+    private IInteractable lastInteraction = null;
+
     public InputControls controls { get; private set; }
 
     public int Health { get { return Health; } set { Health += value; } }
     public int MaxHealth { get { return MaxHealth; } set { MaxHealth = value; } }
+
 
     void Awake()
     {
@@ -70,6 +73,35 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         interactor = GetComponent<Interactor>();
 
         StartCoroutine(LateStart());
+    }
+
+    private void Update()
+    {
+        bool isOverlapping = interactor.GetOverlaps().Item1;
+
+        if (isOverlapping)
+        {
+            if(lastInteraction == null)
+            {
+                lastInteraction = interactor.GetOverlaps().Item2;
+                lastInteraction.ShowInteractPrompt();
+            }
+            if(interactor.GetOverlaps().Item2 != lastInteraction)
+            {
+                lastInteraction.HideInteractPrompt();
+
+                lastInteraction = interactor.GetOverlaps().Item2;
+                lastInteraction.ShowInteractPrompt();
+            }
+        }
+        else
+        {
+            if(lastInteraction != null)
+            {
+                lastInteraction.HideInteractPrompt();
+                lastInteraction = null;
+            }
+        }
     }
 
 
@@ -171,19 +203,19 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        var item = hit.gameObject.GetComponent<ItemHolder>();
-        if (item)
-        {
+        //var item = hit.gameObject.GetComponent<ItemHolder>();
+        //if (item)
+        //{
 
-            bool wasItemAdded = inventory.AddItem(item.item, 1);
-            if (wasItemAdded)
-            {
+        //    bool wasItemAdded = inventory.AddItem(item.item, 1);
+        //    if (wasItemAdded)
+        //    {
                 
-                onItemChangedCallback?.Invoke();
+        //        onItemChangedCallback?.Invoke();
                 
-                Destroy(hit.gameObject);
-            }
-        }
+        //        Destroy(hit.gameObject);
+        //    }
+        //}
     }
 
     void OnEnable()
