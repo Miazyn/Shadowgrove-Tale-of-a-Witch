@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryName: Player Inventory
   inventorySize: 36
-  itemCap: 5
+  itemCap: 999
   inventoryItems: []
