@@ -11,6 +11,8 @@ public class ResourceNode : MonoBehaviour, IInteractable
     [Range(0, 50)]
     [SerializeField] private int resourceHardness = 0;
 
+    [SerializeField] private SO_Item droppedItem;
+    [SerializeField] private int droppedAmount = 0;
     public string interactionPrompt => throw new System.NotImplementedException();
 
 
@@ -25,6 +27,11 @@ public class ResourceNode : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        if(droppedItem == null)
+        {
+            Debug.LogError($"No Dropped Item defined for {this.gameObject.name}.");
+        }
+
         player = Player.instance;
         playerInventory = player.inventory;
     }
@@ -70,6 +77,14 @@ public class ResourceNode : MonoBehaviour, IInteractable
 
     public void CollectResource()
     {
-        Debug.Log("Chop chop, tree gone");
+        if(droppedItem == null)
+        {
+            Debug.Log("DIdnt add dropped Item!!!");
+            return;
+        }
+
+        playerInventory.AddItem(droppedItem, droppedAmount);
+
+        Debug.Log("Chop chop, tree gone and added items");
     }
 }
