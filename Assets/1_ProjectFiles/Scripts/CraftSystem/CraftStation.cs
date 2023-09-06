@@ -67,8 +67,12 @@ public class CraftStation : MonoBehaviour, IInteractable
             {
                 if (playerInventory.inventoryItems[j].item == _blueprint.Materials[i])
                 {
-                    Debug.Log("Found item in inventory!");
-                    foundItem = true;
+                    if (playerInventory.inventoryItems[j].amount == _blueprint.Amount[i])
+                    {
+                        //No need to look out for bigger cases. Recipe wont exceed 999 limit.
+                        Debug.Log("Found item in inventory!");
+                        foundItem = true;
+                    }
                 }
             }
 
