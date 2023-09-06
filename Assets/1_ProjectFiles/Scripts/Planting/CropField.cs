@@ -71,6 +71,8 @@ public class CropField : MonoBehaviour, IInteractable
             int counter = 0;
             plantStages = 3;
 
+            HideInteractPrompt();
+
             StartCoroutine(GrowPlantStages());
             return true;
         }
@@ -88,6 +90,9 @@ public class CropField : MonoBehaviour, IInteractable
 
         currentStage = PlantStages.empty;
 
+        currentSeed = null;
+
+        HideInteractPrompt();
     }
 
     IEnumerator GrowPlantStages()
@@ -141,7 +146,10 @@ public class CropField : MonoBehaviour, IInteractable
     {
         if (InteractPrompt != null)
         {
-            InteractPrompt.SetActive(true);
+            if(currentSeed == null || stage3.activeSelf)
+            {
+                InteractPrompt.SetActive(true);
+            }
         }
     }
 

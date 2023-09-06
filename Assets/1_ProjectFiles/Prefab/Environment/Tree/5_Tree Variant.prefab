@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6638121164451388935, guid: 7f6b451b45467634c971c08521755324, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d65e802faf83e2448eaa2b258cb635e, type: 2}
     - target: {fileID: 7454279974226837577, guid: 7f6b451b45467634c971c08521755324, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -61,7 +65,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7454279974226837620, guid: 7f6b451b45467634c971c08521755324, type: 3}
       propertyPath: m_Name
-      value: 15_Tree
+      value: 5_Tree Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660130521204248056, guid: 7f6b451b45467634c971c08521755324, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660130521204248056, guid: 7f6b451b45467634c971c08521755324, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f6b451b45467634c971c08521755324, type: 3}

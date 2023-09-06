@@ -15,6 +15,9 @@ public class CraftValueDisplay : MonoBehaviour
     [SerializeField] private GameObject parentRequirements;
 
     private TextMeshProUGUI[] requiredIngredients;
+    private SO_Blueprint currentBlueprint;
+
+    private CraftStation craftStation;
 
     private void Awake()
     {
@@ -31,6 +34,8 @@ public class CraftValueDisplay : MonoBehaviour
             requiredIngredients[i] =  parentRequirements.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
         }
 
+        craftStation = FindObjectOfType<CraftStation>();
+
         UpdateUI(null);
     }
 
@@ -43,7 +48,7 @@ public class CraftValueDisplay : MonoBehaviour
         }
         else
         {
-            Debug.Log("Did noz work");
+            Debug.Log("Did not work");
         }
     }
 
@@ -69,6 +74,8 @@ public class CraftValueDisplay : MonoBehaviour
     {
         if(_blueprint == null)
         {
+            currentBlueprint = null;
+
             blueprintName.SetText("Craft Preview");
             descriptionBox.SetText("Click a Blueprint to view details.");
 
@@ -98,6 +105,24 @@ public class CraftValueDisplay : MonoBehaviour
                 requiredIngredients[i].SetText("");
             }
         }
-
+        currentBlueprint = _blueprint;
     }
+
+    public void Craft()
+    {
+        if(craftStation == null)
+        {
+            Debug.LogError("Could not find a crafting station!");
+            return;
+        }
+        if(currentBlueprint == null)
+        {
+            return;
+        }
+
+        craftStation.Craft(currentBlueprint);
+        Debug.Log($"Ey mate I am crafting here. {currentBlueprint}");
+        
+    }
+
 }
