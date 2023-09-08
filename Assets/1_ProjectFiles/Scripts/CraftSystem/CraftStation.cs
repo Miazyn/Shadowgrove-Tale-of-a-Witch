@@ -44,46 +44,61 @@ public class CraftStation : MonoBehaviour, IInteractable
         return true;
     }
 
-    public void Craft(SO_Blueprint _blueprint)
+    public void Craft(SO_Blueprint _blueprint, int _amount)
     {
-        if (!CanCraftItem(_blueprint))
+        if(_blueprint == null)
+        {
+            Debug.Log("No blueprint set");
+            return;
+        }
+        if(_amount <= 0)
+        {
+            Debug.Log("Nothing to craft");
+            return;
+        }
+
+        if (!CanCraftItem(_blueprint, _amount))
         {
             Debug.Log("Cannot craft yet");
             return;
         }
 
-        Debug.Log("Going to craft now:" + _blueprint.BlueprintName);
-    }
-
-    bool CanCraftItem(SO_Blueprint _blueprint)
-    {
-        bool foundItem = false;
+        Debug.Log("Going to craft now:" + _blueprint.Result);
 
         for (int i = 0; i < _blueprint.Materials.Length; i++)
         {
-            foundItem = false;
+            player.inventory.RemoveItems(_blueprint.Materials[i], _amount);
+        
+        }
+
+        player.inventory.AddItem(_blueprint.Result, _amount);
+    }
+
+    bool CanCraftItem(SO_Blueprint _blueprint, int _amount)
+    {
+        for (int i = 0; i < _blueprint.Materials.Length; i++)
+        {
+            int requiredAmount = _blueprint.Amount[i] * _amount;
+
+            int availableAmount = 0;
 
             for (int j = 0; j < playerInventory.inventoryItems.Count; j++)
             {
                 if (playerInventory.inventoryItems[j].item == _blueprint.Materials[i])
                 {
-                    if (playerInventory.inventoryItems[j].amount == _blueprint.Amount[i])
-                    {
-                        //No need to look out for bigger cases. Recipe wont exceed 999 limit.
-                        Debug.Log("Found item in inventory!");
-                        foundItem = true;
-                    }
+                    availableAmount += playerInventory.inventoryItems[j].amount;
                 }
             }
 
-            if (!foundItem)
+            if (availableAmount < requiredAmount)
             {
-                Debug.Log($"Missing the item: {_blueprint.Materials[i]}");
+                //Debug.Log($"Missing the item: {_blueprint.Materials[i]} to craft {_amount} items.");
+                //Debug.Log($"Player owns: {availableAmount} of {_amount} {_blueprint.Materials[i]} required to craft.");
                 return false;
             }
         }
 
-        Debug.Log("All items for blueprint available.");
+        Debug.Log($"All materials available to craft {_amount} items of blueprint.");
         return true;
     }
 

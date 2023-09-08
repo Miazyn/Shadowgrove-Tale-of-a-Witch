@@ -15,14 +15,16 @@ public class CraftValueDisplay : MonoBehaviour
     [SerializeField] private GameObject parentRequirements;
 
     private TextMeshProUGUI[] requiredIngredients;
-    private SO_Blueprint currentBlueprint;
+
+    private SO_Blueprint curBlueprint = null;
+    private int curAmount = 1;
 
     private CraftStation craftStation;
 
     private void Awake()
     {
-        input.text = "0";
-        
+        input.text = "1";
+        craftStation = FindObjectOfType<CraftStation>();
     }
 
     private void Start()
@@ -34,8 +36,6 @@ public class CraftValueDisplay : MonoBehaviour
             requiredIngredients[i] =  parentRequirements.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
         }
 
-        craftStation = FindObjectOfType<CraftStation>();
-
         UpdateUI(null);
     }
 
@@ -44,21 +44,27 @@ public class CraftValueDisplay : MonoBehaviour
         if(int.TryParse(input.text, out int result))
         {
             result = 1 + result > 999 ? 999 : 1 + result;
+            curAmount = result;
+
             input.text = result.ToString();
         }
         else
         {
-            Debug.Log("Did not work");
+            Debug.Log("Did noz work");
         }
+        UpdateUI(curBlueprint);
     }
 
     public void DecreaseValue() 
     {
         if(int.TryParse(input.text, out int result))
         {
-            result = result - 1 < 0 ? 0 : result - 1;
+            result = result - 1 < 1 ? 1 : result - 1;
+            curAmount = result;
+
             input.text = result.ToString();
         }
+        UpdateUI(curBlueprint);
     }
 
     public void ValidateInput()
@@ -66,16 +72,20 @@ public class CraftValueDisplay : MonoBehaviour
         if(int.TryParse(input.text, out int result))
         {
             result = result > 999 ? 999 : result < 0 ? result * -1 : result;
+            curAmount = result;
+
             input.text = result.ToString();
         }
+
+        UpdateUI(curBlueprint);
     }
 
     public void UpdateUI(SO_Blueprint _blueprint)
     {
+        curBlueprint = _blueprint;
+
         if(_blueprint == null)
         {
-            currentBlueprint = null;
-
             blueprintName.SetText("Craft Preview");
             descriptionBox.SetText("Click a Blueprint to view details.");
 
@@ -95,6 +105,8 @@ public class CraftValueDisplay : MonoBehaviour
             int amount = _blueprint.Amount[i];
             SO_Item item = _blueprint.Materials[i];
 
+            amount = curAmount > 0 ? amount * curAmount : amount;
+
             requiredIngredients[i].SetText($"0/{amount} {item.ItemName}");
         }
 
@@ -105,24 +117,14 @@ public class CraftValueDisplay : MonoBehaviour
                 requiredIngredients[i].SetText("");
             }
         }
-        currentBlueprint = _blueprint;
+
     }
 
     public void Craft()
     {
-        if(craftStation == null)
+        if(craftStation != null)
         {
-            Debug.LogError("Could not find a crafting station!");
-            return;
+            craftStation.Craft(curBlueprint, curAmount);
         }
-        if(currentBlueprint == null)
-        {
-            return;
-        }
-
-        craftStation.Craft(currentBlueprint);
-        Debug.Log($"Ey mate I am crafting here. {currentBlueprint}");
-        
     }
-
 }

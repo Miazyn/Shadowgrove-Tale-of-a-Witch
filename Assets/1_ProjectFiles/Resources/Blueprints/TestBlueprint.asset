@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlueprintName: Tester_NA
   BlueprintDesc: Just a test, for the golden apple time.
-  Result: {fileID: 11400000, guid: 9eb9be2dde0b2874db89b469900ca7b2, type: 2}
+  Result: {fileID: 11400000, guid: 42f948b3a87e05e4c8bd6b5b95fe981f, type: 2}
   Materials:
   - {fileID: 11400000, guid: 9eb9be2dde0b2874db89b469900ca7b2, type: 2}
   Amount: 01000000

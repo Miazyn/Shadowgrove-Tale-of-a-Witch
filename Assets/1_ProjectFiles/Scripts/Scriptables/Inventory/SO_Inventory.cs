@@ -63,6 +63,56 @@ public class SO_Inventory : ScriptableObject
         Player.instance.onItemChangedCallback?.Invoke();
     }
 
+    public void RemoveItems(SO_Item _item, int _amount)
+    {
+        Debug.Log($"Before removal - {_item.name}: {GetItemCount(_item)}");
+
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].item == _item)
+            {
+                if (inventoryItems[i].amount - _amount <= 0)
+                {
+                    _amount -= inventoryItems[i].amount;
+
+                    inventoryItems[i].amount = 0;
+                    inventoryItems[i].item = null;
+                }
+                else
+                {
+                    inventoryItems[i].amount -= _amount;
+                }
+            }
+        }
+
+        Debug.Log($"After removal - {_item.name}: {GetItemCount(_item)}");
+
+        if (_amount > 0)
+        {
+            Debug.Log($"Cannot reduce more... left: {_amount}");
+        }
+        else
+        {
+            Debug.Log("All removed.");
+        }
+
+        Player.instance.onItemChangedCallback?.Invoke();
+    }
+
+    private int GetItemCount(SO_Item _item)
+    {
+        int count = 0;
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].item == _item)
+            {
+                count += inventoryItems[i].amount;
+            }
+        }
+        return count;
+    }
+
+
     public bool AddItem(SO_Item _item, int _amount)
     {
         if(_item == null)

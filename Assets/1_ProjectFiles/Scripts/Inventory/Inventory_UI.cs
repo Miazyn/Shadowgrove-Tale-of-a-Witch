@@ -82,20 +82,20 @@ public class Inventory_UI : MonoBehaviour
         UpdatingSlots();
     }
 
-    void UpdateSlots(InventorySlotUI[] _slots)
-    {
-        for (int i = 0; i < _slots.Length; i++)
-        {
-            if (i < inventory.inventoryItems.Count && inventory.inventoryItems[i].item != null)
-            {
-                _slots[i].AddItem(inventory.inventoryItems[i].item, inventory.inventoryItems[i].amount);
-            }
-            else
-            {
-                _slots[i].ClearSlot();
-            }
-        }
-    }
+    //void UpdateSlots(InventorySlotUI[] _slots)
+    //{
+    //    for (int i = 0; i < _slots.Length; i++)
+    //    {
+    //        if (i < inventory.inventoryItems.Count && inventory.inventoryItems[i].item != null)
+    //        {
+    //            _slots[i].AddItem(inventory.inventoryItems[i].item, inventory.inventoryItems[i].amount);
+    //        }
+    //        else
+    //        {   
+    //            _slots[i].ClearSlot();
+    //        }
+    //    }
+    //}
 
     public void InventoryToggle()
     {
