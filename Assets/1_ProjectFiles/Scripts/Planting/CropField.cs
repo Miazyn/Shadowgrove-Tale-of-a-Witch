@@ -144,12 +144,18 @@ public class CropField : MonoBehaviour, IInteractable
 
     public void ShowInteractPrompt()
     {
-        if (InteractPrompt != null)
+        if(interactionPrompt == null)
         {
-            if (currentSeed == null || stage3.activeSelf)
-            {
-                interactPrompt.SetActive(true);
-            }
+            return;
+        }
+        if(player.GetCurrentItem() == null)
+        {
+            return;
+        }
+        
+        if (currentSeed == null && player.GetCurrentItem().GetType() == typeof(SO_Seed)|| stage3.activeSelf)
+        {
+            interactPrompt.SetActive(true);
         }
     }
 

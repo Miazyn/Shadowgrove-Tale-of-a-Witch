@@ -14,6 +14,7 @@ public class SO_Seed : SO_Item
     [Range(1, 10)]
     public int Stages;
     public Mesh[] MeshForStages;
+    public Material[] MeshMaterial;
 
     //public bool GetSeedsBack;
     //public int SeedMax;
