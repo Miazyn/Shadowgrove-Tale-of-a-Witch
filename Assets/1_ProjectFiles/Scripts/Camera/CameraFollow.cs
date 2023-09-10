@@ -15,7 +15,6 @@ public class CameraFollow : MonoBehaviour
 
     public float camHeight = 0;
     public float camZoom = 0;
-
     private void Start()
     {
         if (!characterToFollow)
@@ -46,4 +45,6 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = new Vector3(xPos, yPos, zPos);
     }
+
+
 }
