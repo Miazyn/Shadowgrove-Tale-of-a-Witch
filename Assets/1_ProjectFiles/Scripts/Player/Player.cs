@@ -20,8 +20,20 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     public InputControls controls { get; private set; }
 
-    public int Health { get { return Health; } set { Health = value; } }
-    public int MaxHealth { get { return MaxHealth; } set { MaxHealth = value; } }
+    private int health;
+    public int Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
+
+    private int maxHealth;
+    public int MaxHealth
+    {
+        get { return maxHealth; }
+        set { maxHealth = value; }
+    }
+
 
     public int Endurance { get; private set; }
     public int MaxEndurance { get; private set; }
