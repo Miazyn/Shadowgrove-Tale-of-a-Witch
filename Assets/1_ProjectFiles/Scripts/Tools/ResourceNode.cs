@@ -124,6 +124,9 @@ public class ResourceNode : MonoBehaviour, IInteractable, IDamageable
             Debug.Log("Chop chop, gone and added items");
             Collapse();
         }
+
+        player.EnduranceChanged(playerTool.GetToolEnduranceUse(SO_Tools.ToolUsage.Proper));
+
         //System with any tool can chop, but slower.
         //if (currentHardness >= 0)
         //{

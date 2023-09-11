@@ -12,6 +12,13 @@ public class SO_Tools : SO_Item
     public int MaxHardness;
 
     public int Strength;
+
+    public enum ToolUsage
+    {
+        Proper,
+        Improper,
+        Waterrefil
+    }
     private void Awake()
     {
         TypeOfItem = ItemType.Tools;
@@ -27,5 +34,34 @@ public class SO_Tools : SO_Item
     public override bool CanBeUsed(GameObject _objectToInteract)
     {
         return base.CanBeUsed(_objectToInteract);
+    }
+
+    public int GetToolEnduranceUse(ToolUsage usage)
+    {
+        if(usage == ToolUsage.Waterrefil)
+        {
+            return -2;
+        }
+
+        if(usage == ToolUsage.Improper)
+        {
+            return -1;
+        }
+
+        switch (MaxHardness)
+        {
+            case 0:
+                return -5;
+            case 5:
+                return -4;
+            case 10:
+                return -3;
+            case 20:
+                return -2;
+            case 30:
+                return -1;
+            default:
+                return -1;
+        }
     }
 }

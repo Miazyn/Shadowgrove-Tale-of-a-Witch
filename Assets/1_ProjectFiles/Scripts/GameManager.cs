@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
 
     public delegate void OnMenuClosed();
     public OnMenuClosed onMenuClosedCallback;
+
+    public delegate void OnPlayerHealthChange(int maxhealth, int curhealth);
+    public OnPlayerHealthChange onPlayerHealthChangeCallback; 
+    
+    public delegate void OnPlayerEnduranceChange(int maxEndurance, int curEndurance);
+    public OnPlayerEnduranceChange onPlayerEnduranceChangeCallback;
     public enum GameState
     {
         Normal,

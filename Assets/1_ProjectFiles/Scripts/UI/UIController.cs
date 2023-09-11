@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
 
     private GameObject currentMenu;
 
+    private HealthSlider healthbar;
+    private EnduranceSlider enduranceBar;
     public enum Menu
     {
         Crafting,
@@ -32,6 +34,9 @@ public class UIController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        healthbar = FindObjectOfType<HealthSlider>();
+        enduranceBar = FindObjectOfType<EnduranceSlider>();
     }
 
     private void Start()
@@ -40,6 +45,8 @@ public class UIController : MonoBehaviour
 
         gamemanager.onAnyMenuToggleCallback += AnyMenuToggled;
         gamemanager.onMenuClosedCallback += CloseCurrentWindow;
+        gamemanager.onPlayerHealthChangeCallback += PlayerTookDamage;
+        gamemanager.onPlayerEnduranceChangeCallback += PlayerEnduranceChange;
 
         Hotbar.SetActive(true);
     }
@@ -48,6 +55,8 @@ public class UIController : MonoBehaviour
     {
         gamemanager.onAnyMenuToggleCallback -= AnyMenuToggled;
         gamemanager.onMenuClosedCallback -= CloseCurrentWindow;
+        gamemanager.onPlayerHealthChangeCallback -= PlayerTookDamage;
+        gamemanager.onPlayerEnduranceChangeCallback -= PlayerEnduranceChange;
     }
 
 
@@ -105,5 +114,15 @@ public class UIController : MonoBehaviour
         currentMenu = null;
     }
 
+    private void PlayerTookDamage(int maxhealth, int curhealth)
+    {
+        healthbar.SetMaxValue(maxhealth);
+        healthbar.SetValue(curhealth);
+    }
 
+    private void PlayerEnduranceChange(int maxendurance, int curendurance)
+    {
+        enduranceBar.SetMaxValue(maxendurance);
+        enduranceBar.SetValue(curendurance);
+    }
 }

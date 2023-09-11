@@ -45,8 +45,6 @@ public class CameraFollow : MonoBehaviour
         zPos = Mathf.Clamp(zPos, minLimit.z - camZoom, maxLimit.z);
 
         transform.position = new Vector3(xPos, yPos, zPos);
-
-        Debug.Log($"New pos: {new Vector3(xPos, yPos, zPos)}");
     }
 
 
@@ -78,7 +76,6 @@ public class CameraFollow : MonoBehaviour
 
             minLimit = new Vector3(minLimit.x + xpadding, minLimit.y, minLimit.z + zpadding);
             maxLimit = new Vector3(maxLimit.x - zpadding, maxLimit.y, maxLimit.z - zpadding);
-            Debug.Log($"Min is: {minLimit} and max: {maxLimit}");
         }
         else
         {

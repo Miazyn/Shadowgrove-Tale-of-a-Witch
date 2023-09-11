@@ -20,8 +20,11 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     public InputControls controls { get; private set; }
 
-    public int Health { get { return Health; } set { Health += value; } }
+    public int Health { get { return Health; } set { Health = value; } }
     public int MaxHealth { get { return MaxHealth; } set { MaxHealth = value; } }
+
+    public int Endurance { get; private set; }
+    public int MaxEndurance { get; private set; }
 
 
     void Awake()
@@ -71,6 +74,12 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         manager = GameManager.Instance;
 
         interactor = GetComponent<Interactor>();
+
+        MaxEndurance = 100;
+        Endurance = MaxEndurance;
+
+        MaxHealth = 100;
+        Health = MaxHealth;
 
         StartCoroutine(LateStart());
     }
@@ -123,6 +132,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         onInventoryCreatedCallback?.Invoke();
     }
 
+
     private void CancelAction()
     {
         manager.onMenuClosedCallback?.Invoke();
@@ -140,7 +150,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     void InventoryInteraction()
     {
-        manager.onAnyMenuToggleCallback(UIController.Menu.Inventory);
+        manager.onAnyMenuToggleCallback?.Invoke(UIController.Menu.Inventory);
     }
 
     bool UseItem()
@@ -181,6 +191,23 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         return currentItem.GetCurrentlyEquippedItem();
     }
 
+    public void SetMaxHealth(int newValue)
+    {
+        MaxHealth = newValue;
+    }
+
+    public void SetMaxEndurance(int newValue)
+    {
+        MaxEndurance = newValue;
+    }
+
+    public void EnduranceChanged(int endurance)
+    {
+        Endurance = Mathf.Clamp(Endurance + endurance, 0, MaxEndurance);
+
+        manager.onPlayerEnduranceChangeCallback?.Invoke(MaxEndurance, Endurance);
+    }
+
 
     public void TakeDamage(int dmg)
     {
@@ -189,6 +216,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         {
             Debug.Log($"{gameObject.name} has died.");
         }
+        manager.onPlayerHealthChangeCallback?.Invoke(MaxHealth, Health);
     }
 
     public void Heal(int healHP)
@@ -198,6 +226,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         {
             Health = MaxHealth;
         }
+        manager.onPlayerHealthChangeCallback?.Invoke(MaxHealth, Health);
     }
 
 
