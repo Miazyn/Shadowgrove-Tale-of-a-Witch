@@ -168,6 +168,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  anim: {fileID: 4126655763572010122}
+  playerMesh: {fileID: 7273084654919003210}
 --- !u!114 &4450180731014685432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,8 +321,18 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: bd31fe696f8cd02428673838d14b93ed, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a016b4438fdbcbb4ab6f9739e333874d, type: 3}
+--- !u!1 &7273084654919003210 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a016b4438fdbcbb4ab6f9739e333874d, type: 3}
+  m_PrefabInstance: {fileID: 7507014751080648987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8044835592501655280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a016b4438fdbcbb4ab6f9739e333874d, type: 3}
+  m_PrefabInstance: {fileID: 7507014751080648987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4126655763572010122 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a016b4438fdbcbb4ab6f9739e333874d, type: 3}
   m_PrefabInstance: {fileID: 7507014751080648987}
   m_PrefabAsset: {fileID: 0}

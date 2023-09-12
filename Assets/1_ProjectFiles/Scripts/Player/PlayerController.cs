@@ -31,13 +31,19 @@ public class PlayerController : MonoBehaviour
 
     bool canMove;
 
+    [SerializeField] Animator anim;
+    [SerializeField] GameObject playerMesh;
+
+    private static readonly int Idle = Animator.StringToHash("Standing Idle");
+    private static readonly int Walk = Animator.StringToHash("Walking");
+    private static readonly int Run = Animator.StringToHash("Running");
+
     private void Awake()
     {
         canMove = true;
     }
     private void Start()
     {
-
         controls = gameObject.GetComponent<Player>().controls;
         controls.Player.Sprint.performed += sprinting => Sprinting();
         controls.Player.StopSprint.performed += sprintStop => StopSprinting();
@@ -60,9 +66,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        playerMesh.transform.position = transform.position;
+        playerMesh.transform.rotation = transform.rotation;
+
         if (canMove)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
 
             if (isGrounded && velocity.y < 0)
             {
@@ -77,8 +87,29 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
             charControl.Move(velocity * speed);
         }
-        
-        
+
+        if (moveDirection == new Vector2(0, 0))
+        {
+            anim.CrossFade(Idle, 0, 0);
+        }
+        else if (IsSprinting)
+        {
+            anim.CrossFade(Run, 0, 0);
+        }
+        else
+        {
+            anim.CrossFade(Walk, 0, 0);
+        }
+
+        //Ray ray = new Ray(waterCheck.transform.position, -transform.up);
+
+        //if (Physics.Raycast(ray, out RaycastHit hit, 2))
+        //{
+        //    if (hit.collider.CompareTag(waterTag))
+        //    {
+
+        //    }
+        //}
     }
 
     void Rotation()

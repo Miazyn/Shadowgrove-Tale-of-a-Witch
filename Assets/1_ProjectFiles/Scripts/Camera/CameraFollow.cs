@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
 
-    public Terrain terrain; // Reference to your Terrain GameObject
-    public float zpadding = 1.0f;
-    public float xpadding = 1.0f;
+    //public Terrain terrain; // Reference to your Terrain GameObject
+    //public float zpadding = 1.0f;
+    //public float xpadding = 1.0f;
 
     private Vector3 minLimit;
     private Vector3 maxLimit;
@@ -16,12 +16,17 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] GameObject characterToFollow;
 
-    [SerializeField] float xPos;
-    [SerializeField] float yPos;
-    [SerializeField] float zPos;
+    float xPos;
+    float yPos;
+    float zPos;
+
+    Vector3 playerPos;
 
     public float camHeight = 0;
     public float camZoom = 0;
+
+    [SerializeField] float raycastDistance;
+    [SerializeField] LayerMask terrainLayer;
     private void Start()
     {
         if (!characterToFollow)
@@ -29,11 +34,13 @@ public class CameraFollow : MonoBehaviour
             Debug.LogWarning("No Character to follow");
         }
 
-        CalculateCameraLimits();
+        //CalculateCameraLimits();
     }
 
     private void Update()
     {
+
+
 
         yPos = characterToFollow.transform.position.y + camHeight;
 
@@ -41,10 +48,18 @@ public class CameraFollow : MonoBehaviour
 
         xPos = characterToFollow.transform.position.x;
 
-        xPos = Mathf.Clamp(xPos, minLimit.x, maxLimit.x);
-        zPos = Mathf.Clamp(zPos, minLimit.z - camZoom, maxLimit.z);
+        Ray ray = new Ray(characterToFollow.transform.position, -transform.forward);
+        RaycastHit hit;
+        
 
-        transform.position = new Vector3(xPos, yPos, zPos);
+        if (Physics.Raycast(ray, out hit, raycastDistance + camZoom, terrainLayer))
+        {
+            transform.position = new Vector3(xPos, yPos, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(xPos, yPos, zPos);
+        }
     }
 
 
@@ -60,27 +75,10 @@ public class CameraFollow : MonoBehaviour
         transform.position = new Vector3(xPos, yPos, zPos);
     }
 
-    private void CalculateCameraLimits()
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (terrain != null)
-        {
-            TerrainData terrainData = terrain.terrainData;
-            Bounds terrainBounds = terrainData.bounds;
-
-            // Calculate minimum and maximum limits with padding
-            minLimit = terrainBounds.min;
-            maxLimit = terrainBounds.max;
-
-            minLimit = maxLimit/2 * -1;
-            maxLimit = maxLimit / 2;
-
-            minLimit = new Vector3(minLimit.x + xpadding, minLimit.y, minLimit.z + zpadding);
-            maxLimit = new Vector3(maxLimit.x - zpadding, maxLimit.y, maxLimit.z - zpadding);
-        }
-        else
-        {
-            Debug.LogError("Terrain reference is missing!");
-        }
+        Debug.Log($"Collided with {other}");
     }
 
 }
