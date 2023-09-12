@@ -1,31 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-8461920365108156556
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Standing Idle 0
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bb44cf221eeecfc47af3054b82af6161, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-8404046171984929176
 AnimatorState:
   serializedVersion: 6
@@ -89,7 +63,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 6159921747864330403}
-    m_Position: {x: 240, y: -110, z: 0}
+    m_Position: {x: 260, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3551668201297373626}
     m_Position: {x: -50, y: 430, z: 0}
@@ -146,13 +120,10 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: 660, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -944574291381422853}
-    m_Position: {x: 250, y: 170, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8461920365108156556}
-    m_Position: {x: 20, y: 140, z: 0}
+    m_Position: {x: 300, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4327287914327731686}
-    m_Position: {x: 40, y: 210, z: 0}
+    m_Position: {x: 10, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8786835809482662940}
     m_Position: {x: 580, y: 190, z: 0}
@@ -165,7 +136,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 260, y: -210, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 6159921747864330403}
+  m_DefaultState: {fileID: 4327287914327731686}
 --- !u!1102 &-5786918190765718012
 AnimatorState:
   serializedVersion: 6
@@ -328,7 +299,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Animator Controller
+  m_Name: PlayerController
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
