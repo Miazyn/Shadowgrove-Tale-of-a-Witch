@@ -81,6 +81,8 @@ public class HotbarHighlight : MonoBehaviour
         }
         //Highlight stayed where it was
         HighlightEnabled(true);
+
+        player.EquipTool();
     }
 
     void QuickSelectSlot(float value)
@@ -92,6 +94,8 @@ public class HotbarHighlight : MonoBehaviour
         currentHighlight = (int)value - 1;
 
         HighlightEnabled(true);
+
+        player.EquipTool();
     }
 
     void HighlightEnabled(bool value)

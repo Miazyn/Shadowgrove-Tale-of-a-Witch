@@ -13,6 +13,14 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     GameManager manager;
 
     [SerializeField] HotbarHighlight currentItem;
+
+    [Header("Tools")]
+    [SerializeField] GameObject hammer;
+    [SerializeField] GameObject hoe;
+    [SerializeField] GameObject axe;
+    [SerializeField] GameObject wateringCan;
+    [SerializeField] GameObject wand;
+
     public Interactor interactor { get; private set; }
 
 
@@ -153,11 +161,83 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     void HotbarSelection(float value)
     {
         onHotbarQuickSelect?.Invoke(value);
+
     }
 
     void Scroll()
     {
         onHotbarScrollCallback?.Invoke();
+
+    }
+
+    public void EquipTool()
+    {
+        if (!IsTool())
+        {
+            wateringCan.SetActive(false);
+            axe.SetActive(false);
+            hammer.SetActive(false);
+            hoe.SetActive(false);
+            wand.SetActive(false);
+
+            return;
+        }
+
+        string itemName = GetCurrentItem().ItemName;
+
+        if(itemName.Contains("Wateringcan"))
+        {
+            wateringCan.SetActive(true);
+
+            axe.SetActive(false);
+            hammer.SetActive(false);
+            hoe.SetActive(false);
+            wand.SetActive(false);
+        }
+        else if (itemName.Contains("Axe"))
+        {
+            wateringCan.SetActive(false);
+
+            axe.SetActive(true);
+            hammer.SetActive(false);
+            hoe.SetActive(false);
+            wand.SetActive(false);
+        }
+        else if (itemName.Contains("Hammer"))
+        {
+            wateringCan.SetActive(false);
+
+            axe.SetActive(false);
+            hammer.SetActive(true);
+            hoe.SetActive(false);
+            wand.SetActive(false);
+        }
+        else if (itemName.Contains("Garden hoe"))
+        {
+            wateringCan.SetActive(false);
+
+            axe.SetActive(false);
+            hammer.SetActive(false);
+            hoe.SetActive(true);
+            wand.SetActive(false);
+        }
+        else if (itemName.Contains("Wand"))
+        {
+            wateringCan.SetActive(false);
+            axe.SetActive(false);
+            hammer.SetActive(false);
+            hoe.SetActive(false);
+            wand.SetActive(true);
+        }
+    }
+
+    private bool IsTool()
+    {
+        if(GetCurrentItem() as SO_Tools == null)
+        {
+            return false;
+        }
+        return true;
     }
 
     void InventoryInteraction()
