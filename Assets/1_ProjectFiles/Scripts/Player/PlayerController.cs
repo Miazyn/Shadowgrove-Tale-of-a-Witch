@@ -37,9 +37,19 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float walkStateTransitionTime = 0;
 
+    private float lockedTime;
+    private string itemName = "nothing";
+
+    private float swingAxeTime = 2.3f;
+    private float waterTime = 4.5f;
+
+    private int currentState;
+
     private static readonly int Idle = Animator.StringToHash("Standing Idle");
     private static readonly int Walk = Animator.StringToHash("Walking");
     private static readonly int Run = Animator.StringToHash("Running");
+    private static readonly int Water = Animator.StringToHash("Watering");
+    private static readonly int SwingAxe = Animator.StringToHash("Chop tree");
 
     private void Awake()
     {
@@ -69,8 +79,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        playerMesh.transform.position = transform.position;
-        playerMesh.transform.rotation = transform.rotation;
 
         if (canMove)
         {
@@ -91,28 +99,53 @@ public class PlayerController : MonoBehaviour
             charControl.Move(velocity * speed);
         }
 
-        if (moveDirection == new Vector2(0, 0))
+        var state = GetState(itemName);
+
+        if (state == currentState) return;
+
+        itemName = "nothing";
+        anim.CrossFade(state, 0, 0);
+        currentState = state;
+
+        playerMesh.transform.position = transform.position;
+        playerMesh.transform.rotation = transform.rotation;
+    }
+
+    private int GetState(string _itemName)
+    {
+        if (Time.time < lockedTime) return currentState;
+
+        EventManager.OnInteractionEnd?.Invoke();
+
+        if (_itemName.Contains("Wateringcan")) return LockState(Water, waterTime);
+
+        if (_itemName.Contains("Axe")) return LockState(SwingAxe, swingAxeTime);
+
+        if (_itemName.Contains("Hammer")) return -1;
+        if (_itemName.Contains("Garden hoe")) return -1;
+        if (_itemName.Contains("Wand")) return -1;
+
+
+        if (moveDirection == Vector2.zero) return Idle;
+
+        if (IsSprinting) return Run;
+        if (moveDirection != Vector2.zero) return Walk;
+
+
+        int LockState(int s, float t)
         {
-            anim.CrossFade(Idle, walkStateTransitionTime, 0);
-        }
-        else if (IsSprinting)
-        {
-            anim.CrossFade(Run, walkStateTransitionTime, 0);
-        }
-        else
-        {
-            anim.CrossFade(Walk, walkStateTransitionTime, 0);
+            EventManager.OnInteractionStart?.Invoke();
+
+            lockedTime = Time.time + t;
+            return s;
         }
 
-        //Ray ray = new Ray(waterCheck.transform.position, -transform.up);
+        return -1;
+    }
 
-        //if (Physics.Raycast(ray, out RaycastHit hit, 2))
-        //{
-        //    if (hit.collider.CompareTag(waterTag))
-        //    {
-
-        //    }
-        //}
+    public void GetToolAnimation(string itemName)
+    {
+        this.itemName = itemName;
     }
 
     void Rotation()

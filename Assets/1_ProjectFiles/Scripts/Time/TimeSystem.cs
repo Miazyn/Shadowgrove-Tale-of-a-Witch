@@ -31,8 +31,6 @@ public class TimeSystem : MonoBehaviour
     [Range(0, 23)]
     [SerializeField] private int passOutTime = 2;
 
-
-
     public enum Day
     {
         Mon,
@@ -54,16 +52,24 @@ public class TimeSystem : MonoBehaviour
 
     public void Start()
     {
+
         hour = startHour;
 
         curDay = Day.Mon;
         curSeason = Season.Spring;
+
+        EventManager.OnTimeChanged?.Invoke(minute, hour);
+        EventManager.OnDayChanged?.Invoke(dayCounter, curDay);
+        EventManager.OnSeasonChanged?.Invoke(curSeason);
+        EventManager.OnYearChanged?.Invoke(Year);
 
         StartCoroutine(HourIncrease());
     }
 
     public IEnumerator HourIncrease()
     {
+        
+
         while (hour != 2)
         {
             yield return new WaitForSeconds(timeBtwMinutes);
@@ -87,6 +93,8 @@ public class TimeSystem : MonoBehaviour
                     minute += 10;
                 }
             }
+
+            EventManager.OnTimeChanged?.Invoke(minute, hour);
 
             //string time = "Time" + hour.ToString("D2") + ":" + minute.ToString("D2") + " Day:" + dayCounter;
         }
@@ -138,6 +146,8 @@ public class TimeSystem : MonoBehaviour
 
         Debug.Log("Next day:" + curDay + " " + dayCounter + " " + curSeason + " Year: " + Year);
 
+        EventManager.OnDayChanged?.Invoke(dayCounter, curDay);
+
         hour = startHour;
         minute = 0;
 
@@ -166,10 +176,13 @@ public class TimeSystem : MonoBehaviour
                 Debug.LogError("Went outside of the expected possible seasons!!!");
                 break;
         }
+
+        EventManager.OnSeasonChanged?.Invoke(curSeason);
     }
 
     public void NextYear()
     {
         Year++;
+        EventManager.OnYearChanged?.Invoke(Year);
     }
 }

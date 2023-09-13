@@ -10,6 +10,9 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     public string PlayerName = "Isabella";
 
+    public int Money { get; private set; }
+    [SerializeField] int StarterMoney = 1000;
+
     GameManager manager;
 
     [SerializeField] HotbarHighlight currentItem;
@@ -85,6 +88,9 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     public delegate void OnInventoryCreated();
     public OnInventoryCreated onInventoryCreatedCallback;
 
+    public delegate void OnPlayerMoneyChanged(int curMoney);
+    public OnPlayerMoneyChanged onPlayerMoneyChangedCallback;
+
     void Start()
     {
         if (currentItem == null)
@@ -138,6 +144,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     {
         yield return new WaitForSeconds(0.1f);
         CreateInventory();
+        AddMoney(StarterMoney);
     }
 
     void CreateInventory()
@@ -150,6 +157,12 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         }
 
         onInventoryCreatedCallback?.Invoke();
+    }
+
+    private void AddMoney(int _addedMoney)
+    {
+        Money = Money + _addedMoney <= 0 ? 0 : Money + _addedMoney;
+        onPlayerMoneyChangedCallback?.Invoke(Money);
     }
 
 
@@ -168,6 +181,21 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     {
         onHotbarScrollCallback?.Invoke();
 
+    }
+
+    public void UseTool(GameObject _objectToLookAt)
+    {
+        if (_objectToLookAt != null)
+        {
+            gameObject.transform.LookAt(_objectToLookAt.transform);
+        }
+
+        if (!IsTool())
+        {
+            return;
+        }
+        //Calls On PlayerController for Anim
+        gameObject.GetComponent<PlayerController>().GetToolAnimation(GetCurrentItem().ItemName);
     }
 
     public void EquipTool()
@@ -231,7 +259,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         }
     }
 
-    private bool IsTool()
+    public bool IsTool()
     {
         if(GetCurrentItem() as SO_Tools == null)
         {

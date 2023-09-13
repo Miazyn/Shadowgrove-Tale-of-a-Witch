@@ -101,7 +101,6 @@ public class ResourceNode : MonoBehaviour, IInteractable, IDamageable
             }
         }
 
-        Debug.Log("I am a resource Node");
         CollectResource();
 
         return true;
@@ -116,14 +115,14 @@ public class ResourceNode : MonoBehaviour, IInteractable, IDamageable
         }
 
         TakeDamage(playerTool.Strength);
-        Debug.Log("CHOP");
         
         if (Health == 0) 
         {
             playerInventory.AddItem(droppedItem, droppedAmount);
-            Debug.Log("Chop chop, gone and added items");
             Collapse();
         }
+
+        player.UseTool(gameObject);
 
         player.EnduranceChanged(playerTool.GetToolEnduranceUse(SO_Tools.ToolUsage.Proper));
 

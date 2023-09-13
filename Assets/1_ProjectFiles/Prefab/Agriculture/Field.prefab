@@ -64,6 +64,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prompt: 
+  wateredMat: {fileID: 2100000, guid: d4c22fb6bd5f718438c6c93a8b139edb, type: 2}
+  dryMat: {fileID: 2100000, guid: e4d1770f09510214789926c3aaa0e3ee, type: 2}
+  fieldMesh: {fileID: 1253965603878244167}
   currentSeed: {fileID: 0}
   stage1: {fileID: 1253965604926168399}
   stage2: {fileID: 1253965603564908199}

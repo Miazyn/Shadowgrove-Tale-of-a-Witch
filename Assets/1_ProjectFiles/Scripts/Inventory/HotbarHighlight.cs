@@ -13,7 +13,7 @@ public class HotbarHighlight : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemNameText;
     InventorySlotUI[] slots;
     int currentHighlight = 0;
-    
+
     void Start()
     {
         player = Player.instance;

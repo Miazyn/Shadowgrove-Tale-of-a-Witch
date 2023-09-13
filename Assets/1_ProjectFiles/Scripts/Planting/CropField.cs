@@ -9,9 +9,16 @@ public class CropField : MonoBehaviour, IInteractable
 
     Plant plant;
 
+    [Header("Water Status")]
+    private bool watered;
+    [SerializeField] Material wateredMat;
+    [SerializeField] Material dryMat;
+    [SerializeField] MeshRenderer fieldMesh;
+
     [SerializeField] SO_Seed currentSeed;
     int daysToGrow;
     int plantStages;
+    int daysPassed = 0;
 
     [SerializeField] GameObject stage1;
     [SerializeField] GameObject stage2;
@@ -37,6 +44,9 @@ public class CropField : MonoBehaviour, IInteractable
     private void Start()
     {
         player = Player.instance;
+        fieldMesh.material = dryMat;
+
+        watered = false;
     }
 
 
@@ -76,6 +86,20 @@ public class CropField : MonoBehaviour, IInteractable
             StartCoroutine(GrowPlantStages());
             return true;
         }
+
+        if (player.IsTool())
+        {
+            if (player.GetCurrentItem().ItemName.Contains("Wateringcan"))
+            {
+                watered = true;
+
+                SO_Tools playerTool = (SO_Tools)player.GetCurrentItem();
+                fieldMesh.material = wateredMat;
+                player.UseTool(null);
+
+                player.EnduranceChanged(playerTool.GetToolEnduranceUse(SO_Tools.ToolUsage.Proper));
+            }
+        }
         
         return false;
     }
@@ -93,6 +117,39 @@ public class CropField : MonoBehaviour, IInteractable
         currentSeed = null;
 
         HideInteractPrompt();
+    }
+
+    public void GrowPlant()
+    {
+        if (currentSeed == null) return;
+
+        int stageintervalls = daysToGrow / 3;
+
+        if(daysPassed >= daysToGrow)
+        {
+            stage1.SetActive(false);
+            stage2.SetActive(false);
+            stage3.SetActive(true);
+
+            currentStage = PlantStages.harvestable;
+
+            Debug.Log($"{currentSeed.ItemName} has fully grown. Now we can harvest.");
+            plant = new Plant(currentSeed.Harvestable, currentSeed.HarvestAmount);
+        }
+        else
+        {
+            if(daysPassed/stageintervalls == 1)
+            {
+                stage1.SetActive(true);
+            }
+            if(daysPassed/stageintervalls == 2)
+            {
+                stage1.SetActive(false);
+                stage2.SetActive(true);
+            }
+
+            daysPassed++;
+        }
     }
 
     IEnumerator GrowPlantStages()
@@ -153,7 +210,7 @@ public class CropField : MonoBehaviour, IInteractable
             return;
         }
         
-        if (currentSeed == null && player.GetCurrentItem().GetType() == typeof(SO_Seed)|| stage3.activeSelf)
+        if (currentSeed == null && player.GetCurrentItem().GetType() == typeof(SO_Seed)|| stage3.activeSelf || player.IsTool() && player.GetCurrentItem().ItemName.Contains("Wateringcan"))
         {
             interactPrompt.SetActive(true);
         }
