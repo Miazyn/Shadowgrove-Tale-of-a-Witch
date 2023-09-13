@@ -20,9 +20,20 @@ public class CropField : MonoBehaviour, IInteractable
     int plantStages;
     int daysPassed = 0;
 
+    [Header("Plant Stages")]
+    [SerializeField] GameObject seedStage;
     [SerializeField] GameObject stage1;
     [SerializeField] GameObject stage2;
     [SerializeField] GameObject stage3;
+
+    private MeshFilter filterStage1;
+    private MeshRenderer meshStage1;
+
+    private MeshFilter filterStage2;
+    private MeshRenderer meshStage2;
+
+    private MeshFilter filterStage3;
+    private MeshRenderer meshStage3;
 
     Player player;
 
@@ -41,27 +52,58 @@ public class CropField : MonoBehaviour, IInteractable
     }
     PlantStages currentStage;
 
+    private void OnEnable()
+    {
+        EventManager.OnDayChanged.AddListener(GrowPlant);
+    }
+
     private void Start()
     {
         player = Player.instance;
         fieldMesh.material = dryMat;
 
+        filterStage1 = stage1.GetComponent<MeshFilter>();
+        meshStage1 = stage1.GetComponent<MeshRenderer>();
+
+        filterStage2 = stage2.GetComponent<MeshFilter>();
+        meshStage2 = stage2.GetComponent<MeshRenderer>();
+
+        filterStage3 = stage3.GetComponent<MeshFilter>();
+        meshStage3 = stage3.GetComponent<MeshRenderer>();
         watered = false;
     }
 
-
+    private void OnDisable()
+    {
+        EventManager.OnDayChanged.RemoveListener(GrowPlant);
+    }
 
     public bool Interact(Interactor interactor)
     {
-        if (currentStage == PlantStages.planted)
-        {
-            return false;
-        }
-        if(currentStage == PlantStages.harvestable)
+        if (currentStage == PlantStages.harvestable)
         {
             Harvest();
 
             return true;
+        }
+
+        if (player.IsTool() && currentStage != PlantStages.harvestable)
+        {
+            if (player.GetCurrentItem().ItemName.Contains("Wateringcan"))
+            {
+                watered = true;
+
+                SO_Tools playerTool = (SO_Tools)player.GetCurrentItem();
+                fieldMesh.material = wateredMat;
+                player.UseTool(null);
+
+                player.EnduranceChanged(playerTool.GetToolEnduranceUse(SO_Tools.ToolUsage.Proper));
+            }
+        }
+
+        if (currentStage == PlantStages.planted)
+        {
+            return false;
         }
         if (player.GetCurrentItem() == null)
         {
@@ -83,25 +125,74 @@ public class CropField : MonoBehaviour, IInteractable
 
             HideInteractPrompt();
 
-            StartCoroutine(GrowPlantStages());
+            if (seedStage != null) seedStage.SetActive(true);
+
+            daysPassed = 1;
+
+            ChangeMeshes();
+            //TODO
             return true;
-        }
-
-        if (player.IsTool())
-        {
-            if (player.GetCurrentItem().ItemName.Contains("Wateringcan"))
-            {
-                watered = true;
-
-                SO_Tools playerTool = (SO_Tools)player.GetCurrentItem();
-                fieldMesh.material = wateredMat;
-                player.UseTool(null);
-
-                player.EnduranceChanged(playerTool.GetToolEnduranceUse(SO_Tools.ToolUsage.Proper));
-            }
         }
         
         return false;
+    }
+
+    private void ChangeMeshes()
+    {
+        Material[] materials;
+        Mesh curmesh;
+
+        if(currentSeed.prefabStage.Length <= 0)
+        {
+            Debug.LogError("NO MESH FOUND FOR PLANT!");
+            return;
+        }
+
+        int counter = 0;
+        foreach(var stage in currentSeed.prefabStage)
+        {
+            materials = stage.GetComponent<MeshRenderer>().sharedMaterials;
+            curmesh = stage.GetComponent<MeshFilter>().sharedMesh;
+
+            switch (counter)
+            {
+                case 0:
+                    if (filterStage1 != null)
+                    {
+                        filterStage1.sharedMesh = curmesh;
+                    }
+                    if (meshStage1 != null)
+                    {
+                        meshStage1.sharedMaterials = materials;
+                    }
+                    break;
+                case 1:
+                    if(filterStage2 != null)
+                    {
+                        filterStage2.sharedMesh = curmesh;
+                    }
+                    if(meshStage2 != null)
+                    {
+                        meshStage2.sharedMaterials = materials;
+                    }
+                    break;
+                case 2:
+                    if (filterStage3 != null)
+                    {
+                        filterStage3.sharedMesh = curmesh;
+                    }
+                    if (meshStage3 != null)
+                    {
+                        meshStage3.sharedMaterials = materials;
+                    }
+                    break;
+                default:
+                    Debug.Log("Too many stages???");
+                    break;
+            }
+
+            counter++;
+        }
     }
 
     private void Harvest()
@@ -122,6 +213,8 @@ public class CropField : MonoBehaviour, IInteractable
     public void GrowPlant()
     {
         if (currentSeed == null) return;
+        Debug.Log($"Field was watered: {watered}");
+        if (!watered) return; 
 
         int stageintervalls = daysToGrow / 3;
 
@@ -133,53 +226,29 @@ public class CropField : MonoBehaviour, IInteractable
 
             currentStage = PlantStages.harvestable;
 
-            Debug.Log($"{currentSeed.ItemName} has fully grown. Now we can harvest.");
             plant = new Plant(currentSeed.Harvestable, currentSeed.HarvestAmount);
         }
         else
         {
-            if(daysPassed/stageintervalls == 1)
+            if (daysPassed > 0)
             {
-                stage1.SetActive(true);
-            }
-            if(daysPassed/stageintervalls == 2)
-            {
-                stage1.SetActive(false);
-                stage2.SetActive(true);
+                if (daysPassed / stageintervalls == 1)
+                {
+                    if (seedStage != null) seedStage.SetActive(false);
+                    stage1.SetActive(true);
+                }
+                if (daysPassed / stageintervalls == 2)
+                {
+                    stage1.SetActive(false);
+                    stage2.SetActive(true);
+                }
             }
 
             daysPassed++;
         }
-    }
 
-    IEnumerator GrowPlantStages()
-    {
-        int counter = 0;
-        while(counter < plantStages)
-        {
-            yield return new WaitForSeconds(daysToGrow);
-            counter++;
-            Debug.Log($"{daysToGrow} Days have passed and the plant has grown.");
-            if(counter == 1)
-            {
-                stage1.SetActive(true);
-            }
-            if(counter == 2)
-            {
-                stage1.SetActive(false);
-                stage2.SetActive(true);
-            }
-            if(counter == plantStages)
-            {
-                stage2.SetActive(false);
-                stage3.SetActive(true);
-            }
-            
-        }
-        currentStage = PlantStages.harvestable;
-
-        Debug.Log($"{currentSeed.ItemName} has fully grown. Now we can harvest.");
-        plant = new Plant(currentSeed.Harvestable, currentSeed.HarvestAmount);
+        watered = false;
+        fieldMesh.material = dryMat;
     }
 
     public bool CanInteract()

@@ -58,10 +58,10 @@ public class TimeSystem : MonoBehaviour
         curDay = Day.Mon;
         curSeason = Season.Spring;
 
-        EventManager.OnTimeChanged?.Invoke(minute, hour);
-        EventManager.OnDayChanged?.Invoke(dayCounter, curDay);
-        EventManager.OnSeasonChanged?.Invoke(curSeason);
-        EventManager.OnYearChanged?.Invoke(Year);
+        EventManager.OnTimeChangedInfo?.Invoke(minute, hour);
+        EventManager.OnDayChangedInfo?.Invoke(dayCounter, curDay);
+        EventManager.OnSeasonChangedInfo?.Invoke(curSeason);
+        EventManager.OnYearChangedInfo?.Invoke(Year);
 
         StartCoroutine(HourIncrease());
     }
@@ -94,7 +94,7 @@ public class TimeSystem : MonoBehaviour
                 }
             }
 
-            EventManager.OnTimeChanged?.Invoke(minute, hour);
+            EventManager.OnTimeChangedInfo?.Invoke(minute, hour);
 
             //string time = "Time" + hour.ToString("D2") + ":" + minute.ToString("D2") + " Day:" + dayCounter;
         }
@@ -146,7 +146,9 @@ public class TimeSystem : MonoBehaviour
 
         Debug.Log("Next day:" + curDay + " " + dayCounter + " " + curSeason + " Year: " + Year);
 
-        EventManager.OnDayChanged?.Invoke(dayCounter, curDay);
+        EventManager.OnDayChangedInfo?.Invoke(dayCounter, curDay);
+
+        EventManager.OnDayChanged?.Invoke();
 
         hour = startHour;
         minute = 0;
@@ -177,12 +179,12 @@ public class TimeSystem : MonoBehaviour
                 break;
         }
 
-        EventManager.OnSeasonChanged?.Invoke(curSeason);
+        EventManager.OnSeasonChangedInfo?.Invoke(curSeason);
     }
 
     public void NextYear()
     {
         Year++;
-        EventManager.OnYearChanged?.Invoke(Year);
+        EventManager.OnYearChangedInfo?.Invoke(Year);
     }
 }

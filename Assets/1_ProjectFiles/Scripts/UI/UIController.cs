@@ -42,7 +42,7 @@ public class UIController : MonoBehaviour
     [SerializeField] Image seasonIcon;
     [SerializeField] Sprite spring;
     [SerializeField] Sprite summer;
-    [SerializeField] Sprite autumn;
+    [SerializeField] Sprite fall;
     [SerializeField] Sprite winter;
 
     private void Awake()
@@ -63,10 +63,10 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnTimeChanged.AddListener(TimeUpdate);
-        EventManager.OnDayChanged.AddListener(DayUpdate);
-        EventManager.OnSeasonChanged.AddListener(SeasonUpdate);
-        EventManager.OnYearChanged.AddListener(YearUpdate);
+        EventManager.OnTimeChangedInfo.AddListener(TimeUpdate);
+        EventManager.OnDayChangedInfo.AddListener(DayUpdate);
+        EventManager.OnSeasonChangedInfo.AddListener(SeasonUpdate);
+        EventManager.OnYearChangedInfo.AddListener(YearUpdate);
     }
 
     private void Start()
@@ -90,10 +90,10 @@ public class UIController : MonoBehaviour
         gamemanager.onPlayerHealthChangeCallback -= PlayerTookDamage;
         gamemanager.onPlayerEnduranceChangeCallback -= PlayerEnduranceChange;
 
-        EventManager.OnTimeChanged.RemoveListener(TimeUpdate);
-        EventManager.OnDayChanged.RemoveListener(DayUpdate);
-        EventManager.OnSeasonChanged.RemoveListener(SeasonUpdate);
-        EventManager.OnYearChanged.RemoveListener(YearUpdate);
+        EventManager.OnTimeChangedInfo.RemoveListener(TimeUpdate);
+        EventManager.OnDayChangedInfo.RemoveListener(DayUpdate);
+        EventManager.OnSeasonChangedInfo.RemoveListener(SeasonUpdate);
+        EventManager.OnYearChangedInfo.RemoveListener(YearUpdate);
 
         Player.instance.onPlayerMoneyChangedCallback -= UpdateMoney;
     }
@@ -156,15 +156,19 @@ public class UIController : MonoBehaviour
         {
             case TimeSystem.Season.Spring:
                 seasonText.text = "Spring";
+                seasonIcon.sprite = spring;
                 break;
             case TimeSystem.Season.Summer:
                 seasonText.text = "Summer";
+                seasonIcon.sprite = summer;
                 break;
             case TimeSystem.Season.Fall:
                 seasonText.text = "Fall";
+                seasonIcon.sprite = fall;
                 break;
             case TimeSystem.Season.Winter:
                 seasonText.text = "Winter";
+                seasonIcon.sprite = winter;
                 break;
             default:
                 break;

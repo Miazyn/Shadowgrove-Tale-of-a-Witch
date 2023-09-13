@@ -92,6 +92,20 @@ MonoBehaviour:
   CraftMenu: {fileID: 0}
   InventoryMenu: {fileID: 0}
   Hotbar: {fileID: 0}
+  moneyText: {fileID: 0}
+  clockText: {fileID: 0}
+  dayText: {fileID: 0}
+  yearText: {fileID: 0}
+  seasonText: {fileID: 0}
+  weatherIcon: {fileID: 0}
+  rainyWeather: {fileID: 21300000, guid: 7577ba65c985cb940b4b71e168b23ceb, type: 3}
+  sunnyWeather: {fileID: 21300000, guid: 949a92e33988db843871da101b965d77, type: 3}
+  snowyWeather: {fileID: 21300000, guid: fc5544559de003b4a97e8553fbdd6782, type: 3}
+  seasonIcon: {fileID: 0}
+  spring: {fileID: 21300000, guid: 8ea89a5fc9b0c1e47899453d29a00d83, type: 3}
+  summer: {fileID: 21300000, guid: 0e203903f5f8b014eb8165c9e1f831e2, type: 3}
+  autumn: {fileID: 21300000, guid: fd8ffd4649ab5ac42b572ad6a677b825, type: 3}
+  winter: {fileID: 21300000, guid: 6a4aeb4e34814bc4f8861a621ba28a99, type: 3}
 --- !u!114 &4690353346432491399
 MonoBehaviour:
   m_ObjectHideFlags: 0

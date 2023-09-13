@@ -20,13 +20,12 @@ MonoBehaviour:
   BuyPrice: 0
   SellPrice: 0
   Icon: {fileID: 21300000, guid: 63bb5c9b274822040bdf07c97ee7f21c, type: 3}
-  DaysToGrow: 2
+  DaysToGrow: 3
   GrowthSeason: 00000000
   Harvestable: {fileID: 11400000, guid: 32e3a266a5303d640a945faf85a15615, type: 2}
   HarvestAmount: 1
   Stages: 3
-  MeshForStages:
-  - {fileID: -2432090755550338912, guid: cd6ae8f53e1ba7f478d93ac697a8665a, type: 3}
-  - {fileID: -2432090755550338912, guid: bb07b5d40e268374cb03adb486948b04, type: 3}
-  - {fileID: -2432090755550338912, guid: 15540597053fe9442ba5e84de79aa83e, type: 3}
-  MeshMaterial: []
+  prefabStage:
+  - {fileID: 3659755388584493415, guid: ae8b68a4ac6b75d43be6ed55f90e0856, type: 3}
+  - {fileID: 5059854990475187178, guid: 6ab6bc7e6915f694784d500e56489e27, type: 3}
+  - {fileID: 8755653089286832746, guid: a964be9fa73fd4a4c8dddbb55a3efbc9, type: 3}
