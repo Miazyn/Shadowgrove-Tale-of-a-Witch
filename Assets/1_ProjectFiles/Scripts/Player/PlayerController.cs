@@ -40,8 +40,13 @@ public class PlayerController : MonoBehaviour
     private float lockedTime;
     private string itemName = "nothing";
 
+    bool IsPassingOut = false;
+    bool IsCollapsing = false;
+
     private float swingAxeTime = 2.3f;
     private float waterTime = 4.5f;
+    private float yawnTime = 5.2f;
+    private float collapseTime = 3.6f;
 
     private int currentState;
 
@@ -50,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private static readonly int Run = Animator.StringToHash("Running");
     private static readonly int Water = Animator.StringToHash("Watering");
     private static readonly int SwingAxe = Animator.StringToHash("Chop tree");
+    private static readonly int Yawn = Animator.StringToHash("Yawn");
+    private static readonly int Collapse = Animator.StringToHash("Collapse Exhaustion");
 
     private void Awake()
     {
@@ -69,12 +76,14 @@ public class PlayerController : MonoBehaviour
     {
         EventManager.OnInteractionStart.AddListener(DisableMovement);
         EventManager.OnInteractionEnd.AddListener(EnableMovement);
+        EventManager.OnPlayerPassOut.AddListener(PassOut);
     }
 
     private void OnDisable()
     {
         EventManager.OnInteractionStart.RemoveListener(DisableMovement);
         EventManager.OnInteractionEnd.RemoveListener(EnableMovement);
+        EventManager.OnPlayerPassOut.RemoveListener(PassOut);
     }
 
     void Update()
@@ -115,6 +124,25 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.time < lockedTime) return currentState;
 
+        if (IsPassingOut)
+        {
+            IsPassingOut = false;
+            return LockState(Yawn, yawnTime);
+        }
+
+        if (currentState == Yawn)
+        {
+            IsCollapsing = true;
+            return LockState(Collapse, collapseTime);
+        }
+
+        if (IsCollapsing)
+        {
+            IsCollapsing = false;
+            EventManager.StartNewDay?.Invoke();
+            EventManager.OnInteractionStart?.Invoke();
+        }
+
         EventManager.OnInteractionEnd?.Invoke();
 
         if (_itemName.Contains("Wateringcan")) return LockState(Water, waterTime);
@@ -143,6 +171,10 @@ public class PlayerController : MonoBehaviour
         return -1;
     }
 
+    private void PassOut()
+    {
+        IsPassingOut = true;
+    }
     public void GetToolAnimation(string itemName)
     {
         this.itemName = itemName;

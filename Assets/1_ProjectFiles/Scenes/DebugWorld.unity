@@ -143,6 +143,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7273084654919003210, guid: a106d9cfb6de93948908c375a3940446, type: 3}
   m_PrefabInstance: {fileID: 4450180730755602955}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &327230547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5378816158958496588, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
+  m_PrefabInstance: {fileID: 5378816157443565837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339598ee6ec3d504794bc7418c7584b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &345345495
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +441,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6690133132743802045, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
   m_PrefabInstance: {fileID: 5378816157443565837}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &692389995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5378816159135687055, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
+  m_PrefabInstance: {fileID: 5378816157443565837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7029bc7d608974b978604a66db3b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,6 +1987,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5378816157443565843}
     - target: {fileID: 4690353346432491398, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+      propertyPath: healthbar
+      value: 
+      objectReference: {fileID: 692389995}
+    - target: {fileID: 4690353346432491398, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
       propertyPath: moneyText
       value: 
       objectReference: {fileID: 5378816157443565842}
@@ -1980,6 +2006,10 @@ PrefabInstance:
       propertyPath: weatherIcon
       value: 
       objectReference: {fileID: 5378816157443565838}
+    - target: {fileID: 4690353346432491398, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+      propertyPath: enduranceBar
+      value: 
+      objectReference: {fileID: 327230547}
     - target: {fileID: 4690353346432491398, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
       propertyPath: InventoryMenu
       value: 
@@ -2007,6 +2037,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5378816157692828928, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378816158196951083, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5378816158197322682, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}

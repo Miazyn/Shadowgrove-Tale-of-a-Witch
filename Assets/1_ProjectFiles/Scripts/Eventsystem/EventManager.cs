@@ -14,5 +14,8 @@ public class EventManager : MonoBehaviour
     public static UnityEvent<TimeSystem.Season> OnSeasonChangedInfo = new UnityEvent<TimeSystem.Season>();
     public static UnityEvent<int> OnYearChangedInfo = new UnityEvent<int>();
 
+    public static UnityEvent OnPlayerPassOut = new UnityEvent();
+    public static UnityEvent StartNewDay = new UnityEvent();
+
     public static UnityEvent OnDayChanged = new UnityEvent();
 }

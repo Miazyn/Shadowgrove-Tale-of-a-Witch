@@ -63,7 +63,13 @@ public class TimeSystem : MonoBehaviour
         EventManager.OnSeasonChangedInfo?.Invoke(curSeason);
         EventManager.OnYearChangedInfo?.Invoke(Year);
 
+        EventManager.StartNewDay.AddListener(NextDay);
+
         StartCoroutine(HourIncrease());
+    }
+    private void OnDisable()
+    {
+        EventManager.StartNewDay.RemoveListener(NextDay);
     }
 
     public IEnumerator HourIncrease()
@@ -100,7 +106,9 @@ public class TimeSystem : MonoBehaviour
         }
 
         Debug.Log("We have passeed out. Restart Coroutine, next day.");
-        NextDay();
+
+        EventManager.OnPlayerPassOut?.Invoke();
+        //NextDay();
     }
 
     public void NextDay()
@@ -149,6 +157,8 @@ public class TimeSystem : MonoBehaviour
         EventManager.OnDayChangedInfo?.Invoke(dayCounter, curDay);
 
         EventManager.OnDayChanged?.Invoke();
+
+        EventManager.OnInteractionEnd?.Invoke();
 
         hour = startHour;
         minute = 0;

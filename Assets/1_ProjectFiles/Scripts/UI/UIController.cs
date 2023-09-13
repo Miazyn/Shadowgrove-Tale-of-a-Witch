@@ -14,8 +14,8 @@ public class UIController : MonoBehaviour
 
     private GameObject currentMenu;
 
-    private HealthSlider healthbar;
-    private EnduranceSlider enduranceBar;
+    [SerializeField] private HealthSlider healthbar;
+    [SerializeField] private EnduranceSlider enduranceBar;
     public enum Menu
     {
         Crafting,
@@ -57,8 +57,6 @@ public class UIController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        healthbar = FindObjectOfType<HealthSlider>();
-        enduranceBar = FindObjectOfType<EnduranceSlider>();
     }
 
     private void OnEnable()
@@ -237,12 +235,16 @@ public class UIController : MonoBehaviour
 
     private void PlayerTookDamage(int maxhealth, int curhealth)
     {
+        if (healthbar == null) return;
+
         healthbar.SetMaxValue(maxhealth);
         healthbar.SetValue(curhealth);
     }
 
     private void PlayerEnduranceChange(int maxendurance, int curendurance)
     {
+        if (enduranceBar == null) return;
+
         enduranceBar.SetMaxValue(maxendurance);
         enduranceBar.SetValue(curendurance);
     }

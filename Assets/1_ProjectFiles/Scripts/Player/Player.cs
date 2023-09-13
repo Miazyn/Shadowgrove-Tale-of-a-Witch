@@ -91,6 +91,19 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     public delegate void OnPlayerMoneyChanged(int curMoney);
     public OnPlayerMoneyChanged onPlayerMoneyChangedCallback;
 
+    void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.Disable();
+        EventManager.OnDayChanged.RemoveListener(ResetEndurance);
+        EventManager.OnDayChanged.RemoveListener(ResetHealth);
+
+    }
+
     void Start()
     {
         if (currentItem == null)
@@ -106,6 +119,9 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
         MaxHealth = 100;
         Health = MaxHealth;
+
+        EventManager.OnDayChanged.AddListener(ResetEndurance);
+        EventManager.OnDayChanged.AddListener(ResetHealth);
 
         StartCoroutine(LateStart());
     }
@@ -316,6 +332,12 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         MaxHealth = newValue;
     }
 
+    public void ResetEndurance()
+    {
+        Endurance = MaxEndurance;
+        manager.onPlayerEnduranceChangeCallback?.Invoke(MaxEndurance, Endurance);
+    }
+
     public void SetMaxEndurance(int newValue)
     {
         MaxEndurance = newValue;
@@ -328,6 +350,12 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         manager.onPlayerEnduranceChangeCallback?.Invoke(MaxEndurance, Endurance);
     }
 
+    public void ResetHealth()
+    {
+        Health = MaxHealth;
+
+        manager.onPlayerHealthChangeCallback?.Invoke(MaxHealth, Health);
+    }
 
     public void TakeDamage(int dmg)
     {
@@ -365,16 +393,6 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         //        Destroy(hit.gameObject);
         //    }
         //}
-    }
-
-    void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    void OnDisable()
-    {
-        controls.Disable();
     }
 
     void OnApplicationQuit()
