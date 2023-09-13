@@ -19,7 +19,7 @@ MonoBehaviour:
   CanBeSold: 0
   BuyPrice: 0
   SellPrice: 0
-  Icon: {fileID: 21300000, guid: 084b763889afb5c429f7d6fa083c62a6, type: 3}
+  Icon: {fileID: 21300000, guid: 6fb9ceaef7a8bcf40a0462e9b011af56, type: 3}
   HasEffectArea: 0
   EffectArea: {x: 0, y: 0}
   MaxHardness: 20

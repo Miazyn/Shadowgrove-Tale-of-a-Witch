@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   sprintSpeed: 4
-  characterRotationSmoothing: 0.45
+  characterRotationSmoothing: 0.03
   charControl: {fileID: 4450180731014685413}
   gravity: -9.8
   groundCheck: {fileID: 4450180730750063165}

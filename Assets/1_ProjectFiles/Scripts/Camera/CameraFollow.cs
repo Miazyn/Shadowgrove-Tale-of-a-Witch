@@ -27,6 +27,7 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] float raycastDistance;
     [SerializeField] LayerMask terrainLayer;
+
     private void Start()
     {
         if (!characterToFollow)

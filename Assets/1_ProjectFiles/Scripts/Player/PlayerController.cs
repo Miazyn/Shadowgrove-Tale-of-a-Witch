@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] GameObject playerMesh;
 
+
+    [SerializeField] float walkStateTransitionTime = 0;
+
     private static readonly int Idle = Animator.StringToHash("Standing Idle");
     private static readonly int Walk = Animator.StringToHash("Walking");
     private static readonly int Run = Animator.StringToHash("Running");
@@ -90,15 +93,15 @@ public class PlayerController : MonoBehaviour
 
         if (moveDirection == new Vector2(0, 0))
         {
-            anim.CrossFade(Idle, 0, 0);
+            anim.CrossFade(Idle, walkStateTransitionTime, 0);
         }
         else if (IsSprinting)
         {
-            anim.CrossFade(Run, 0, 0);
+            anim.CrossFade(Run, walkStateTransitionTime, 0);
         }
         else
         {
-            anim.CrossFade(Walk, 0, 0);
+            anim.CrossFade(Walk, walkStateTransitionTime, 0);
         }
 
         //Ray ray = new Ray(waterCheck.transform.position, -transform.up);
