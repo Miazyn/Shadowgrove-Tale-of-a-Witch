@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
@@ -30,6 +31,10 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     void Start()
     {
         player = Player.instance;
+
+        
+        GetComponent<Image>().sprite = HeldItem.Icon;
+
         StartCoroutine(CheckIfDragged());
     }
 
