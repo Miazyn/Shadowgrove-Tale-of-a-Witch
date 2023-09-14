@@ -4,10 +4,10 @@ using System.IO;
 
 public class CSVToSO
 {
-    private static string CSVItems = "/Editor/CSV/Crops.csv";
+    private static string CSVItems = "/1_ProjectFiles/Editor/CSV/Crops.csv";
     private static string CSVSpells = "/Editor/CSV/Spells.csv";
 
-    [MenuItem("Utilities/GenerateItems")]
+    [MenuItem("Utilities/GenerateCrops")]
     public static void GenerateSO()
     {
 
@@ -18,9 +18,36 @@ public class CSVToSO
         {
             string[] splitData = s.Split(';');
 
-            SO_Item tester = ScriptableObject.CreateInstance<SO_Item>();
+            SO_Seed tester = ScriptableObject.CreateInstance<SO_Seed>();
             tester.ItemName = splitData[0];
 
+            switch (splitData[1])
+            {
+                case "Spring":
+                    tester.GrowthSeason[0] = SO_Seed.Season.Spring;
+                    break;
+                case "Summer":
+                    tester.GrowthSeason[0] = SO_Seed.Season.Summer;
+                    break;
+                case "Autumn":
+                    tester.GrowthSeason[0] = SO_Seed.Season.Fall;
+                    break;
+                case "Winter":
+                    tester.GrowthSeason[0] = SO_Seed.Season.Winter;
+                    break;
+                default:
+                    tester.GrowthSeason[0] = SO_Seed.Season.Spring;
+                    break;
+            }
+
+            if(splitData[6] == "")
+            {
+                tester.BuyPrice = 100;
+            }
+            else
+            {
+                tester.BuyPrice = int.Parse(splitData[6]);
+            }
 
             //var testerSprite = Resources.Load<Sprite>(resourcePath + tester.ItemName);
             //if (testerSprite != null) 
@@ -33,7 +60,7 @@ public class CSVToSO
             //}
 
             //Knowledge of unity of all data //Path has alrdy to be exist
-            AssetDatabase.CreateAsset(tester, $"Assets/ProjectFiles/Scriptables/Items/TestItems/{tester.ItemName}.asset");
+            AssetDatabase.CreateAsset(tester, $"Assets/1_ProjectFiles/Resources/Items/{tester.ItemName}.asset");
         }
 
         AssetDatabase.SaveAssets();
