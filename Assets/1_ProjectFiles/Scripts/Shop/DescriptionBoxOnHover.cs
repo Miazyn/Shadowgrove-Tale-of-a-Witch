@@ -8,10 +8,9 @@ public class DescriptionBoxOnHover : MonoBehaviour
     [Header("All Text")]
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] TextMeshProUGUI descriptionText;
+    [SerializeField] Image itemImage;
 
-    [SerializeField] RectTransform descriptionWindows;
-
-    public static Action<SO_Item, Vector2> OnMouseOver;
+    public static Action<SO_Item> OnMouseOver;
     public static Action OnMouseLoseFocus;
 
     void OnEnable()
@@ -30,19 +29,32 @@ public class DescriptionBoxOnHover : MonoBehaviour
         HideTip();   
     }
 
-    void ShowTip(SO_Item _itemToShow, Vector2 mousePos)
+    void ShowTip(SO_Item _itemToShow)
     {
-        itemName.text = _itemToShow.ItemName;
-        descriptionText.text = _itemToShow.ItemDescription;
+        if (_itemToShow == null)
+        {
+            return;
+        }
 
-        descriptionWindows.gameObject.SetActive(true);
-        descriptionWindows.transform.position = new Vector2(mousePos.x - descriptionWindows.sizeDelta.x * 0.35f, mousePos.y);
+        if (_itemToShow.ItemName != null)
+        {
+            itemName.text = _itemToShow.ItemName;
+        }
+
+        if (_itemToShow.ItemDescription != null)
+        {
+            descriptionText.text = _itemToShow.ItemDescription;
+        }
+
+        if (_itemToShow.Icon != null)
+        {
+            itemImage.sprite = _itemToShow.Icon;
+        }
     }
 
     void HideTip()
     {
-        descriptionText.text = default;
-        descriptionWindows.gameObject.SetActive(false);
+
     }
 
 }

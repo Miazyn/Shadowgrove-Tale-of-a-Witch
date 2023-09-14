@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 
-public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IInitializePotentialDragHandler
+public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IInitializePotentialDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     //Externally setup
     public SO_Item item; //Item can be null
@@ -166,5 +166,14 @@ public class InventorySlotUI : MonoBehaviour, IDropHandler, IDragHandler, IIniti
        
     }
 
-   
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item == null) return;
+        DescriptionBoxOnHover.OnMouseOver(item);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        DescriptionBoxOnHover.OnMouseLoseFocus();
+    }
 }

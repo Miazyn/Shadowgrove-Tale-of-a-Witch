@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterToFollow: {fileID: 0}
-  xPos: -0.07638073
-  yPos: 6.459127
-  zPos: -10.071814
   camHeight: 6
   camZoom: 10
+  raycastDistance: 0
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 256

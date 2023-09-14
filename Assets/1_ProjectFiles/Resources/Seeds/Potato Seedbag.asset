@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b240b1d1fa4e3843a88a53e6416dc18, type: 3}
+  m_Name: Potato Seedbag
+  m_EditorClassIdentifier: 
+  TypeOfItem: 6
+  ItemName: Potato Seedbag
+  ItemDescription: 
+  ItemId: Potato Seedbag
+  CanBeSold: 1
+  BuyPrice: 100
+  SellPrice: 0
+  Icon: {fileID: 21300000, guid: 63bb5c9b274822040bdf07c97ee7f21c, type: 3}
+  DaysToGrow: 3
+  GrowthSeason: 00000000
+  Harvestable: {fileID: 11400000, guid: 0d831c91af1b43d4d9a3c5c82924673d, type: 2}
+  HarvestAmount: 0
+  Stages: 0
+  prefabStage:
+  - {fileID: 8310341028143372517, guid: a06699c5cf762ed40bb6dec832f103fd, type: 3}
+  - {fileID: 4818603670884639205, guid: 6970935bc114cf942b77e9d6694a92d5, type: 3}
+  - {fileID: 8779505930017036955, guid: c4fbc4d37f76b4443b3ce872e694b7f3, type: 3}

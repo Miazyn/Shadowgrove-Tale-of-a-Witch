@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d5037d0a82738e4fa34fd89d4410833, type: 3}
-  m_Name: Test
+  m_Name: Belladonna,Spring,1,4,,,,,1,No,,,Spring,1
   m_EditorClassIdentifier: 
   TypeOfItem: 0
-  ItemName: Axe
-  ItemDescription: Passed down for gens
-  ItemId: 
-  CanBeSold: 1
-  BuyPrice: 200
-  SellPrice: 0
-  Icon: {fileID: 21300000, guid: 64c945e29a708f045ba1cc3b2ff2b5fa, type: 3}
+  ItemName: Belladonna,Spring,1,4,,,,,1,No,,,Spring,1
+  ItemDescription: 
+  ItemId: Belladonna,Spring,1,4,,,,,1,No,,,Spring,1
+  CanBeSold: 0
+  BuyPrice: 0
+  SellPrice: 150
+  Icon: {fileID: 0}

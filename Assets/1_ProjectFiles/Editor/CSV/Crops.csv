@@ -1,35 +1,35 @@
-Belladonna;Spring;1;;;;;;No;;;Spring;1
-Cabbage;Spring;1;;;;;;No;;;Summer;2
-Chamomile;Spring;1;;;;;;No;;;Autumn;3
-Leek;Spring;1;;;;;;No;;;Winter;4
-Nightshade;Spring;1;;;;;;No;;;;
-Onion;Spring;1;;;;;;No;;;;
-Parsnip;Spring;1;;;;;;No;;;;
-Potato;Spring;1;;;;;;No;;;;
-Spinach;Spring;1;;;;;;No;;;;
-Starlight Lotus;Spring;1;;;;;;No;;;;
-Strawberries;Spring;1;;;;;;Yes;;;;
-Corn;Summer;2;;;;;;Yes;;;;
-Crimsonvine;Summer;2;;;;;;Yes;;;;
-Cucumber;Summer;2;;;;;;Yes;;;;
-Fire Orchid;Summer;2;;;;;;No;;;;
-Melon;Summer;2;;;;;;No;;;;
-Phoenix Fern;Summer;2;;;;;;No;;;;
-Sunflower;Summer;2;;;;;;No;;;;
-Tomato;Summer;2;;;;;;Yes;;;;
-Willow;Summer;2;;;;;;Yes;;;;
-Apples;Autumn;3;;;;;;Yes;;;;
-Broccoli;Autumn;3;;;;;;No;;;;
-Cauliflower;Autumn;3;;;;;;No;;;;
-Ghostberry Bush;Autumn;3;;;;;;Yes;;;;
-Hexberry Bush;Autumn;3;;;;;;Yes;;;;
-Pear;Autumn;3;;;;;;Yes;;;;
-Pumpkin;Autumn;3;;;;;;No;;;;
-Shadowberries;Autumn;3;;;;;;Yes;;;;
-Sweet Potato;Autumn;3;;;;;;No;;;;
-Butternut Squash;Winter;4;;;;;;No;;;;
-Mandrake;Winter;4;;;;;;No;;;;
-Moonlight Berries;Winter;4;;;;;;Yes;;;;
-Obsidian Rose;Winter;4;;;;;;No;;;;
-Serpentroot;Winter;4;;;;;;No;;;;
-Snowdrop;Winter;4;;;;;;No;;;;
+Belladonna,Spring,1,4,,,,,1,No,,,Spring,1
+Cabbage,Spring,1,3,,,,,1,No,,,Summer,2
+Chamomile,Spring,1,5,,,,,1,No,,,Autumn,3
+Leek,Spring,1,3,,,,,1,No,,,Winter,4
+Nightshade,Spring,1,10,,,,,1,No,,,,
+Onion,Spring,1,12,,,,,1,No,,,,
+Parsnip,Spring,1,4,,,,,1,No,,,,
+Potato,Spring,1,7,,,,,1,No,,,,
+Spinach,Spring,1,5,,,,,1,No,,,,
+Starlight Lotus,Spring,1,14,,,,,1,No,,,,
+Strawberries,Spring,1,10,,,,,1,Yes,,,,
+Corn,Summer,2,4,,,,,1,Yes,,,,
+Crimsonvine,Summer,2,9,,,,,1,Yes,,,,
+Cucumber,Summer,2,7,,,,,1,Yes,,,,
+Fire Orchid,Summer,2,12,,,,,1,No,,,,
+Melon,Summer,2,8,,,,,1,No,,,,
+Phoenix Fern,Summer,2,3,,,,,1,No,,,,
+Sunflower,Summer,2,5,,,,,1,No,,,,
+Tomato,Summer,2,6,,,,,1,Yes,,,,
+Willow,Summer,2,13,,,,,1,Yes,,,,
+Apples,Autumn,3,6,,,,,1,Yes,,,,
+Broccoli,Autumn,3,4,,,,,1,No,,,,
+Cauliflower,Autumn,3,6,,,,,1,No,,,,
+Ghostberry Bush,Autumn,3,7,,,,,1,Yes,,,,
+Hexberry Bush,Autumn,3,9,,,,,1,Yes,,,,
+Pear,Autumn,3,7,,,,,1,Yes,,,,
+Pumpkin,Autumn,3,12,,,,,1,No,,,,
+Shadowberries,Autumn,3,7,,,,,1,Yes,,,,
+Sweet Potato,Autumn,3,5,,,,,1,No,,,,
+Butternut Squash,Winter,4,7,,,,,1,No,,,,
+Mandrake,Winter,4,9,,,,,1,No,,,,
+Moonlight Berries,Winter,4,7,,,,,1,Yes,,,,
+Obsidian Rose,Winter,4,14,,,,,1,No,,,,
+Serpentroot,Winter,4,15,,,,,1,No,,,,
+Snowdrop,Winter,4,8,,,,,1,No,,,,

@@ -19,7 +19,18 @@ public class CSVToSO
             string[] splitData = s.Split(';');
 
             SO_Seed tester = ScriptableObject.CreateInstance<SO_Seed>();
-            tester.ItemName = splitData[0];
+            SO_Item testerResult = ScriptableObject.CreateInstance<SO_Item>();
+
+            testerResult.ItemName = splitData[0];
+            testerResult.SellPrice = 150;
+            testerResult.ItemId = splitData[0];
+
+            AssetDatabase.CreateAsset(testerResult, $"Assets/1_ProjectFiles/Resources/Items/{testerResult.ItemName}.asset");
+
+            tester.ItemName = splitData[0] + " Seedbag";
+            tester.ItemId = splitData[0] + " Seedbag";
+            tester.DaysToGrow = 4;
+            tester.Harvestable = testerResult;
 
             switch (splitData[1])
             {
@@ -40,14 +51,8 @@ public class CSVToSO
                     break;
             }
 
-            if(splitData[6] == "")
-            {
-                tester.BuyPrice = 100;
-            }
-            else
-            {
-                tester.BuyPrice = int.Parse(splitData[6]);
-            }
+            tester.BuyPrice = 100;
+            
 
             //var testerSprite = Resources.Load<Sprite>(resourcePath + tester.ItemName);
             //if (testerSprite != null) 
@@ -60,7 +65,7 @@ public class CSVToSO
             //}
 
             //Knowledge of unity of all data //Path has alrdy to be exist
-            AssetDatabase.CreateAsset(tester, $"Assets/1_ProjectFiles/Resources/Items/{tester.ItemName}.asset");
+            AssetDatabase.CreateAsset(tester, $"Assets/1_ProjectFiles/Resources/Seeds/{tester.ItemName}.asset");
         }
 
         AssetDatabase.SaveAssets();

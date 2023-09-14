@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] public GameObject CraftMenu;
     [SerializeField] public GameObject InventoryMenu;
+    [SerializeField] public GameObject Shop;
     [SerializeField] public GameObject Hotbar;
 
     private GameObject currentMenu;
@@ -19,7 +20,8 @@ public class UIController : MonoBehaviour
     public enum Menu
     {
         Crafting,
-        Inventory
+        Inventory,
+        Shop
     }
 
     GameManager gamemanager;
@@ -198,6 +200,9 @@ public class UIController : MonoBehaviour
             case Menu.Inventory:
                 EnableMenu(InventoryMenu);
 
+                break;
+            case Menu.Shop:
+                EnableMenu(Shop);
                 break;
             default:
                 break;

@@ -17,7 +17,7 @@ public class ShopManager : MonoBehaviour
 
     void Awake()
     {
-        allItems = Resources.LoadAll<SO_Item>("Items");
+        allItems = Resources.LoadAll<SO_Seed>("Seeds");
     }
 
     void Start()

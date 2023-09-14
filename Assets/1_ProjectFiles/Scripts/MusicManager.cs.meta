@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b0032d161d128c94f8d2a203a52554dc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - PlayerBase: {fileID: 8300000, guid: 0b7354fafae66764291784ab028ae4ee, type: 3}
+  - Town: {fileID: 8300000, guid: 755c43d8d7dc63f44ae2d6620793e034, type: 3}
+  - Woods: {fileID: 8300000, guid: 703cfd54ad5357b4cbec666aaf43653c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

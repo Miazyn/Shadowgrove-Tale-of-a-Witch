@@ -9,20 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b240b1d1fa4e3843a88a53e6416dc18, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d5037d0a82738e4fa34fd89d4410833, type: 3}
   m_Name: Ghostberry Bush
   m_EditorClassIdentifier: 
-  TypeOfItem: 6
+  TypeOfItem: 0
   ItemName: Ghostberry Bush
   ItemDescription: 
-  ItemId: 
-  CanBeSold: 1
-  BuyPrice: 100
-  SellPrice: 0
-  Icon: {fileID: 21300000, guid: 63bb5c9b274822040bdf07c97ee7f21c, type: 3}
-  DaysToGrow: 0
-  GrowthSeason: 02000000
-  Harvestable: {fileID: 0}
-  HarvestAmount: 0
-  Stages: 0
-  prefabStage: []
+  ItemId: Ghostberry Bush
+  CanBeSold: 0
+  BuyPrice: 0
+  SellPrice: 150
+  Icon: {fileID: 0}
