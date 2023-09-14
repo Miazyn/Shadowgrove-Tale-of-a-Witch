@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
 
     //THIRD PERSON FOLLOW SCRIPT
 
-    [SerializeField] GameObject characterToFollow;
+    [SerializeField] public GameObject characterToFollow;
 
     float xPos;
     float yPos;

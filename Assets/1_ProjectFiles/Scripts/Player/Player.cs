@@ -58,12 +58,16 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(this);
-        }
+        //    else
+        //    {
+        //        instance.GetComponent<FadingObjectBlockingObject>().Camera = this.GetComponent<FadingObjectBlockingObject>().Camera;
+        //        this.GetComponent<FadingObjectBlockingObject>().Camera.GetComponent<CameraFollow>().characterToFollow = instance.gameObject;
+
+        //        Destroy(this.gameObject);
+        //    }
+
         controls = new InputControls();
         controls.Player.Interact.performed += interaction => Interacting();
         controls.Player.Inventory.performed += inventory => InventoryInteraction();
@@ -102,8 +106,11 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     void OnDisable()
     {
         controls.Disable();
-        EventManager.OnDayChanged.RemoveListener(ResetEndurance);
-        EventManager.OnDayChanged.RemoveListener(ResetHealth);
+        if (EventManager.OnDayChanged != null)
+        {
+            EventManager.OnDayChanged.RemoveListener(ResetEndurance);
+            EventManager.OnDayChanged.RemoveListener(ResetHealth);
+        }
 
     }
 

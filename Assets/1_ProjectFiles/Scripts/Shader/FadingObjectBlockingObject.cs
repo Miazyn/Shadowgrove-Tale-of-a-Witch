@@ -9,7 +9,7 @@ public class FadingObjectBlockingObject : MonoBehaviour
     [SerializeField]
     private Transform Target;
     [SerializeField]
-    private Camera Camera;
+    public Camera Camera;
     [SerializeField]
     [Range(0, 1f)]
     private float FadedAlpha = 0.33f;
