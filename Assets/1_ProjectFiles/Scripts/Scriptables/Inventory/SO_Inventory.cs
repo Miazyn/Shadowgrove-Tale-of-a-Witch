@@ -99,7 +99,7 @@ public class SO_Inventory : ScriptableObject
         Player.instance.onItemChangedCallback?.Invoke();
     }
 
-    private int GetItemCount(SO_Item _item)
+    public int GetItemCount(SO_Item _item)
     {
         int count = 0;
         for (int i = 0; i < inventoryItems.Count; i++)

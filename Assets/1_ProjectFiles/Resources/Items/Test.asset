@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5037d0a82738e4fa34fd89d4410833, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  TypeOfItem: 0
+  ItemName: Axe
+  ItemDescription: Passed down for gens
+  ItemId: 
+  CanBeSold: 1
+  BuyPrice: 200
+  SellPrice: 0
+  Icon: {fileID: 21300000, guid: 64c945e29a708f045ba1cc3b2ff2b5fa, type: 3}

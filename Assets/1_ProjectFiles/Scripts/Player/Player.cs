@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     public string PlayerName = "Isabella";
 
     public int Money { get; private set; }
+
     [SerializeField] int StarterMoney = 1000;
 
     GameManager manager;
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
 
     private IInteractable lastInteraction = null;
+
+    
 
     public InputControls controls { get; private set; }
 
@@ -123,6 +126,8 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         EventManager.OnDayChanged.AddListener(ResetEndurance);
         EventManager.OnDayChanged.AddListener(ResetHealth);
 
+        onPlayerMoneyChangedCallback?.Invoke(Money);
+
         StartCoroutine(LateStart());
     }
 
@@ -155,6 +160,21 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         }
     }
 
+    public bool CanBuy(int buyPrice)
+    {
+        if (Money >= buyPrice)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void SetMoneyAmount(int _addedMoney)
+    {
+        Money = Money + _addedMoney <= 0 ? 0 : Money + _addedMoney;
+        onPlayerMoneyChangedCallback?.Invoke(Money);
+    }
 
     public IEnumerator LateStart()
     {
