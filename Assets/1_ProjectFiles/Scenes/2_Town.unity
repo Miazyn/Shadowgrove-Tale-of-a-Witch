@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 33ab377b49aa14f6fae6e5bac230a5d4, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.37793598, g: 0.6875553, b: 0.8765884, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3144b5d150ab0f948b719f17ccb165a1, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -196,7 +196,8 @@ GameObject:
   - component: {fileID: 234553580}
   - component: {fileID: 234553579}
   - component: {fileID: 234553578}
-  m_Layer: 0
+  - component: {fileID: 234553581}
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,6 +262,20 @@ Transform:
   m_Father: {fileID: 297967359}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &234553581
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234553577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &254012601
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 297967359}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrains
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +840,8 @@ GameObject:
   - component: {fileID: 730122889}
   - component: {fileID: 730122888}
   - component: {fileID: 730122887}
-  m_Layer: 0
+  - component: {fileID: 730122890}
+  m_Layer: 8
   m_Name: Terrain_(120.0, 0.0, 0.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -890,6 +906,20 @@ Transform:
   m_Father: {fileID: 297967359}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &730122890
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730122886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &742714705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,7 +1095,8 @@ GameObject:
   - component: {fileID: 902200375}
   - component: {fileID: 902200374}
   - component: {fileID: 902200373}
-  m_Layer: 0
+  - component: {fileID: 902200376}
+  m_Layer: 8
   m_Name: Terrain_(0.0, 0.0, -120.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1130,6 +1161,20 @@ Transform:
   m_Father: {fileID: 297967359}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &902200376
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902200372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &915303962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1376,8 @@ GameObject:
   - component: {fileID: 945309554}
   - component: {fileID: 945309553}
   - component: {fileID: 945309552}
-  m_Layer: 0
+  - component: {fileID: 945309555}
+  m_Layer: 8
   m_Name: Terrain_(-90.0, 0.0, 0.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,6 +1442,20 @@ Transform:
   m_Father: {fileID: 297967359}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &945309555
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945309551}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &957549442
 PrefabInstance:
   m_ObjectHideFlags: 0

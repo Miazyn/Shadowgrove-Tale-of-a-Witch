@@ -20,6 +20,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Image npcSprite;
     [SerializeField] GameObject InDialogEffect;
 
+    [Header("Friendship Colors")]
+    [SerializeField] Image FriendshipHeart;
+    [SerializeField] Color Acquaintance;
+    [SerializeField] Color Friend;
+    [SerializeField] Color Close_Friend;
+    [SerializeField] Color Best_Friend;
+
     Sprite savedSprite;
     string savedName;
 
@@ -75,8 +82,28 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("No Default SpriteBox is defined.");
         }
     }
-    public void SetUpDialog(SO_Dialog _currentDialog, SO_NPC _dialogNpc)
+    public void SetUpDialog(SO_Dialog _currentDialog, SO_NPC _dialogNpc, NpcScript.FriendshipLevel friendshipLevel)
     {
+        if(FriendshipHeart != null)
+        {
+            switch (friendshipLevel)
+            {
+                case NpcScript.FriendshipLevel.Acquaintance:
+                    FriendshipHeart.color = Acquaintance;
+                    break;
+                case NpcScript.FriendshipLevel.Friend:
+                    FriendshipHeart.color = Friend;
+                    break;
+                case NpcScript.FriendshipLevel.Close_Friend:
+                    FriendshipHeart.color = Close_Friend;
+                    break;
+                case NpcScript.FriendshipLevel.Best_Friend:
+                    FriendshipHeart.color = Best_Friend;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         if (_dialogNpc.voice != null)
         {
@@ -97,6 +124,7 @@ public class DialogueManager : MonoBehaviour
         if (finishedLastDialog)
         {
             EventManager.OnInteractionEnd.Invoke();
+            
 
             finishedLastDialog = false;
             counter = 0;

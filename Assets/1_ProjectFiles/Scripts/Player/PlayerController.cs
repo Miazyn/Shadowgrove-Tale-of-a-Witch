@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         EventManager.OnInteractionStart.AddListener(DisableMovement);
         EventManager.OnInteractionEnd.AddListener(EnableMovement);
         EventManager.OnPlayerPassOut.AddListener(PassOut);
+        EventManager.StartNewDay.AddListener(NextDayAfterCollapse);
     }
 
     private void OnDisable()
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
         EventManager.OnInteractionStart.RemoveListener(DisableMovement);
         EventManager.OnInteractionEnd.RemoveListener(EnableMovement);
         EventManager.OnPlayerPassOut.RemoveListener(PassOut);
+        EventManager.StartNewDay.RemoveListener(NextDayAfterCollapse);
     }
 
     void Update()
@@ -143,7 +145,6 @@ public class PlayerController : MonoBehaviour
             EventManager.OnInteractionStart?.Invoke();
         }
 
-        EventManager.OnInteractionEnd?.Invoke();
 
         if (_itemName.Contains("Wateringcan")) return LockState(Water, waterTime);
 
@@ -169,6 +170,11 @@ public class PlayerController : MonoBehaviour
         }
 
         return -1;
+    }
+
+    private void NextDayAfterCollapse()
+    {
+        EventManager.OnInteractionEnd?.Invoke();
     }
 
     private void PassOut()
@@ -210,11 +216,14 @@ public class PlayerController : MonoBehaviour
 
     void EnableMovement()
     {
+        Debug.Log("Can Move");
         canMove = true;
     }
  
     void DisableMovement()
     {
+        Debug.Log("Cant Move");
+
         canMove = false;
     }
     private void OnDrawGizmos()

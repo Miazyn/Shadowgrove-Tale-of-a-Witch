@@ -103,7 +103,7 @@ public class UIController : MonoBehaviour
 
     private void TimeUpdate(int minute, int hour) 
     {
-        string formattedTime = hour.ToString("D2") + ":" + minute.ToString("D2") + "o`clock";
+        string formattedTime = hour.ToString("D2") + ":" + minute.ToString("D2") + " o'clock";
 
         clockText.text = formattedTime;
     }

@@ -18,4 +18,9 @@ public class SceneMana : MonoBehaviour
 
         SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
     }
+
+    public void CloseApplication()
+    {
+        Application.Quit();
+    }
 }

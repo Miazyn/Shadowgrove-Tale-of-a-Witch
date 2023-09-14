@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(PlayerController), typeof(Interactor), typeof(CharacterController))]
 public class Player : MonoBehaviour, ILateStart, IDamageable
 {
@@ -30,7 +31,8 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     private IInteractable lastInteraction = null;
 
-    
+    [Header("Read ONLY")]
+    public List<FriendshipStats> allFriendships = new List<FriendshipStats>();
 
     public InputControls controls { get; private set; }
 
@@ -48,6 +50,19 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         set { maxHealth = value; }
     }
 
+    public class FriendshipStats
+    {
+        public int friendShipLevel;
+        public SO_NPC npc;
+
+        public int talkPoints = 10;
+
+        public FriendshipStats(int _friendLvl, SO_NPC _npc)
+        {
+            friendShipLevel = _friendLvl;
+            npc = _npc;
+        }
+    }
 
     public int Endurance { get; private set; }
     public int MaxEndurance { get; private set; }
@@ -165,6 +180,44 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
                 lastInteraction = null;
             }
         }
+    }
+
+    public void CheckPlayerStat(NpcScript _npc)
+    {
+        if (_npc.interacted) return;
+
+        SO_NPC curNpc = _npc._NPC;
+
+        foreach(FriendshipStats npc in allFriendships)
+        {
+            if(npc.npc.NpcName == curNpc.NpcName)
+            {
+                npc.friendShipLevel += npc.talkPoints;
+                return;
+            }
+        }
+
+        FriendshipStats addedFriend = new FriendshipStats(0, curNpc);
+
+        allFriendships.Add(addedFriend);
+    }
+
+    public int CheckFriendshipLevel(SO_NPC _npc)
+    {
+        if (_npc == null) return 0;
+
+        foreach(FriendshipStats npc in allFriendships)
+        {
+            if (npc.npc.NpcName == _npc.NpcName)
+            {
+                return npc.friendShipLevel;
+            }
+        }
+
+        FriendshipStats addedFriend = new FriendshipStats(0, _npc);
+
+        allFriendships.Add(addedFriend);
+        return 0;
     }
 
     public bool CanBuy(int buyPrice)

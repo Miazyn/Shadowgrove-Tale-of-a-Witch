@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerName: Isabella
+  StarterMoney: 1000
   currentItem: {fileID: 0}
   hammer: {fileID: 488290217577847460}
   hoe: {fileID: 2554318325581704092}
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   sprintSpeed: 4
-  characterRotationSmoothing: 0.03
+  characterRotationSmoothing: 1
   charControl: {fileID: 4450180731014685413}
   gravity: -9.8
   groundCheck: {fileID: 4450180730750063165}
