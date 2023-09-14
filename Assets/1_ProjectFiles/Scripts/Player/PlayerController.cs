@@ -145,6 +145,10 @@ public class PlayerController : MonoBehaviour
             EventManager.OnInteractionStart?.Invoke();
         }
 
+        if(!IsPassingOut && !IsCollapsing && currentState != Yawn)
+        {
+            EventManager.OnInteractionEnd?.Invoke();
+        }
 
         if (_itemName.Contains("Wateringcan")) return LockState(Water, waterTime);
 
