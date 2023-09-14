@@ -141,7 +141,8 @@ public class DialogueManager : MonoBehaviour
             DisplayCharacterSprite(_currentDialog);
             DisplayCharacterName(_currentDialog);
 
-            StopTypeEffect(_currentDialog);
+            //TODO: FIX Stopping Type effect
+            //StopTypeEffect(_currentDialog);
         }
     }
     void TextReceived(SO_Dialog dialogue)
@@ -180,6 +181,12 @@ public class DialogueManager : MonoBehaviour
         }
 
     }
+
+    public bool FinishedLastDialog()
+    {
+        return finishedLastDialog;
+    }
+
     void EndDialog()
     {
         EventManager.OnInteractionEnd.Invoke();
@@ -226,18 +233,18 @@ public class DialogueManager : MonoBehaviour
             StopCoroutine(displayCoroutine);
         }
 
-        string line = CleanString(dialogue.lines[counter - 1]);
+        string line = CleanString(dialogue.lines[counter - 1 >= 0 ? 0 : counter - 1]);
 
         dialogueText.text = line;
 
         typerRunning = false;
 
-        if (counter > dialogue.lines.Count)
+        if (counter >= dialogue.lines.Count)
         {
-            Debug.LogError("END AT STOP TYPE");
             EndDialog();
         }
     }
+
     private string CleanString(string lineToClean)
     {
         string line = lineToClean;

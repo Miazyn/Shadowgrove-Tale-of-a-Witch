@@ -182,9 +182,9 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         }
     }
 
-    public void CheckPlayerStat(NpcScript _npc)
+    public bool CheckPlayerStat(NpcScript _npc)
     {
-        if (_npc.interacted) return;
+        if (_npc.interacted) return true;
 
         SO_NPC curNpc = _npc._NPC;
 
@@ -193,13 +193,15 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
             if(npc.npc.NpcName == curNpc.NpcName)
             {
                 npc.friendShipLevel += npc.talkPoints;
-                return;
+                return true;
             }
         }
 
         FriendshipStats addedFriend = new FriendshipStats(0, curNpc);
 
+        Debug.Log("New NPC");
         allFriendships.Add(addedFriend);
+        return false;
     }
 
     public int CheckFriendshipLevel(SO_NPC _npc)

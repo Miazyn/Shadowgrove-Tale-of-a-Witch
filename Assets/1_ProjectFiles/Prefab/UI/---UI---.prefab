@@ -5033,7 +5033,7 @@ MonoBehaviour:
   InDialogEffect: {fileID: 3848302297192998032}
   FriendshipHeart: {fileID: 9198661793166753923}
   Acquaintance: {r: 1, g: 1, b: 1, a: 1}
-  Friend: {r: 0.5337843, g: 0.7924528, b: 0.7898366, a: 1}
+  Friend: {r: 0.3764685, g: 0.46873724, b: 0.7075472, a: 1}
   Close_Friend: {r: 0.4949804, g: 0.745283, b: 0.51241505, a: 0}
   Best_Friend: {r: 0.7152559, g: 0.5505874, b: 0.7169812, a: 1}
   typerRunning: 0

@@ -640,8 +640,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8edd087a1dd7594b96ac10ba3ca3185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  introduction: {fileID: 11400000, guid: 144e5e47d92c9ee49858109cd325c006, type: 2}
   dialogs:
   - {fileID: 11400000, guid: 249627ffe26a3be428bd430d73247cb7, type: 2}
+  - {fileID: 11400000, guid: 94a649bc5f7bef54a99e6a6c17ea0e8d, type: 2}
   _NPC: {fileID: 11400000, guid: ecb3f94f04616304e8fe6c61bb855607, type: 2}
   interactPrompt: {fileID: 0}
   interacted: 0
@@ -1514,7 +1516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1956084420224220946, guid: f87019ad92874b94e81c0707541ecbf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.14
+      value: 3.53
       objectReference: {fileID: 0}
     - target: {fileID: 1956084420224220946, guid: f87019ad92874b94e81c0707541ecbf9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1522,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1956084420224220946, guid: f87019ad92874b94e81c0707541ecbf9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.16
+      value: 13.46
       objectReference: {fileID: 0}
     - target: {fileID: 1956084420224220946, guid: f87019ad92874b94e81c0707541ecbf9, type: 3}
       propertyPath: m_LocalRotation.w

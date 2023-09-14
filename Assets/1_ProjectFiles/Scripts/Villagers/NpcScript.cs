@@ -8,6 +8,7 @@ public class NpcScript : MonoBehaviour, IInteractable
 
     DialogueManager dialogManager;
 
+    [SerializeField] SO_Dialog introduction;
     [SerializeField] SO_Dialog[] dialogs;
 
     [SerializeField]public SO_NPC _NPC;
@@ -15,6 +16,8 @@ public class NpcScript : MonoBehaviour, IInteractable
     [SerializeField] private GameObject interactPrompt;
 
     public bool interacted = false;
+
+    SO_Dialog curDialog = null;
 
     Player player;
 
@@ -57,13 +60,25 @@ public class NpcScript : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
-        dialogManager.SetUpDialog(ChooseRandomDialoge(), _NPC, GetFriendshipLevel());
+        
 
         if (!interacted)
         {
-            player.CheckPlayerStat(this);
+            //NOt true => No stat available, create new
+            if (!player.CheckPlayerStat(this))
+            {
+                curDialog = introduction;
+            }
             interacted = true;
         }
+        
+        if (dialogManager.FinishedLastDialog())
+        {
+            curDialog = ChooseRandomDialoge();
+        }
+
+        dialogManager.SetUpDialog(curDialog, _NPC, GetFriendshipLevel());
+        
 
         return true;
     }
