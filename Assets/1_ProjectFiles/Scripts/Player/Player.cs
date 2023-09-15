@@ -36,6 +36,8 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     public InputControls controls { get; private set; }
 
+    public bool firstStart = true;
+
     private int health;
     public int Health
     {
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     public int MaxEndurance { get; private set; }
 
 
+    public Vector3 nonInstancePos;
     void Awake()
     {
         if (instance == null)
@@ -75,13 +78,17 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
             instance = this;
             //DontDestroyOnLoad(gameObject);
         }
-        //    else
-        //    {
-        //        instance.GetComponent<FadingObjectBlockingObject>().Camera = this.GetComponent<FadingObjectBlockingObject>().Camera;
-        //        this.GetComponent<FadingObjectBlockingObject>().Camera.GetComponent<CameraFollow>().characterToFollow = instance.gameObject;
+        //else if(this != instance)
+        //{
+        //    instance.GetComponent<FadingObjectBlockingObject>().Camera = this.GetComponent<FadingObjectBlockingObject>().Camera;
+        //    instance.GetComponent<FadingObjectBlockingObject>().Camera.GetComponent<CameraFollow>().characterToFollow = instance.gameObject;
+        //    instance.currentItem = this.currentItem;
 
-        //        Destroy(this.gameObject);
-        //    }
+
+        //    Debug.Log("I am not the instance");
+
+        //    Destroy(gameObject);
+        //}
 
         controls = new InputControls();
         controls.Player.Interact.performed += interaction => Interacting();
@@ -93,6 +100,13 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         controls.Player.HotbarQuick.performed += HotbarHighlight => HotbarSelection(controls.Player.HotbarQuick.ReadValue<float>());
 
         controls.Enable();
+
+
+        MaxEndurance = 100;
+        Endurance = MaxEndurance;
+
+        MaxHealth = 100;
+        Health = MaxHealth;
     }
 
 
@@ -120,17 +134,26 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     void OnDisable()
     {
-        controls.Disable();
-        if (EventManager.OnDayChanged != null)
+        if (this == instance)
         {
-            EventManager.OnDayChanged.RemoveListener(ResetEndurance);
-            EventManager.OnDayChanged.RemoveListener(ResetHealth);
+
+            controls.Disable();
+            if (EventManager.OnDayChanged != null)
+            {
+                EventManager.OnDayChanged.RemoveListener(ResetEndurance);
+                EventManager.OnDayChanged.RemoveListener(ResetHealth);
+            }
         }
 
     }
 
+    private void OnDestroy()
+    {
+    }
+
     void Start()
     {
+
         if (currentItem == null)
         {
             Debug.LogWarning("No Hotbar is defined.");
@@ -139,11 +162,6 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
         interactor = GetComponent<Interactor>();
 
-        MaxEndurance = 100;
-        Endurance = MaxEndurance;
-
-        MaxHealth = 100;
-        Health = MaxHealth;
 
         EventManager.OnDayChanged.AddListener(ResetEndurance);
         EventManager.OnDayChanged.AddListener(ResetHealth);
@@ -151,6 +169,20 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         onPlayerMoneyChangedCallback?.Invoke(Money);
 
         StartCoroutine(LateStart());
+    }
+
+    public IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
+        CreateInventory();
+
+        if (firstStart)
+        {
+            AddMoney(StarterMoney);
+            firstStart = false;
+        }
+
+        onPlayerMoneyChangedCallback?.Invoke(Money);
     }
 
     private void Update()
@@ -232,18 +264,18 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
         return false;
     }
 
+    public void SetMoney(int _money)
+    {
+        Money = _money;
+        onPlayerMoneyChangedCallback?.Invoke(Money);
+    }
+
     public void SetMoneyAmount(int _addedMoney)
     {
         Money = Money + _addedMoney <= 0 ? 0 : Money + _addedMoney;
         onPlayerMoneyChangedCallback?.Invoke(Money);
     }
 
-    public IEnumerator LateStart()
-    {
-        yield return new WaitForSeconds(0.1f);
-        CreateInventory();
-        AddMoney(StarterMoney);
-    }
 
     void CreateInventory()
     {
@@ -412,6 +444,16 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
     public void SetMaxHealth(int newValue)
     {
         MaxHealth = newValue;
+    }
+
+    public void SetEndurance(int value)
+    {
+        Endurance = value > MaxEndurance ? MaxEndurance : value;
+    }
+
+    public void SetHealth(int value)
+    {
+        Health = value > MaxHealth ? MaxHealth : value;
     }
 
     public void ResetEndurance()

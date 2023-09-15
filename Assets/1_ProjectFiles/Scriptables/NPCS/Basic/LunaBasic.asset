@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed88c8208fd4a241ab99921791e55f1, type: 3}
-  m_Name: Basic 11
+  m_Name: LunaBasic
   m_EditorClassIdentifier: 
   keyForName: 00000000
   nameOfSpeaker:
   - ' '
   keyForCharacterDisplay: 00000000
   spriteForCharacterDisplay:
-  - {fileID: 21300000, guid: 0eb4c260e48c247458a11787d01811b0, type: 3}
+  - {fileID: 21300000, guid: 853995a0e5a1f3f47bb656663bd33e26, type: 3}
   lines:
   - Hi there.
   dialogueChoices: []

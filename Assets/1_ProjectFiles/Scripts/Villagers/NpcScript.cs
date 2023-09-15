@@ -72,10 +72,10 @@ public class NpcScript : MonoBehaviour, IInteractable
             interacted = true;
         }
         
-        if (dialogManager.FinishedLastDialog())
-        {
-            curDialog = ChooseRandomDialoge();
-        }
+        //if (dialogManager.FinishedLastDialog())
+        //{
+        //    curDialog = ChooseRandomDialoge();
+        //}
 
         dialogManager.SetUpDialog(curDialog, _NPC, GetFriendshipLevel());
         

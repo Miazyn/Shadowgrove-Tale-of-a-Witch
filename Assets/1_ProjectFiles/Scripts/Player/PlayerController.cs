@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     Vector2 moveDirection;
     bool IsGrounded;
 
+
     public float gravity = -9.8f;
 
     Vector3 velocity;
@@ -90,7 +91,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
         if (canMove)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -220,13 +220,11 @@ public class PlayerController : MonoBehaviour
 
     void EnableMovement()
     {
-        Debug.Log("Can Move");
         canMove = true;
     }
  
     void DisableMovement()
     {
-        Debug.Log("Cant Move");
 
         canMove = false;
     }

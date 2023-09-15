@@ -2176,7 +2176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4450180731014685412, guid: a106d9cfb6de93948908c375a3940446, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.91
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4450180731014685412, guid: a106d9cfb6de93948908c375a3940446, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2226,6 +2226,10 @@ PrefabInstance:
       propertyPath: currentItem
       value: 
       objectReference: {fileID: 1267731821}
+    - target: {fileID: 4450180731014685435, guid: a106d9cfb6de93948908c375a3940446, type: 3}
+      propertyPath: StarterMoney
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5584999436673727514, guid: a106d9cfb6de93948908c375a3940446, type: 3}
       propertyPath: m_Icon
       value: 

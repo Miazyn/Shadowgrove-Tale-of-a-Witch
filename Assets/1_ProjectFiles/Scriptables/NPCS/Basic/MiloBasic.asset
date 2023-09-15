@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed88c8208fd4a241ab99921791e55f1, type: 3}
-  m_Name: Basic 10
+  m_Name: MiloBasic
   m_EditorClassIdentifier: 
   keyForName: 00000000
   nameOfSpeaker:
   - ' '
   keyForCharacterDisplay: 00000000
   spriteForCharacterDisplay:
-  - {fileID: 21300000, guid: 7b03b15638cd4f940b88ae5c9b7d6b0f, type: 3}
+  - {fileID: 21300000, guid: e86283ac3eb54f6499c6cc5bb1376790, type: 3}
   lines:
   - Hi there.
   dialogueChoices: []

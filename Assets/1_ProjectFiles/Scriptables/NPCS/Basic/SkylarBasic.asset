@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed88c8208fd4a241ab99921791e55f1, type: 3}
-  m_Name: Basic 14
+  m_Name: SkylarBasic
   m_EditorClassIdentifier: 
   keyForName: 00000000
   nameOfSpeaker:
   - ' '
   keyForCharacterDisplay: 00000000
   spriteForCharacterDisplay:
-  - {fileID: 21300000, guid: 43e5098ba78ac6d418d76bb2c3d0f46a, type: 3}
+  - {fileID: 21300000, guid: ed67f0563a073c349bc74d27519002ad, type: 3}
   lines:
   - Hi there.
   dialogueChoices: []
