@@ -5,12 +5,24 @@ using UnityEngine;
 public class TeleportTo : MonoBehaviour
 {
     [SerializeField] GameObject targetPos;
+    GameObject lastHit;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
-        {
-            other.gameObject.transform.position = targetPos.transform.position;
-        }
+        other.GetComponent<PlayerController>().NeedStillness = true;
+
+        other.transform.position = targetPos.transform.position;
+
+
+        lastHit = other.gameObject;
+
+        StartCoroutine(GracePeriod());
     }
+
+    public IEnumerator GracePeriod()
+    {
+        yield return new WaitForSeconds(0.2f);
+        lastHit.GetComponent<PlayerController>().NeedStillness = false;
+    }
+
 }

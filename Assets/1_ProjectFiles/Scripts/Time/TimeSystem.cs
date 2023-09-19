@@ -52,7 +52,6 @@ public class TimeSystem : MonoBehaviour
 
     public void Start()
     {
-
         hour = startHour;
 
         curDay = Day.Mon;
@@ -67,6 +66,7 @@ public class TimeSystem : MonoBehaviour
 
         StartCoroutine(HourIncrease());
     }
+
     private void OnDisable()
     {
         EventManager.StartNewDay.RemoveListener(NextDay);

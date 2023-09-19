@@ -3441,6 +3441,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 649130087}
     - target: {fileID: 4690353346432491398, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690353346432491398, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
       propertyPath: moneyText
       value: 
       objectReference: {fileID: 649130095}
@@ -3464,7 +3468,11 @@ PrefabInstance:
       propertyPath: InventoryMenu
       value: 
       objectReference: {fileID: 649130090}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4690353346432491393, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+    - {fileID: 4690353346432491399, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+    - {fileID: 4690353346432491396, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+    - {fileID: 3335114093024939658, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
 --- !u!1 &1906794726
 GameObject:

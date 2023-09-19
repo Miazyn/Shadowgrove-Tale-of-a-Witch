@@ -63,31 +63,31 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("STARTED");
+
         CurrentState = GameState.Normal;
     }
 
 
     public void SetPlayerStat()
     {
-        Debug.Log("Before player stats");
+        if(curPlayerStat == null)
+        {
+            Debug.Log("No player stat available");
+            return;
+        }
+        Player.instance.SetEndurance(curPlayerStat.endurance);
+        Player.instance.SetHealth(curPlayerStat.health);
+        Player.instance.SetMoney(curPlayerStat.money);
+        Player.instance.PlayerName = curPlayerStat.playerName;
 
-        
+        Player.instance.firstStart = curPlayerStat.firstStart;
 
-        //Debug.Log($"Set player stats: {curPlayerStat.money}");
-
-        //Player.instance.SetEndurance(curPlayerStat.endurance);
-        //Player.instance.SetHealth(curPlayerStat.health);
-        //Player.instance.SetMoney(curPlayerStat.money);
-        //Player.instance.PlayerName = curPlayerStat.playerName;
-
-        //Player.instance.firstStart = curPlayerStat.firstStart;
-
-        //Player.instance.allFriendships = curPlayerStat.playerFriendships;
+        Player.instance.allFriendships = curPlayerStat.playerFriendships;
     }
 
     public void SavePlayerStat(int _endurance, int _health, List<Player.FriendshipStats> friendshipStats, int _money, string _name, bool firstStart)
     {
-        Debug.Log("Before Save");
         curPlayerStat = new PlayerStat(_endurance, _health, _money, _name, friendshipStats, firstStart);
         Debug.Log($"After Save: {_money}");
     }

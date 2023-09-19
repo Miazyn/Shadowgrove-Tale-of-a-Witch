@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1_ProjectFiles/Scenes/3_Woods.unity
     guid: 2dde6f0ccdd23054f83cb32710a97ace
+  - enabled: 1
+    path: Assets/1_ProjectFiles/Scenes/Merge.unity
+    guid: f29e1bf9fbfda354a9ab5face4230437
   m_configObjects: {}

@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
-    bool canMove;
+    public bool canMove;
+
+    public bool NeedStillness = false;
 
     [SerializeField] Animator anim;
     [SerializeField] GameObject playerMesh;
@@ -91,6 +93,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (NeedStillness) return;
+
         if (canMove)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);

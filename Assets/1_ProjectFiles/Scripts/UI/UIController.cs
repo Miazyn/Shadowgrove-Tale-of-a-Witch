@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
 
     }
@@ -85,17 +85,21 @@ public class UIController : MonoBehaviour
 
     private void OnDisable()
     {
-        gamemanager.onAnyMenuToggleCallback -= AnyMenuToggled;
-        gamemanager.onMenuClosedCallback -= CloseCurrentWindow;
-        gamemanager.onPlayerHealthChangeCallback -= PlayerTookDamage;
-        gamemanager.onPlayerEnduranceChangeCallback -= PlayerEnduranceChange;
+        if (gamemanager != null)
+        {
 
-        EventManager.OnTimeChangedInfo.RemoveListener(TimeUpdate);
-        EventManager.OnDayChangedInfo.RemoveListener(DayUpdate);
-        EventManager.OnSeasonChangedInfo.RemoveListener(SeasonUpdate);
-        EventManager.OnYearChangedInfo.RemoveListener(YearUpdate);
+            gamemanager.onAnyMenuToggleCallback -= AnyMenuToggled;
+            gamemanager.onMenuClosedCallback -= CloseCurrentWindow;
+            gamemanager.onPlayerHealthChangeCallback -= PlayerTookDamage;
+            gamemanager.onPlayerEnduranceChangeCallback -= PlayerEnduranceChange;
 
-        Player.instance.onPlayerMoneyChangedCallback -= UpdateMoney;
+            EventManager.OnTimeChangedInfo.RemoveListener(TimeUpdate);
+            EventManager.OnDayChangedInfo.RemoveListener(DayUpdate);
+            EventManager.OnSeasonChangedInfo.RemoveListener(SeasonUpdate);
+            EventManager.OnYearChangedInfo.RemoveListener(YearUpdate);
+
+            Player.instance.onPlayerMoneyChangedCallback -= UpdateMoney;
+        }
     }
 
     private void UpdateMoney(int curMoney)

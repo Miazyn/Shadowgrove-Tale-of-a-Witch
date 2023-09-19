@@ -107,6 +107,8 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
         MaxHealth = 100;
         Health = MaxHealth;
+
+        //GameManager.Instance.SetPlayerStat();
     }
 
 
@@ -134,21 +136,19 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     void OnDisable()
     {
-        if (this == instance)
-        {
-
             controls.Disable();
             if (EventManager.OnDayChanged != null)
             {
                 EventManager.OnDayChanged.RemoveListener(ResetEndurance);
                 EventManager.OnDayChanged.RemoveListener(ResetHealth);
             }
-        }
+        
 
     }
 
     private void OnDestroy()
     {
+        //manager.SavePlayerStat(Endurance, Health, allFriendships, Money, PlayerName, firstStart);
     }
 
     void Start()
@@ -434,6 +434,7 @@ public class Player : MonoBehaviour, ILateStart, IDamageable
 
     public SO_Item GetCurrentItem()
     {
+        currentItem = FindObjectOfType<HotbarHighlight>();
         if(currentItem.GetCurrentlyEquippedItem() == null)
         {
             return null;
