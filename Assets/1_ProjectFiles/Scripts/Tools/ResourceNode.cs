@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceNode : MonoBehaviour, IInteractable, IDamageable
+public class ResourceNode : MonoBehaviour, IInteractable, IAttackUnit
 {
     Player player;
     SO_Inventory playerInventory;

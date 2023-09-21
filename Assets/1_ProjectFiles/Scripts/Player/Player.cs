@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(PlayerController), typeof(Interactor), typeof(CharacterController))]
-public class Player : MonoBehaviour, ILateStart, IDamageable
+public class Player : MonoBehaviour, ILateStart, IAttackUnit
 {
     public static Player instance;
 

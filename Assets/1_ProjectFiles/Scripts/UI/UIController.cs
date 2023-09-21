@@ -8,6 +8,8 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance;
 
+    [Header("Menues")]
+    [SerializeField] private GameObject BattleScreen;
     [SerializeField] public GameObject CraftMenu;
     [SerializeField] public GameObject InventoryMenu;
     [SerializeField] public GameObject Shop;
