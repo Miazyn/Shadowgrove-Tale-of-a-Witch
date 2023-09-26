@@ -13,6 +13,16 @@ public class TimeSystem : MonoBehaviour
     /// 24 hrs = 16:48 minutes
     /// </summary>/// 
 
+    [Header("Lighting")]
+    [SerializeField] private float colorChangeSpeed = 1f;
+    [SerializeField] private Light CurLight;
+    [SerializeField] private Material skyBoxDay;
+    [SerializeField] private Material skyBoxNight;
+    [SerializeField] private Color morningColor;
+    [SerializeField] private Color middayColor;
+    [SerializeField] private Color eveningColor;
+    [SerializeField] private Color nightColor;
+
     [SerializeField] private Day curDay;
     [SerializeField] private Season curSeason;
     [SerializeField] public int Year = 1;
@@ -65,11 +75,94 @@ public class TimeSystem : MonoBehaviour
         EventManager.StartNewDay.AddListener(NextDay);
 
         StartCoroutine(HourIncrease());
+
+        StartCoroutine(ChangeToMorning());
     }
 
     private void OnDisable()
     {
         EventManager.StartNewDay.RemoveListener(NextDay);
+    }
+
+    private IEnumerator ChangeToMorning()
+    {
+        RenderSettings.skybox = skyBoxDay;
+
+        float _time = 0f;
+        Color endColor = morningColor;
+        Color startColor = CurLight.color;
+
+        while(CurLight.color != endColor)
+        {
+            _time += Time.deltaTime * colorChangeSpeed;
+            CurLight.color = Color.Lerp(startColor, endColor, _time);
+            yield return null;
+        }
+    }
+
+    private IEnumerator ChangeToMidday()
+    {
+        float _time = 0f;
+        Color endColor = middayColor;
+        Color startColor = CurLight.color;
+
+        while (CurLight.color != endColor)
+        {
+            _time += Time.deltaTime * colorChangeSpeed;
+            CurLight.color = Color.Lerp(startColor, endColor, _time);
+            yield return null;
+        }
+    }
+
+    private IEnumerator ChangeToEvening()
+    {
+        float _time = 0f;
+        Color endColor = eveningColor;
+        Color startColor = CurLight.color;
+
+        while (CurLight.color != endColor)
+        {
+            _time += Time.deltaTime * colorChangeSpeed;
+            CurLight.color = Color.Lerp(startColor, endColor, _time);
+            yield return null;
+        }
+    }
+
+    private IEnumerator ChangeToNight()
+    {
+        RenderSettings.skybox = skyBoxNight;
+
+        float _time = 0f;
+        Color endColor = nightColor;
+        Color startColor = CurLight.color;
+
+        while (CurLight.color != endColor)
+        {
+            _time += Time.deltaTime * colorChangeSpeed;
+            CurLight.color = Color.Lerp(startColor, endColor, _time);
+            yield return null;
+        }
+    }
+
+    public void CheckTime(int hour)
+    {
+        switch (hour)
+        {
+            case 6:
+                StartCoroutine(ChangeToMorning());
+                break;
+            case 8:
+                StartCoroutine(ChangeToMidday());
+                break;
+            case 18:
+                StartCoroutine(ChangeToEvening());
+                break;
+            case 21:
+                StartCoroutine(ChangeToNight());
+                break;
+            default:
+                break;
+        }
     }
 
     public IEnumerator HourIncrease()
@@ -90,6 +183,7 @@ public class TimeSystem : MonoBehaviour
                 else if (hour != passOutTime)
                 {
                     hour++;
+                    CheckTime(hour);
                 }
             }
             else
@@ -101,7 +195,7 @@ public class TimeSystem : MonoBehaviour
             }
 
             EventManager.OnTimeChangedInfo?.Invoke(minute, hour);
-
+            
             //string time = "Time" + hour.ToString("D2") + ":" + minute.ToString("D2") + " Day:" + dayCounter;
         }
 
@@ -163,6 +257,7 @@ public class TimeSystem : MonoBehaviour
         hour = startHour;
         minute = 0;
 
+        StartCoroutine(ChangeToMorning());
         StartCoroutine(HourIncrease());
     }
 

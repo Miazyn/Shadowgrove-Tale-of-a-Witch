@@ -975,7 +975,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -2466,7 +2466,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -2716,7 +2716,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -3671,7 +3671,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -4288,7 +4288,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -7205,6 +7205,14 @@ PrefabInstance:
       propertyPath: InventoryMenu
       value: 
       objectReference: {fileID: 918434007}
+    - target: {fileID: 5886013510379386390, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+      propertyPath: CurLight
+      value: 
+      objectReference: {fileID: 302695730}
+    - target: {fileID: 5886013510379386390, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
+      propertyPath: Daylight
+      value: 
+      objectReference: {fileID: 302695730}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6815aaf067f6c86469ae85b9387a1c1b, type: 3}
 --- !u!1001 &854777461
@@ -7519,7 +7527,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -8375,7 +8383,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -9299,6 +9307,82 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030342138}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1032190482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032190485}
+  - component: {fileID: 1032190484}
+  - component: {fileID: 1032190483}
+  m_Layer: 0
+  m_Name: Terrain_(0.0, 0.0, 40.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!154 &1032190483
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032190482}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: 3a62e843ae29ffd45a6b82f37c6f4c0b, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!218 &1032190484
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032190482}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: 3a62e843ae29ffd45a6b82f37c6f4c0b, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ScaleInLightmap: 0.38162228
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 1
+--- !u!4 &1032190485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032190482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 40}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1037223440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9500,7 +9584,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -10405,7 +10489,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -10751,7 +10835,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -12998,7 +13082,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -14138,7 +14222,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -15208,7 +15292,7 @@ GameObject:
   - component: {fileID: 1964310844}
   - component: {fileID: 1964310843}
   m_Layer: 14
-  m_Name: SpawnZone 1 (1)
+  m_Name: TESTSPAWN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15300,7 +15384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964310842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 69.2, y: 2.5, z: 81.1}
+  m_LocalPosition: {x: 78.4, y: 2.5, z: 81.1}
   m_LocalScale: {x: 13.711926, y: 2.5608, z: 13.058706}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15908,7 +15992,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: e451cebd1e33dfc4f9d68736778c2c92, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: c2579ca20771eaf4b9e78ab661ca27bc, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1

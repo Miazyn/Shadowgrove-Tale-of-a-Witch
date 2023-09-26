@@ -58,6 +58,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43106d2640187e42916664d3bf74c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Daylight: {fileID: 0}
+  skyBoxDay: {fileID: 2100000, guid: 33ab377b49aa14f6fae6e5bac230a5d4, type: 2}
+  skyBoxNight: {fileID: 2100000, guid: ab675e6698bde46fd87143fb0d7580cb, type: 2}
+  morningColor: {r: 0.21132074, g: 0.4687369, b: 0.5283019, a: 1}
+  middayColor: {r: 0.9056604, g: 0.80261225, b: 0.6783909, a: 1}
+  eveningColor: {r: 0.745283, g: 0.30514416, b: 0.30514416, a: 1}
+  nightColor: {r: 0, g: 0, b: 0, a: 1}
   curDay: 0
   curSeason: 0
   Year: 1
