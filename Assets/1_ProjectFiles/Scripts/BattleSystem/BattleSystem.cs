@@ -27,6 +27,10 @@ public class BattleSystem : MonoBehaviour
 
     public BattleState state;
 
+    private int SongBefore;
+
+    [SerializeField] private SimpleAudioManager.Manager songManager;
+
     void Start()
     {
         //TODO Manage this outside or inside other function.
@@ -37,6 +41,12 @@ public class BattleSystem : MonoBehaviour
     public void StartBattle(SO_Unit _curEnemyUnit)
     {
         state = BattleState.START;
+
+        SongBefore = songManager._currentSongIndex;
+
+        Debug.Log($"Current song {songManager._currentSongIndex}");
+
+        songManager.PlaySong(3);
 
         UIController.Instance.OpenBattleScreen();
 
@@ -50,10 +60,14 @@ public class BattleSystem : MonoBehaviour
 
             StartCoroutine(UIController.Instance.CloseBattleScreen());
 
-            yield return new WaitForSeconds(battleCooldown);
+            MusicManager.Instance.PlayWonBattle();
+
+            songManager.PlaySong(SongBefore);
 
             state = BattleState.INACTIVE;
             Debug.Log("Inactive");
+
+            yield return new WaitForSeconds(battleCooldown);
 
         }
         else if (state == BattleState.LOST)
@@ -62,10 +76,13 @@ public class BattleSystem : MonoBehaviour
 
             StartCoroutine(UIController.Instance.CloseBattleScreen());
 
-            yield return new WaitForSeconds(battleCooldown);
+            songManager.PlaySong(SongBefore);
 
             state = BattleState.INACTIVE;
             Debug.Log("Inactive");
+
+            yield return new WaitForSeconds(battleCooldown);
+
         }
         
     }

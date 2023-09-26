@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] AudioClip PlayerBase;
-    [SerializeField] AudioClip Town;
-    [SerializeField] AudioClip Woods;
+    public static MusicManager Instance;
+
+    [SerializeField] AudioClip wonBattle;
 
     AudioSource source;
 
-    void Start()
+    private void Awake()
     {
-        source = GetComponent<AudioSource>();
 
-        source.clip = PlayerBase;
-        source.Play();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
+        source = GetComponent<AudioSource>();
     }
 
+    public void PlayWonBattle()
+    {
+        if (wonBattle == null) return;
+
+        source.clip = wonBattle;
+        source.Play();
+    }
 }

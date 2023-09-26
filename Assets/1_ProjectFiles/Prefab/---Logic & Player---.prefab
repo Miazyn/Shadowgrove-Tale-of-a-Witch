@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4690353346283432861}
   - component: {fileID: 8636133901480958071}
-  - component: {fileID: 527785583591603779}
-  - component: {fileID: 7894961512084191369}
   - component: {fileID: 5886013510379386390}
   - component: {fileID: 5347138095241910757}
   m_Layer: 0
@@ -31,7 +29,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.5036192, y: 0.45912695, z: 0.97818613}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5519467917653378519}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,21 +46,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd47f119e19f8b4ea9e874fcaa39209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &527785583591603779
-AudioSource:
+--- !u!114 &5886013510379386390
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4690353346283432860}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43106d2640187e42916664d3bf74c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curDay: 0
+  curSeason: 0
+  Year: 1
+  timeBtwMinutes: 7
+  dayInSeason: 28
+  startHour: 6
+  passOutTime: 2
+--- !u!114 &5347138095241910757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690353346283432860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2778ff20604a6d24b9e6cf63797466bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6561307238788827342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5519467917653378519}
+  - component: {fileID: 4577174047224631464}
+  - component: {fileID: 8527667200766475834}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5519467917653378519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561307238788827342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4690353346283432861}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4577174047224631464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561307238788827342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0032d161d128c94f8d2a203a52554dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wonBattle: {fileID: 8300000, guid: 787c7b66a598f3143bb7f33c4ecb539c, type: 3}
+--- !u!82 &8527667200766475834
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561307238788827342}
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -143,49 +218,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7894961512084191369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4690353346283432860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0032d161d128c94f8d2a203a52554dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerBase: {fileID: 8300000, guid: 0b7354fafae66764291784ab028ae4ee, type: 3}
-  Town: {fileID: 8300000, guid: 755c43d8d7dc63f44ae2d6620793e034, type: 3}
-  Woods: {fileID: 8300000, guid: 703cfd54ad5357b4cbec666aaf43653c, type: 3}
---- !u!114 &5886013510379386390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4690353346283432860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a43106d2640187e42916664d3bf74c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curDay: 0
-  curSeason: 0
-  Year: 1
-  timeBtwMinutes: 7
-  dayInSeason: 28
-  startHour: 6
-  passOutTime: 2
---- !u!114 &5347138095241910757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4690353346283432860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2778ff20604a6d24b9e6cf63797466bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
