@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     bool IsSprinting = false;
 
-    Vector2 moveDirection;
+    public Vector2 moveDirection;
     bool IsGrounded;
 
 
@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     bool isGrounded;
+
+    public LayerMask monsterSpawnLayer;
 
     public bool canMove;
 
@@ -91,9 +93,11 @@ public class PlayerController : MonoBehaviour
         EventManager.StartNewDay.RemoveListener(NextDayAfterCollapse);
     }
 
+    [System.Obsolete]
     void Update()
     {
         if (NeedStillness) return;
+
 
         if (canMove)
         {
@@ -232,6 +236,8 @@ public class PlayerController : MonoBehaviour
 
         canMove = false;
     }
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

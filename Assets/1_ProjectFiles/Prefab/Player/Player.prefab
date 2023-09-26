@@ -176,6 +176,11 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  monsterSpawnLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  canMove: 0
+  NeedStillness: 0
   anim: {fileID: 4126655763572010122}
   playerMesh: {fileID: 7273084654919003210}
   walkStateTransitionTime: 0

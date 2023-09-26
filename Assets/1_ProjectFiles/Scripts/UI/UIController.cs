@@ -15,6 +15,8 @@ public class UIController : MonoBehaviour
     [SerializeField] public GameObject Shop;
     [SerializeField] public GameObject Hotbar;
 
+    [SerializeField] private float TimeToCloseBattleScreen = 0.5f;
+
     private GameObject currentMenu;
 
     [SerializeField] private HealthSlider healthbar;
@@ -104,6 +106,21 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void OpenBattleScreen()
+    {
+        CloseCurrentWindow();
+
+        BattleScreen.SetActive(true);
+    }
+
+    public IEnumerator CloseBattleScreen()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        Debug.Log("Close battle screen");
+        BattleScreen.SetActive(false);
+    }
+
     private void UpdateMoney(int curMoney)
     {
         moneyText.text = curMoney.ToString() + " G";
@@ -154,6 +171,8 @@ public class UIController : MonoBehaviour
         }
 
         dayText.text = formattedDay;
+
+        TimeUpdate(0, 6);
     }
 
     private void SeasonUpdate(TimeSystem.Season season) 

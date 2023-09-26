@@ -12,6 +12,8 @@ public enum BattleState
 
 public class BattleSystem : MonoBehaviour
 {
+    public float battleCooldown = 2f;
+
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
@@ -32,14 +34,43 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.INACTIVE;
     }
 
-    public void StartBattle()
+    public void StartBattle(SO_Unit _curEnemyUnit)
     {
         state = BattleState.START;
 
-        StartCoroutine(SetupBattle());
+        UIController.Instance.OpenBattleScreen();
+
+        StartCoroutine(SetupBattle(_curEnemyUnit));
+    }
+    IEnumerator EndBattle()
+    {
+        if (state == BattleState.WON)
+        {
+            dialogueText.text = "You won the battle!";
+
+            StartCoroutine(UIController.Instance.CloseBattleScreen());
+
+            yield return new WaitForSeconds(battleCooldown);
+
+            state = BattleState.INACTIVE;
+            Debug.Log("Inactive");
+
+        }
+        else if (state == BattleState.LOST)
+        {
+            dialogueText.text = "You were defeated...";
+
+            StartCoroutine(UIController.Instance.CloseBattleScreen());
+
+            yield return new WaitForSeconds(battleCooldown);
+
+            state = BattleState.INACTIVE;
+            Debug.Log("Inactive");
+        }
+        
     }
 
-    IEnumerator SetupBattle()
+    IEnumerator SetupBattle(SO_Unit _enemy)
     {
         GameObject playerGO = Instantiate(playerPrefab, transform);
         playerUnit = playerGO.GetComponent<Unit>();
@@ -47,7 +78,18 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, transform);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        dialogueText.SetText("A wild " + enemyUnit.untiName + " approaches...");
+        if (_enemy != null)
+        {
+            enemyUnit.unitName = _enemy.unitName;
+            enemyUnit.unitLevel = _enemy.unitLevel;
+
+            enemyUnit.damage = _enemy.damage;
+
+            enemyUnit.maxHP = _enemy.maxHP;
+            enemyUnit.currentHP = enemyUnit.maxHP;
+        }
+
+        dialogueText.SetText("A wild " + enemyUnit.unitName + " approaches...");
 
         //playerUnit.untiName = Player.instance.PlayerName;
 
@@ -95,7 +137,7 @@ public class BattleSystem : MonoBehaviour
         if (isDead)
         {
             state = BattleState.WON;
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -118,7 +160,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        dialogueText.text = enemyUnit.untiName + " attacks!";
+        dialogueText.text = enemyUnit.unitName + " attacks!";
 
         yield return new WaitForSeconds(1f);
 
@@ -131,7 +173,7 @@ public class BattleSystem : MonoBehaviour
         if (isDead)
         {
             state = BattleState.LOST;
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -141,19 +183,5 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    void EndBattle()
-    {
-        if(state == BattleState.WON)
-        {
-            dialogueText.text = "You won the battle!";
-
-        }
-        else if(state == BattleState.LOST)
-        {
-            dialogueText.text = "You were defeated...";
-        }
-
-        //Disable screen
-        state = BattleState.INACTIVE;
-    }
+    
 }
