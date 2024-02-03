@@ -6,8 +6,8 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass
-  m_DiffuseTexture: {fileID: 2800000, guid: 70712a2d91f33454d987483cdeb7bfef, type: 3}
+  m_Name: darkerPathLayer
+  m_DiffuseTexture: {fileID: 2800000, guid: fb73612f23304db4785233afa23f7aa1, type: 3}
   m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 2, y: 2}

@@ -1887,7 +1887,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128.74, y: 134.71}
+  m_AnchoredPosition: {x: -148.78, y: 161.45001}
   m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5210090358683084597
@@ -4805,12 +4805,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5d1ad5df15f384e93901f15125d6dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleCooldown: 2
   playerPrefab: {fileID: 6508156498751098447, guid: 8a0423f0f88765240bb9bfd67684ee3f, type: 3}
   enemyPrefab: {fileID: 4927849779284800658, guid: 98ccaed4af64a214b8986ecb748423be, type: 3}
   playerHud: {fileID: 6885294188728294324}
   enemyHud: {fileID: 44669550581765869}
   dialogueText: {fileID: 3530222278294485730}
   state: 0
+  songManager: {fileID: 0}
 --- !u!1 &5378816158197322683
 GameObject:
   m_ObjectHideFlags: 0
@@ -4861,6 +4863,7 @@ MonoBehaviour:
   InventoryMenu: {fileID: 5378816158507917080}
   Shop: {fileID: 5114660090133495432}
   Hotbar: {fileID: 5378816159305172864}
+  TimeToCloseBattleScreen: 0.5
   healthbar: {fileID: 5378816159135687055}
   enduranceBar: {fileID: 5378816158958496588}
   moneyText: {fileID: 1458386117592189078}
@@ -6605,7 +6608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -243.96, y: 143.26}
+  m_AnchoredPosition: {x: -264, y: 170}
   m_SizeDelta: {x: 130.45, y: 32.0922}
   m_Pivot: {x: 0.5, y: 0.6558736}
 --- !u!222 &5378816158705901505
@@ -9938,7 +9941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -109.4958, y: 134.71}
+  m_AnchoredPosition: {x: -129.53578, y: 161.45001}
   m_SizeDelta: {x: 61.5116, y: 24.998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7296647529679576036

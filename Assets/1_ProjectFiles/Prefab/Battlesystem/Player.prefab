@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64c945e29a708f045ba1cc3b2ff2b5fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcbde225ecdcbfe4bb090de59297fb22, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27668401254e6247ab21a43ff258195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  untiName: Player
+  unitName: 
   unitLevel: 1
   damage: 5
   maxHP: 20
