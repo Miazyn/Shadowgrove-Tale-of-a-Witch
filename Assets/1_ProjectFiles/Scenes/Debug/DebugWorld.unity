@@ -1776,6 +1776,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -2.0934448
       objectReference: {fileID: 0}
+    - target: {fileID: 869858846622429845, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.3294067
+      objectReference: {fileID: 0}
     - target: {fileID: 1560710486708944080, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_Name
       value: IMG_Season
@@ -1830,7 +1834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2010700178111997947, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2554990334792348103, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2086,7 +2090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5974867248148055518, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0008239746
+      value: -0.0008544922
       objectReference: {fileID: 0}
     - target: {fileID: 6231986853407859633, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2118,7 +2122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6690133132743802045, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6700258275278379286, guid: 95478482b748f964d8edfc9a41d73b06, type: 3}
       propertyPath: m_AnchorMax.y
